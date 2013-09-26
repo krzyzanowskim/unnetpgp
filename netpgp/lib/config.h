@@ -38,19 +38,19 @@
 #define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have the <openssl/aes.h> header file. */
-/* #undef HAVE_OPENSSL_AES_H */
+#define HAVE_OPENSSL_AES_H 1
 
 /* Define to 1 if you have the <openssl/bn.h> header file. */
-/* #undef HAVE_OPENSSL_BN_H */
+#define HAVE_OPENSSL_BN_H 1
 
 /* Define to 1 if you have the <openssl/camellia.h> header file. */
 /* #undef HAVE_OPENSSL_CAMELLIA_H */
 
 /* Define to 1 if you have the <openssl/cast.h> header file. */
-/* #undef HAVE_OPENSSL_CAST_H */
+#define HAVE_OPENSSL_CAST_H 1
 
 /* Define to 1 if you have the <openssl/des.h> header file. */
-/* #undef HAVE_OPENSSL_DES_H */
+#define HAVE_OPENSSL_DES_H 1
 
 /* Define to 1 if you have the <openssl/dsa.h> header file. */
 /* #undef HAVE_OPENSSL_DSA_H */
@@ -59,7 +59,7 @@
 /* #undef HAVE_OPENSSL_ERR_H */
 
 /* Define to 1 if you have the <openssl/idea.h> header file. */
-/* #undef HAVE_OPENSSL_IDEA_H */
+#define HAVE_OPENSSL_IDEA_H 1
 
 /* Define to 1 if you have the <openssl/md5.h> header file. */
 /* #undef HAVE_OPENSSL_MD5_H */

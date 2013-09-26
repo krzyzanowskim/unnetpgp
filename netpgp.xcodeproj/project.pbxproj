@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		75E60B5E17F4498900952522 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5D17F4498900952522 /* Foundation.framework */; };
-		75E60B6C17F4498900952522 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B6B17F4498900952522 /* XCTest.framework */; };
-		75E60B6D17F4498900952522 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5D17F4498900952522 /* Foundation.framework */; };
-		75E60B6F17F4498900952522 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B6E17F4498900952522 /* UIKit.framework */; };
-		75E60B7217F4498900952522 /* libnetpgp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5A17F4498900952522 /* libnetpgp.a */; };
-		75E60B7817F4498900952522 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75E60B7617F4498900952522 /* InfoPlist.strings */; };
-		75E60B7A17F4498900952522 /* netpgpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E60B7917F4498900952522 /* netpgpTests.m */; };
 		75E60C2117F44A0B00952522 /* bufgap.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BF917F44A0B00952522 /* bufgap.c */; };
 		75E60C2217F44A0B00952522 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFB17F44A0B00952522 /* compress.c */; };
 		75E60C2317F44A0B00952522 /* create.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFD17F44A0B00952522 /* create.c */; };
@@ -32,17 +26,9 @@
 		75E60C3017F44A0B00952522 /* symmetric.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1A17F44A0B00952522 /* symmetric.c */; };
 		75E60C3117F44A0B00952522 /* validate.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1C17F44A0B00952522 /* validate.c */; };
 		75E60C3217F44A0B00952522 /* writer.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1F17F44A0B00952522 /* writer.c */; };
+		75E60C3517F44BAE00952522 /* mj.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C3317F44BAE00952522 /* mj.c */; };
+		75E60C3E17F4586C00952522 /* netpgp.h in Headers */ = {isa = PBXBuildFile; fileRef = 75E60C3A17F44E6200952522 /* netpgp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		75E60B7017F4498900952522 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75E60B5217F4498900952522 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 75E60B5917F4498900952522;
-			remoteInfo = netpgp;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		75E60B5817F4498900952522 /* CopyFiles */ = {
@@ -60,7 +46,6 @@
 		75E60B5A17F4498900952522 /* libnetpgp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnetpgp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B5D17F4498900952522 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75E60B6117F4498900952522 /* netpgp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "netpgp-Prefix.pch"; sourceTree = "<group>"; };
-		75E60B6A17F4498900952522 /* netpgpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = netpgpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B6B17F4498900952522 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		75E60B6E17F4498900952522 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		75E60B7517F4498900952522 /* netpgpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "netpgpTests-Info.plist"; sourceTree = "<group>"; };
@@ -106,6 +91,9 @@
 		75E60C1E17F44A0B00952522 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		75E60C1F17F44A0B00952522 /* writer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = writer.c; sourceTree = "<group>"; };
 		75E60C2017F44A0B00952522 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		75E60C3317F44BAE00952522 /* mj.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mj.c; sourceTree = "<group>"; };
+		75E60C3417F44BAE00952522 /* mj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mj.h; sourceTree = "<group>"; };
+		75E60C3A17F44E6200952522 /* netpgp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netpgp.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,17 +102,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75E60B5E17F4498900952522 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		75E60B6717F4498900952522 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				75E60B6C17F4498900952522 /* XCTest.framework in Frameworks */,
-				75E60B6F17F4498900952522 /* UIKit.framework in Frameworks */,
-				75E60B6D17F4498900952522 /* Foundation.framework in Frameworks */,
-				75E60B7217F4498900952522 /* libnetpgp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				75E60B5A17F4498900952522 /* libnetpgp.a */,
-				75E60B6A17F4498900952522 /* netpgpTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -198,6 +174,7 @@
 		75E60BE517F44A0B00952522 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				75E60C3617F44BB300952522 /* mj */,
 				75E60BF917F44A0B00952522 /* bufgap.c */,
 				75E60BFA17F44A0B00952522 /* bufgap.h */,
 				75E60BFB17F44A0B00952522 /* compress.c */,
@@ -215,6 +192,7 @@
 				75E60C0717F44A0B00952522 /* memory.h */,
 				75E60C0817F44A0B00952522 /* misc.c */,
 				75E60C0917F44A0B00952522 /* netpgp.c */,
+				75E60C3A17F44E6200952522 /* netpgp.h */,
 				75E60C0A17F44A0B00952522 /* netpgpdefs.h */,
 				75E60C0B17F44A0B00952522 /* netpgpdigest.h */,
 				75E60C0C17F44A0B00952522 /* netpgpsdk.h */,
@@ -242,7 +220,27 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		75E60C3617F44BB300952522 /* mj */ = {
+			isa = PBXGroup;
+			children = (
+				75E60C3317F44BAE00952522 /* mj.c */,
+				75E60C3417F44BAE00952522 /* mj.h */,
+			);
+			name = mj;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		75E60C3D17F4586500952522 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75E60C3E17F4586C00952522 /* netpgp.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		75E60B5917F4498900952522 /* netpgp */ = {
@@ -252,6 +250,7 @@
 				75E60B5617F4498900952522 /* Sources */,
 				75E60B5717F4498900952522 /* Frameworks */,
 				75E60B5817F4498900952522 /* CopyFiles */,
+				75E60C3D17F4586500952522 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -261,24 +260,6 @@
 			productName = netpgp;
 			productReference = 75E60B5A17F4498900952522 /* libnetpgp.a */;
 			productType = "com.apple.product-type.library.static";
-		};
-		75E60B6917F4498900952522 /* netpgpTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 75E60B8017F4498900952522 /* Build configuration list for PBXNativeTarget "netpgpTests" */;
-			buildPhases = (
-				75E60B6617F4498900952522 /* Sources */,
-				75E60B6717F4498900952522 /* Frameworks */,
-				75E60B6817F4498900952522 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				75E60B7117F4498900952522 /* PBXTargetDependency */,
-			);
-			name = netpgpTests;
-			productName = netpgpTests;
-			productReference = 75E60B6A17F4498900952522 /* netpgpTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -302,21 +283,9 @@
 			projectRoot = "";
 			targets = (
 				75E60B5917F4498900952522 /* netpgp */,
-				75E60B6917F4498900952522 /* netpgpTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		75E60B6817F4498900952522 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				75E60B7817F4498900952522 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		75E60B5617F4498900952522 /* Sources */ = {
@@ -336,6 +305,7 @@
 				75E60C3017F44A0B00952522 /* symmetric.c in Sources */,
 				75E60C2217F44A0B00952522 /* compress.c in Sources */,
 				75E60C2417F44A0B00952522 /* crypto.c in Sources */,
+				75E60C3517F44BAE00952522 /* mj.c in Sources */,
 				75E60C2A17F44A0B00952522 /* packet-parse.c in Sources */,
 				75E60C2317F44A0B00952522 /* create.c in Sources */,
 				75E60C2817F44A0B00952522 /* netpgp.c in Sources */,
@@ -344,23 +314,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		75E60B6617F4498900952522 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				75E60B7A17F4498900952522 /* netpgpTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		75E60B7117F4498900952522 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 75E60B5917F4498900952522 /* netpgp */;
-			targetProxy = 75E60B7017F4498900952522 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		75E60B7617F4498900952522 /* InfoPlist.strings */ = {
@@ -478,44 +432,6 @@
 			};
 			name = Release;
 		};
-		75E60B8117F4498900952522 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "netpgp/netpgp-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "netpgpTests/netpgpTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		75E60B8217F4498900952522 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "netpgp/netpgp-Prefix.pch";
-				INFOPLIST_FILE = "netpgpTests/netpgpTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -533,14 +449,6 @@
 			buildConfigurations = (
 				75E60B7E17F4498900952522 /* Debug */,
 				75E60B7F17F4498900952522 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		75E60B8017F4498900952522 /* Build configuration list for PBXNativeTarget "netpgpTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				75E60B8117F4498900952522 /* Debug */,
-				75E60B8217F4498900952522 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
