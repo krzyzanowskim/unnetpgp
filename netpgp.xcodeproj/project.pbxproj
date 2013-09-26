@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		75E60B5E17F4498900952522 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5D17F4498900952522 /* Foundation.framework */; };
+		7515F2DD17F47D7E00C21469 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7515F2DA17F4787500C21469 /* libcrypto.a */; };
 		75E60C2117F44A0B00952522 /* bufgap.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BF917F44A0B00952522 /* bufgap.c */; };
 		75E60C2217F44A0B00952522 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFB17F44A0B00952522 /* compress.c */; };
 		75E60C2317F44A0B00952522 /* create.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFD17F44A0B00952522 /* create.c */; };
@@ -30,6 +30,23 @@
 		75E60C3E17F4586C00952522 /* netpgp.h in Headers */ = {isa = PBXBuildFile; fileRef = 75E60C3A17F44E6200952522 /* netpgp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7515F2D917F4787500C21469 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7515F2D517F4787500C21469 /* openssl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9069D28C0FCE659A0042E34C;
+			remoteInfo = crypto;
+		};
+		7515F2DB17F478D300C21469 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7515F2D517F4787500C21469 /* openssl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9069D28B0FCE659A0042E34C;
+			remoteInfo = crypto;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		75E60B5817F4498900952522 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -43,6 +60,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7515F2D517F4787500C21469 /* openssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = openssl.xcodeproj; sourceTree = "<group>"; };
 		75E60B5A17F4498900952522 /* libnetpgp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnetpgp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B5D17F4498900952522 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75E60B6117F4498900952522 /* netpgp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "netpgp-Prefix.pch"; sourceTree = "<group>"; };
@@ -98,16 +116,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75E60B5E17F4498900952522 /* Foundation.framework in Frameworks */,
+				7515F2DD17F47D7E00C21469 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7515F2D617F4787500C21469 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7515F2DA17F4787500C21469 /* libcrypto.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		75E60B5117F4498900952522 = {
 			isa = PBXGroup;
 			children = (
+				7515F2D517F4787500C21469 /* openssl.xcodeproj */,
 				75E60B5F17F4498900952522 /* netpgp */,
 				75E60B5C17F4498900952522 /* Frameworks */,
 				75E60B5B17F4498900952522 /* Products */,
@@ -233,6 +260,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7515F2DC17F478D300C21469 /* PBXTargetDependency */,
 			);
 			name = netpgp;
 			productName = netpgp;
@@ -258,12 +286,28 @@
 			mainGroup = 75E60B5117F4498900952522;
 			productRefGroup = 75E60B5B17F4498900952522 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7515F2D617F4787500C21469 /* Products */;
+					ProjectRef = 7515F2D517F4787500C21469 /* openssl.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				75E60B5917F4498900952522 /* netpgp */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7515F2DA17F4787500C21469 /* libcrypto.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcrypto.a;
+			remoteRef = 7515F2D917F4787500C21469 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		75E60B5617F4498900952522 /* Sources */ = {
@@ -293,6 +337,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7515F2DC17F478D300C21469 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = crypto;
+			targetProxy = 7515F2DB17F478D300C21469 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		75E60B7B17F4498900952522 /* Debug */ = {
@@ -374,10 +426,11 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/marcinkrzyzanowski/Downloads/test/bin/iPhoneOS7.0-armv7.sdk/include",
+					"$(TARGET_BUILD_DIR)",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/include;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -391,10 +444,11 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/marcinkrzyzanowski/Downloads/test/bin/iPhoneOS7.0-armv7.sdk/include",
+					"$(TARGET_BUILD_DIR)",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/include;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -418,6 +472,7 @@
 				75E60B7F17F4498900952522 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
