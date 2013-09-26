@@ -8,14 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		75E60B5E17F4498900952522 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5D17F4498900952522 /* Foundation.framework */; };
-		75E60B6317F4498900952522 /* netpgp.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 75E60B6217F4498900952522 /* netpgp.h */; };
-		75E60B6517F4498900952522 /* netpgp.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E60B6417F4498900952522 /* netpgp.m */; };
 		75E60B6C17F4498900952522 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B6B17F4498900952522 /* XCTest.framework */; };
 		75E60B6D17F4498900952522 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5D17F4498900952522 /* Foundation.framework */; };
 		75E60B6F17F4498900952522 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B6E17F4498900952522 /* UIKit.framework */; };
 		75E60B7217F4498900952522 /* libnetpgp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5A17F4498900952522 /* libnetpgp.a */; };
 		75E60B7817F4498900952522 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75E60B7617F4498900952522 /* InfoPlist.strings */; };
 		75E60B7A17F4498900952522 /* netpgpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E60B7917F4498900952522 /* netpgpTests.m */; };
+		75E60C2117F44A0B00952522 /* bufgap.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BF917F44A0B00952522 /* bufgap.c */; };
+		75E60C2217F44A0B00952522 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFB17F44A0B00952522 /* compress.c */; };
+		75E60C2317F44A0B00952522 /* create.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFD17F44A0B00952522 /* create.c */; };
+		75E60C2417F44A0B00952522 /* crypto.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFF17F44A0B00952522 /* crypto.c */; };
+		75E60C2517F44A0B00952522 /* fastctype.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C0317F44A0B00952522 /* fastctype.c */; };
+		75E60C2617F44A0B00952522 /* keyring.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C0517F44A0B00952522 /* keyring.c */; };
+		75E60C2717F44A0B00952522 /* misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C0817F44A0B00952522 /* misc.c */; };
+		75E60C2817F44A0B00952522 /* netpgp.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C0917F44A0B00952522 /* netpgp.c */; };
+		75E60C2917F44A0B00952522 /* openssl_crypto.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C0D17F44A0B00952522 /* openssl_crypto.c */; };
+		75E60C2A17F44A0B00952522 /* packet-parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C0F17F44A0B00952522 /* packet-parse.c */; };
+		75E60C2B17F44A0B00952522 /* packet-print.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1117F44A0B00952522 /* packet-print.c */; };
+		75E60C2C17F44A0B00952522 /* packet-show.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1217F44A0B00952522 /* packet-show.c */; };
+		75E60C2D17F44A0B00952522 /* reader.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1517F44A0B00952522 /* reader.c */; };
+		75E60C2E17F44A0B00952522 /* signature.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1717F44A0B00952522 /* signature.c */; };
+		75E60C2F17F44A0B00952522 /* ssh2pgp.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1917F44A0B00952522 /* ssh2pgp.c */; };
+		75E60C3017F44A0B00952522 /* symmetric.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1A17F44A0B00952522 /* symmetric.c */; };
+		75E60C3117F44A0B00952522 /* validate.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1C17F44A0B00952522 /* validate.c */; };
+		75E60C3217F44A0B00952522 /* writer.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1F17F44A0B00952522 /* writer.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +51,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				75E60B6317F4498900952522 /* netpgp.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,14 +60,52 @@
 		75E60B5A17F4498900952522 /* libnetpgp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnetpgp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B5D17F4498900952522 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75E60B6117F4498900952522 /* netpgp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "netpgp-Prefix.pch"; sourceTree = "<group>"; };
-		75E60B6217F4498900952522 /* netpgp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = netpgp.h; sourceTree = "<group>"; };
-		75E60B6417F4498900952522 /* netpgp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = netpgp.m; sourceTree = "<group>"; };
 		75E60B6A17F4498900952522 /* netpgpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = netpgpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B6B17F4498900952522 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		75E60B6E17F4498900952522 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		75E60B7517F4498900952522 /* netpgpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "netpgpTests-Info.plist"; sourceTree = "<group>"; };
 		75E60B7717F4498900952522 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		75E60B7917F4498900952522 /* netpgpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = netpgpTests.m; sourceTree = "<group>"; };
+		75E60BF917F44A0B00952522 /* bufgap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bufgap.c; sourceTree = "<group>"; };
+		75E60BFA17F44A0B00952522 /* bufgap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bufgap.h; sourceTree = "<group>"; };
+		75E60BFB17F44A0B00952522 /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress.c; sourceTree = "<group>"; };
+		75E60BFC17F44A0B00952522 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		75E60BFD17F44A0B00952522 /* create.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = create.c; sourceTree = "<group>"; };
+		75E60BFE17F44A0B00952522 /* create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = create.h; sourceTree = "<group>"; };
+		75E60BFF17F44A0B00952522 /* crypto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crypto.c; sourceTree = "<group>"; };
+		75E60C0017F44A0B00952522 /* crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypto.h; sourceTree = "<group>"; };
+		75E60C0117F44A0B00952522 /* defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
+		75E60C0217F44A0B00952522 /* errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = errors.h; sourceTree = "<group>"; };
+		75E60C0317F44A0B00952522 /* fastctype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fastctype.c; sourceTree = "<group>"; };
+		75E60C0417F44A0B00952522 /* fastctype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fastctype.h; sourceTree = "<group>"; };
+		75E60C0517F44A0B00952522 /* keyring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = keyring.c; sourceTree = "<group>"; };
+		75E60C0617F44A0B00952522 /* keyring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyring.h; sourceTree = "<group>"; };
+		75E60C0717F44A0B00952522 /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
+		75E60C0817F44A0B00952522 /* misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = misc.c; sourceTree = "<group>"; };
+		75E60C0917F44A0B00952522 /* netpgp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = netpgp.c; sourceTree = "<group>"; };
+		75E60C0A17F44A0B00952522 /* netpgpdefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netpgpdefs.h; sourceTree = "<group>"; };
+		75E60C0B17F44A0B00952522 /* netpgpdigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netpgpdigest.h; sourceTree = "<group>"; };
+		75E60C0C17F44A0B00952522 /* netpgpsdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netpgpsdk.h; sourceTree = "<group>"; };
+		75E60C0D17F44A0B00952522 /* openssl_crypto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = openssl_crypto.c; sourceTree = "<group>"; };
+		75E60C0E17F44A0B00952522 /* ops-ssh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ops-ssh.h"; sourceTree = "<group>"; };
+		75E60C0F17F44A0B00952522 /* packet-parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "packet-parse.c"; sourceTree = "<group>"; };
+		75E60C1017F44A0B00952522 /* packet-parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "packet-parse.h"; sourceTree = "<group>"; };
+		75E60C1117F44A0B00952522 /* packet-print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "packet-print.c"; sourceTree = "<group>"; };
+		75E60C1217F44A0B00952522 /* packet-show.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "packet-show.c"; sourceTree = "<group>"; };
+		75E60C1317F44A0B00952522 /* packet-show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "packet-show.h"; sourceTree = "<group>"; };
+		75E60C1417F44A0B00952522 /* packet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = packet.h; sourceTree = "<group>"; };
+		75E60C1517F44A0B00952522 /* reader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reader.c; sourceTree = "<group>"; };
+		75E60C1617F44A0B00952522 /* readerwriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readerwriter.h; sourceTree = "<group>"; };
+		75E60C1717F44A0B00952522 /* signature.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = signature.c; sourceTree = "<group>"; };
+		75E60C1817F44A0B00952522 /* signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = signature.h; sourceTree = "<group>"; };
+		75E60C1917F44A0B00952522 /* ssh2pgp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ssh2pgp.c; sourceTree = "<group>"; };
+		75E60C1A17F44A0B00952522 /* symmetric.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = symmetric.c; sourceTree = "<group>"; };
+		75E60C1B17F44A0B00952522 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		75E60C1C17F44A0B00952522 /* validate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = validate.c; sourceTree = "<group>"; };
+		75E60C1D17F44A0B00952522 /* validate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = validate.h; sourceTree = "<group>"; };
+		75E60C1E17F44A0B00952522 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		75E60C1F17F44A0B00952522 /* writer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = writer.c; sourceTree = "<group>"; };
+		75E60C2017F44A0B00952522 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +163,7 @@
 		75E60B5F17F4498900952522 /* netpgp */ = {
 			isa = PBXGroup;
 			children = (
-				75E60B6217F4498900952522 /* netpgp.h */,
-				75E60B6417F4498900952522 /* netpgp.m */,
+				75E60BE517F44A0B00952522 /* lib */,
 				75E60B6017F4498900952522 /* Supporting Files */,
 			);
 			path = netpgp;
@@ -141,6 +193,53 @@
 				75E60B7617F4498900952522 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		75E60BE517F44A0B00952522 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				75E60BF917F44A0B00952522 /* bufgap.c */,
+				75E60BFA17F44A0B00952522 /* bufgap.h */,
+				75E60BFB17F44A0B00952522 /* compress.c */,
+				75E60BFC17F44A0B00952522 /* config.h */,
+				75E60BFD17F44A0B00952522 /* create.c */,
+				75E60BFE17F44A0B00952522 /* create.h */,
+				75E60BFF17F44A0B00952522 /* crypto.c */,
+				75E60C0017F44A0B00952522 /* crypto.h */,
+				75E60C0117F44A0B00952522 /* defs.h */,
+				75E60C0217F44A0B00952522 /* errors.h */,
+				75E60C0317F44A0B00952522 /* fastctype.c */,
+				75E60C0417F44A0B00952522 /* fastctype.h */,
+				75E60C0517F44A0B00952522 /* keyring.c */,
+				75E60C0617F44A0B00952522 /* keyring.h */,
+				75E60C0717F44A0B00952522 /* memory.h */,
+				75E60C0817F44A0B00952522 /* misc.c */,
+				75E60C0917F44A0B00952522 /* netpgp.c */,
+				75E60C0A17F44A0B00952522 /* netpgpdefs.h */,
+				75E60C0B17F44A0B00952522 /* netpgpdigest.h */,
+				75E60C0C17F44A0B00952522 /* netpgpsdk.h */,
+				75E60C0D17F44A0B00952522 /* openssl_crypto.c */,
+				75E60C0E17F44A0B00952522 /* ops-ssh.h */,
+				75E60C0F17F44A0B00952522 /* packet-parse.c */,
+				75E60C1017F44A0B00952522 /* packet-parse.h */,
+				75E60C1117F44A0B00952522 /* packet-print.c */,
+				75E60C1217F44A0B00952522 /* packet-show.c */,
+				75E60C1317F44A0B00952522 /* packet-show.h */,
+				75E60C1417F44A0B00952522 /* packet.h */,
+				75E60C1517F44A0B00952522 /* reader.c */,
+				75E60C1617F44A0B00952522 /* readerwriter.h */,
+				75E60C1717F44A0B00952522 /* signature.c */,
+				75E60C1817F44A0B00952522 /* signature.h */,
+				75E60C1917F44A0B00952522 /* ssh2pgp.c */,
+				75E60C1A17F44A0B00952522 /* symmetric.c */,
+				75E60C1B17F44A0B00952522 /* types.h */,
+				75E60C1C17F44A0B00952522 /* validate.c */,
+				75E60C1D17F44A0B00952522 /* validate.h */,
+				75E60C1E17F44A0B00952522 /* version.h */,
+				75E60C1F17F44A0B00952522 /* writer.c */,
+				75E60C2017F44A0B00952522 /* writer.h */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,7 +323,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75E60B6517F4498900952522 /* netpgp.m in Sources */,
+				75E60C2C17F44A0B00952522 /* packet-show.c in Sources */,
+				75E60C2717F44A0B00952522 /* misc.c in Sources */,
+				75E60C2917F44A0B00952522 /* openssl_crypto.c in Sources */,
+				75E60C2117F44A0B00952522 /* bufgap.c in Sources */,
+				75E60C3217F44A0B00952522 /* writer.c in Sources */,
+				75E60C2617F44A0B00952522 /* keyring.c in Sources */,
+				75E60C2517F44A0B00952522 /* fastctype.c in Sources */,
+				75E60C2E17F44A0B00952522 /* signature.c in Sources */,
+				75E60C2F17F44A0B00952522 /* ssh2pgp.c in Sources */,
+				75E60C2B17F44A0B00952522 /* packet-print.c in Sources */,
+				75E60C3017F44A0B00952522 /* symmetric.c in Sources */,
+				75E60C2217F44A0B00952522 /* compress.c in Sources */,
+				75E60C2417F44A0B00952522 /* crypto.c in Sources */,
+				75E60C2A17F44A0B00952522 /* packet-parse.c in Sources */,
+				75E60C2317F44A0B00952522 /* create.c in Sources */,
+				75E60C2817F44A0B00952522 /* netpgp.c in Sources */,
+				75E60C3117F44A0B00952522 /* validate.c in Sources */,
+				75E60C2D17F44A0B00952522 /* reader.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +450,11 @@
 				DSTROOT = /tmp/netpgp.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "netpgp/netpgp-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/marcinkrzyzanowski/Downloads/test/bin/iPhoneOS7.0-armv7.sdk/include",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -346,6 +467,11 @@
 				DSTROOT = /tmp/netpgp.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "netpgp/netpgp-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/marcinkrzyzanowski/Downloads/test/bin/iPhoneOS7.0-armv7.sdk/include",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
