@@ -56,7 +56,7 @@
 /* #undef HAVE_OPENSSL_DSA_H */
 
 /* Define to 1 if you have the <openssl/err.h> header file. */
-/* #undef HAVE_OPENSSL_ERR_H */
+#define HAVE_OPENSSL_ERR_H 1
 
 /* Define to 1 if you have the <openssl/idea.h> header file. */
 #define HAVE_OPENSSL_IDEA_H 1
@@ -65,7 +65,7 @@
 /* #undef HAVE_OPENSSL_MD5_H */
 
 /* Define to 1 if you have the <openssl/rand.h> header file. */
-/* #undef HAVE_OPENSSL_RAND_H */
+#define HAVE_OPENSSL_RAND_H 1
 
 /* Define to 1 if you have the <openssl/rsa.h> header file. */
 /* #undef HAVE_OPENSSL_RSA_H */
