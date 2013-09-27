@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name     = 'netpgp'
-  s.version  = '0.1'
-  s.license  = 'MIT'
+  s.version  = '0.2'
+  s.license  = { :type => 'BSD', :file => 'License' }
   s.summary  = 'NetPGP'
   s.homepage = 'http://www.netpgp.com'
-  s.authors  = { 'Unknown' => 'unknown@unknown.com' }
-  #s.source   = { :git => '/Users/marcinkrzyzanowski/Devel/netpgp-xcode/netpgp', :commit => '05e5f3d943e18e88b5fcc69ae701985f97b9e557', :submodules => false }
+  s.authors  = { 'Nominet UK' => 'http://www.nic.uk' }
+  s.source   = { :git => 'ssh://git@stash.up-next.com:7999/spc/netpgp.git', :tag => "v#{s.version}" }
   s.requires_arc = false
 
   s.ios.deployment_target = '6.0'
