@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name     = 'netpgp'
   s.version  = '0.2'
-  s.license  = { :type => 'BSD', :file => 'License' }
+  s.license  = { :type => 'BSD', :file => 'Licence' }
   s.summary  = 'NetPGP'
   s.homepage = 'http://www.netpgp.com'
   s.authors  = { 'Nominet UK' => 'http://www.nic.uk' }
