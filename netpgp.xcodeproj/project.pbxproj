@@ -154,7 +154,8 @@
 		75E60BE517F44A0B00952522 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				75E60C3617F44BB300952522 /* mj */,
+				75E60C3317F44BAE00952522 /* mj.c */,
+				75E60C3417F44BAE00952522 /* mj.h */,
 				75E60BF917F44A0B00952522 /* bufgap.c */,
 				75E60BFA17F44A0B00952522 /* bufgap.h */,
 				75E60BFB17F44A0B00952522 /* compress.c */,
@@ -198,15 +199,6 @@
 				75E60C2017F44A0B00952522 /* writer.h */,
 			);
 			path = lib;
-			sourceTree = "<group>";
-		};
-		75E60C3617F44BB300952522 /* mj */ = {
-			isa = PBXGroup;
-			children = (
-				75E60C3317F44BAE00952522 /* mj.c */,
-				75E60C3417F44BAE00952522 /* mj.h */,
-			);
-			name = mj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
