@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7515F2DD17F47D7E00C21469 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7515F2DA17F4787500C21469 /* libcrypto.a */; };
 		75E60C2117F44A0B00952522 /* bufgap.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BF917F44A0B00952522 /* bufgap.c */; };
 		75E60C2217F44A0B00952522 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFB17F44A0B00952522 /* compress.c */; };
 		75E60C2317F44A0B00952522 /* create.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFD17F44A0B00952522 /* create.c */; };
@@ -28,24 +27,8 @@
 		75E60C3217F44A0B00952522 /* writer.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1F17F44A0B00952522 /* writer.c */; };
 		75E60C3517F44BAE00952522 /* mj.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C3317F44BAE00952522 /* mj.c */; };
 		75E60C3E17F4586C00952522 /* netpgp.h in Headers */ = {isa = PBXBuildFile; fileRef = 75E60C3A17F44E6200952522 /* netpgp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D035A006DF60432984EB4D07 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE89B52DBAE9412383F2624D /* libPods.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7515F2D917F4787500C21469 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7515F2D517F4787500C21469 /* openssl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9069D28C0FCE659A0042E34C;
-			remoteInfo = crypto;
-		};
-		7515F2DB17F478D300C21469 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7515F2D517F4787500C21469 /* openssl.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9069D28B0FCE659A0042E34C;
-			remoteInfo = crypto;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		75E60B5817F4498900952522 /* CopyFiles */ = {
@@ -60,7 +43,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7515F2D517F4787500C21469 /* openssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = openssl.xcodeproj; sourceTree = "<group>"; };
 		75E60B5A17F4498900952522 /* libnetpgp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnetpgp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B5D17F4498900952522 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75E60B6B17F4498900952522 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -108,6 +90,8 @@
 		75E60C3317F44BAE00952522 /* mj.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mj.c; sourceTree = "<group>"; };
 		75E60C3417F44BAE00952522 /* mj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mj.h; sourceTree = "<group>"; };
 		75E60C3A17F44E6200952522 /* netpgp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netpgp.h; sourceTree = "<group>"; };
+		DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		FE89B52DBAE9412383F2624D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,28 +99,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7515F2DD17F47D7E00C21469 /* libcrypto.a in Frameworks */,
+				D035A006DF60432984EB4D07 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7515F2D617F4787500C21469 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7515F2DA17F4787500C21469 /* libcrypto.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		75E60B5117F4498900952522 = {
 			isa = PBXGroup;
 			children = (
-				7515F2D517F4787500C21469 /* openssl.xcodeproj */,
 				75E60B5F17F4498900952522 /* netpgp */,
 				75E60B5C17F4498900952522 /* Frameworks */,
 				75E60B5B17F4498900952522 /* Products */,
+				DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +130,7 @@
 				75E60B5D17F4498900952522 /* Foundation.framework */,
 				75E60B6B17F4498900952522 /* XCTest.framework */,
 				75E60B6E17F4498900952522 /* UIKit.framework */,
+				FE89B52DBAE9412383F2624D /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -250,15 +227,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75E60B7D17F4498900952522 /* Build configuration list for PBXNativeTarget "netpgp" */;
 			buildPhases = (
+				108171624B04444BB0CCB088 /* Check Pods Manifest.lock */,
 				75E60B5617F4498900952522 /* Sources */,
 				75E60B5717F4498900952522 /* Frameworks */,
 				75E60B5817F4498900952522 /* CopyFiles */,
 				75E60C3D17F4586500952522 /* Headers */,
+				D10E1B8165514E39921DFAD1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7515F2DC17F478D300C21469 /* PBXTargetDependency */,
 			);
 			name = netpgp;
 			productName = netpgp;
@@ -284,12 +262,6 @@
 			mainGroup = 75E60B5117F4498900952522;
 			productRefGroup = 75E60B5B17F4498900952522 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 7515F2D617F4787500C21469 /* Products */;
-					ProjectRef = 7515F2D517F4787500C21469 /* openssl.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				75E60B5917F4498900952522 /* netpgp */,
@@ -297,15 +269,38 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		7515F2DA17F4787500C21469 /* libcrypto.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libcrypto.a;
-			remoteRef = 7515F2D917F4787500C21469 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
+/* Begin PBXShellScriptBuildPhase section */
+		108171624B04444BB0CCB088 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
-/* End PBXReferenceProxy section */
+		D10E1B8165514E39921DFAD1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		75E60B5617F4498900952522 /* Sources */ = {
@@ -335,14 +330,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7515F2DC17F478D300C21469 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = crypto;
-			targetProxy = 7515F2DB17F478D300C21469 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		75E60B7B17F4498900952522 /* Debug */ = {
@@ -417,6 +404,7 @@
 		};
 		75E60B7E17F4498900952522 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/netpgp.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -434,6 +422,7 @@
 		};
 		75E60B7F17F4498900952522 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/netpgp.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
