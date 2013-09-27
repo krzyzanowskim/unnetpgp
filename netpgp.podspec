@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
   s.dependency 'OpenSSL'
   s.frameworks = 'Security'
 
-  s.source_files = 'netpgp'
+  s.source_files = 'netpgp/lib'
   s.public_header_files = 'netpgp/lib/netpgp.h'
 end
