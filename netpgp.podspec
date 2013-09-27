@@ -13,9 +13,10 @@ Pod::Spec.new do |s|
 
   # add this to you Podfile, just before netpgp
   # pod 'OpenSSL', :podspec => 'https://raw.github.com/yaakov-h/SKSteamKit/master/podspecs/OpenSSL.podspec'  
-  
+
   s.dependency 'OpenSSL'
   s.frameworks = 'Security'
 
   s.source_files = 'netpgp'
+  s.public_header_files = 'netpgp/lib/netpgp.h'
 end
