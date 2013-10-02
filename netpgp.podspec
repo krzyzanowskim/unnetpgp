@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'netpgp'
-  s.version  = '0.2'
+  s.version  = '0.3'
   s.license  = { :type => 'BSD', :file => 'Licence' }
   s.summary  = 'NetPGP'
   s.homepage = 'http://www.netpgp.com'
@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
   s.frameworks = 'Security'
   s.libraries = 'bz2'
 
-  s.source_files = 'netpgp/lib'
-  s.public_header_files = 'netpgp/lib/netpgp.h'
+  s.source_files = 'netpgp/lib/*.{h,c}', 'netpgp/*.{h,m}'
+  s.public_header_files = 'netpgp/lib/netpgp.h', 'netpgp/UNNetPGP.h'
 end
