@@ -9,7 +9,9 @@
 #import "AppDelegate.h"
 #import "UNNetPGP.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+//    UNNetPGP *pgp;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -41,10 +43,15 @@
 {
     UNNetPGP *pgp = [[UNNetPGP alloc] init];
     pgp.userId = @"Vodaofone KYC W27";
-    NSString *infilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything.gif"];
-    NSString *outfilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"secure-fuckeverything.gif"];
-    [pgp encrypt:[NSURL fileURLWithPath:infilePath] to:[NSURL fileURLWithPath:outfilePath]];
-    NSLog(@"%@",pgp);
+    NSString *plainFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything.gif"];
+    NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];
+    NSString *encryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"secure-fuckeverything.gif.gpg"];
+    BOOL res = NO;
+    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
+    NSLog(@"encryptedFilePath = %@",@(res));
+    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
+    NSLog(@"decryptFileAtPath = %@",@(res));
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

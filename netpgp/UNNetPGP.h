@@ -10,9 +10,13 @@
 
 @interface UNNetPGP : NSObject
 
-@property (strong, nonatomic) NSString *userId;
+@property (strong, atomic) NSString *userId;
+@property (strong, atomic) NSString *homeDirectory;
+@property (strong, atomic) NSString *publicKeyRing;
+@property (strong, atomic) NSString *secretKeyRing;
+@property (assign) BOOL armored;
 
-
-- (BOOL) encrypt:(NSURL *)inFileURL to:(NSURL *)outFileURL;
+- (BOOL) encryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
+- (BOOL) decryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
 
 @end
