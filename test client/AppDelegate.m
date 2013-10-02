@@ -47,10 +47,15 @@
     NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];
     NSString *encryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"secure-fuckeverything.gif.gpg"];
     BOOL res = NO;
-    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
-    NSLog(@"encryptedFilePath = %@",@(res));
-    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
-    NSLog(@"decryptFileAtPath = %@",@(res));
+//    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
+//    NSLog(@"encryptedFilePath = %@",@(res));
+//    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
+//    NSLog(@"decryptFileAtPath = %@",@(res));
+    NSData *encryptedData = [pgp encryptData:[NSData dataWithContentsOfFile:plainFilePath]];
+    NSLog(@"encryptedData = %@",@(encryptedData.length));
+    NSData *decryptedData = [pgp decryptData:encryptedData];
+    NSLog(@"decryptedData = %@",@(decryptedData.length));
+    [decryptedData writeToFile:decryptedFilePath atomically:YES];
     
 }
 

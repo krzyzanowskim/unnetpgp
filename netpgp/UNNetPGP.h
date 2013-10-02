@@ -19,4 +19,7 @@
 - (BOOL) encryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
 - (BOOL) decryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
 
+- (NSData *) encryptData:(NSData *)inData;
+- (NSData *) decryptData:(NSData *)inData;
+
 @end

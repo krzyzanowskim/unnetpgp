@@ -68,6 +68,56 @@ static dispatch_queue_t lock_queue;
     free(netpgp);
 }
 
+- (NSData *) encryptData:(NSData *)inData
+{
+    __block NSData *result = nil;
+    
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            void *inbuf = calloc(inData.length, sizeof(Byte));
+            memcpy(inbuf, inData.bytes, inData.length);
+            
+            int maxlen = (int)(inData.length * 1.2f); // magic number 1.2, how much bigger it can be?
+            void *outbuf = calloc(maxlen, sizeof(Byte));
+            int outsize = netpgp_encrypt_memory(netpgp, [self.userId UTF8String], inbuf, inData.length, outbuf, maxlen, self.armored ? 1 : 0);
+            
+            if (outsize > 0) {
+                result = [NSData dataWithBytesNoCopy:outbuf length:outsize freeWhenDone:YES];
+            }
+            
+            [self finishnetpgp:netpgp];
+            
+            if (inbuf)
+                free(inbuf);
+        }
+    });
+    
+    return result;
+}
+
+- (NSData *) decryptData:(NSData *)inData
+{
+    __block NSData *result = nil;
+    
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            int maxlen = (int)(inData.length * 1.2f); // magic number 1.2, how much bigger it can be?
+            void *outbuf = calloc(maxlen, sizeof(Byte));
+            int outsize = netpgp_decrypt_memory(netpgp, inData.bytes, inData.length, outbuf, maxlen, self.armored ? 1 : 0);
+            
+            if (outsize > 0) {
+                result = [NSData dataWithBytesNoCopy:outbuf length:outsize freeWhenDone:YES];
+            }
+            
+            [self finishnetpgp:netpgp];
+        }
+    });
+    
+    return result;
+}
+
 /**
  Encrypt file.
  
@@ -100,6 +150,9 @@ static dispatch_queue_t lock_queue;
             result = netpgp_encrypt_file(netpgp, [self.userId UTF8String], infilepath, outfilepath, self.armored ? 1 : 0);
 
             [self finishnetpgp:netpgp];
+
+            if (outfilepath)
+                free(outfilepath);
         }
     });
 
@@ -137,6 +190,9 @@ static dispatch_queue_t lock_queue;
             result = netpgp_decrypt_file(netpgp, infilepath, outfilepath, self.armored ? 1 : 0);
             
             [self finishnetpgp:netpgp];
+
+            if (outfilepath)
+                free(outfilepath);
         }
     });
 
