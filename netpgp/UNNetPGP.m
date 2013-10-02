@@ -33,40 +33,7 @@ static dispatch_queue_t lock_queue;
 {
 }
 
-- (netpgp_t *) buildnetpgp;
-{
-    netpgp_t *netpgp = calloc(0x1, sizeof(netpgp_t));
-    
-    if (self.userId)
-        netpgp_setvar(netpgp, "userid", [self.userId UTF8String]);
-    
-    if (self.homeDirectory)
-        netpgp_setvar(netpgp, "homedir", [self.homeDirectory UTF8String]);
-    
-    if (self.secretKeyRing)
-        netpgp_setvar(netpgp, "secring", [self.secretKeyRing UTF8String]);
-    
-    if (self.publicKeyRing)
-        netpgp_setvar(netpgp, "pubring", [self.publicKeyRing UTF8String]);
-    
-    if (!netpgp_init(netpgp)) {
-        NSLog(@"Can't initialize netpgp stack");
-        free(netpgp);
-        return nil;
-    }
-    
-    return netpgp;
-}
-
-- (void) finishnetpgp:(netpgp_t *)netpgp
-{
-    if (!netpgp) {
-        return;
-    }
-    
-    netpgp_end(netpgp);
-    free(netpgp);
-}
+#pragma mark - Data
 
 - (NSData *) encryptData:(NSData *)inData
 {
@@ -117,6 +84,52 @@ static dispatch_queue_t lock_queue;
     
     return result;
 }
+
+- (NSData *) signData:(NSData *)inData
+{
+    __block NSData *result = nil;
+    
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            void *inbuf = calloc(inData.length, sizeof(Byte));
+            memcpy(inbuf, inData.bytes, inData.length);
+            
+            int maxlen = (int)(inData.length * 1.2f); // magic number 1.2, how much bigger it can be?
+            void *outbuf = calloc(maxlen, sizeof(Byte));
+            int outsize = netpgp_sign_memory(netpgp, [self.userId UTF8String], inbuf, inData.length, outbuf, maxlen, self.armored ? 1 : 0, 1 /* cleartext */);
+            
+            if (outsize > 0) {
+                result = [NSData dataWithBytesNoCopy:outbuf length:outsize freeWhenDone:YES];
+            }
+            
+            [self finishnetpgp:netpgp];
+            
+            if (inbuf)
+                free(inbuf);
+        }
+    });
+    
+    return result;
+}
+
+- (BOOL) verifyData:(NSData *)inData
+{
+    __block BOOL result = NO;
+    
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            result = netpgp_verify_memory(netpgp, inData.bytes, inData.length, NULL, 0, self.armored ? 1 : 0);
+            [self finishnetpgp:netpgp];
+        }
+    });
+    
+    return result;
+}
+
+
+#pragma mark - Files
 
 /**
  Encrypt file.
@@ -197,6 +210,93 @@ static dispatch_queue_t lock_queue;
     });
 
     return result;
+}
+
+- (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath
+{
+    return [self signFileAtPath:inFilePath writeSignatureToFile:signatureFilePath detached:YES];
+}
+
+- (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath detached:(BOOL)detached
+{
+    __block BOOL result = NO;
+
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            char infilepath[inFilePath.length];
+            strcpy(infilepath, inFilePath.UTF8String);
+            
+            char *outfilepath = NULL;
+            if (signatureFilePath) {
+                outfilepath = calloc(signatureFilePath.length, sizeof(char));
+                strcpy(outfilepath, signatureFilePath.UTF8String);
+            }
+            
+            result = netpgp_sign_file(netpgp, [self.userId UTF8String], infilepath, outfilepath /* sigfile name */, self.armored ? 1 : 0, 1 /* cleartext */, detached ? 1 : 0 /* detached */);
+            
+            [self finishnetpgp:netpgp];
+        }
+    });
+    
+    return result;
+}
+
+- (BOOL) verifyFileAtPath:(NSString *)inFilePath
+{
+    __block BOOL result = NO;
+    
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            char infilepath[inFilePath.length];
+            strcpy(infilepath, inFilePath.UTF8String);
+            
+            result = netpgp_verify_file(netpgp, infilepath, NULL, self.armored ? 1 : 0);
+            
+            [self finishnetpgp:netpgp];
+        }
+    });
+    
+    return result;
+}
+
+
+#pragma mark - private
+
+- (netpgp_t *) buildnetpgp;
+{
+    netpgp_t *netpgp = calloc(0x1, sizeof(netpgp_t));
+    
+    if (self.userId)
+        netpgp_setvar(netpgp, "userid", [self.userId UTF8String]);
+    
+    if (self.homeDirectory)
+        netpgp_setvar(netpgp, "homedir", [self.homeDirectory UTF8String]);
+    
+    if (self.secretKeyRing)
+        netpgp_setvar(netpgp, "secring", [self.secretKeyRing UTF8String]);
+    
+    if (self.publicKeyRing)
+        netpgp_setvar(netpgp, "pubring", [self.publicKeyRing UTF8String]);
+    
+    if (!netpgp_init(netpgp)) {
+        NSLog(@"Can't initialize netpgp stack");
+        free(netpgp);
+        return nil;
+    }
+    
+    return netpgp;
+}
+
+- (void) finishnetpgp:(netpgp_t *)netpgp
+{
+    if (!netpgp) {
+        return;
+    }
+    
+    netpgp_end(netpgp);
+    free(netpgp);
 }
 
 
