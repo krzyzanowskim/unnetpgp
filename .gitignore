@@ -1,0 +1,11 @@
+.DS_Store
+
+xcuserdata/
+*/project.xcworkspace/
+*.xccheckout
+
+*.swp
+*~.nib
+*.lock
+
+Pods/

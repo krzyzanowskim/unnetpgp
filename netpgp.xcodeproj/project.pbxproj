@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		751132FB17FB1F0800A3DB81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5D17F4498900952522 /* Foundation.framework */; };
+		751132FD17FB1F0800A3DB81 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751132FC17FB1F0800A3DB81 /* CoreGraphics.framework */; };
+		751132FE17FB1F0800A3DB81 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B6E17F4498900952522 /* UIKit.framework */; };
+		7511330417FB1F0800A3DB81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7511330217FB1F0800A3DB81 /* InfoPlist.strings */; };
+		7511330617FB1F0800A3DB81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7511330517FB1F0800A3DB81 /* main.m */; };
+		7511330A17FB1F0800A3DB81 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7511330917FB1F0800A3DB81 /* AppDelegate.m */; };
+		7511330C17FB1F0800A3DB81 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7511330B17FB1F0800A3DB81 /* Images.xcassets */; };
+		7511332517FB1FB200A3DB81 /* libnetpgp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5A17F4498900952522 /* libnetpgp.a */; };
+		7511332717FB1FC400A3DB81 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7511332617FB1FC400A3DB81 /* libPods.a */; };
+		7511332917FB1FCA00A3DB81 /* libPods-OpenSSL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7511332817FB1FCA00A3DB81 /* libPods-OpenSSL.a */; };
+		7544904A17FB07880047DF5C /* UNNetPGP.h in Headers */ = {isa = PBXBuildFile; fileRef = 7544904817FB07880047DF5C /* UNNetPGP.h */; };
+		7544904B17FB07880047DF5C /* UNNetPGP.m in Sources */ = {isa = PBXBuildFile; fileRef = 7544904917FB07880047DF5C /* UNNetPGP.m */; };
+		7561881B17FB2006003030EB /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7561881A17FB2006003030EB /* libbz2.dylib */; };
+		7561881D17FB2011003030EB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7561881C17FB2011003030EB /* libz.dylib */; };
 		75E60C2117F44A0B00952522 /* bufgap.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BF917F44A0B00952522 /* bufgap.c */; };
 		75E60C2217F44A0B00952522 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFB17F44A0B00952522 /* compress.c */; };
 		75E60C2317F44A0B00952522 /* create.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFD17F44A0B00952522 /* create.c */; };
@@ -43,6 +57,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		751132F417FB1ECF00A3DB81 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		751132FA17FB1F0800A3DB81 /* test client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		751132FC17FB1F0800A3DB81 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7511330117FB1F0800A3DB81 /* test client-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "test client-Info.plist"; sourceTree = "<group>"; };
+		7511330317FB1F0800A3DB81 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7511330517FB1F0800A3DB81 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7511330717FB1F0800A3DB81 /* test client-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test client-Prefix.pch"; sourceTree = "<group>"; };
+		7511330817FB1F0800A3DB81 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7511330917FB1F0800A3DB81 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7511330B17FB1F0800A3DB81 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7511332617FB1FC400A3DB81 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		7511332817FB1FCA00A3DB81 /* libPods-OpenSSL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OpenSSL.a"; path = "Pods/build/Debug-iphoneos/libPods-OpenSSL.a"; sourceTree = "<group>"; };
+		7544904817FB07880047DF5C /* UNNetPGP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNNetPGP.h; sourceTree = "<group>"; };
+		7544904917FB07880047DF5C /* UNNetPGP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNNetPGP.m; sourceTree = "<group>"; };
+		7561881A17FB2006003030EB /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
+		7561881C17FB2011003030EB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		75E60B5A17F4498900952522 /* libnetpgp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnetpgp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B5D17F4498900952522 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75E60B6B17F4498900952522 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -95,6 +125,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		751132F717FB1F0800A3DB81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7561881D17FB2011003030EB /* libz.dylib in Frameworks */,
+				7561881B17FB2006003030EB /* libbz2.dylib in Frameworks */,
+				751132FB17FB1F0800A3DB81 /* Foundation.framework in Frameworks */,
+				7511332917FB1FCA00A3DB81 /* libPods-OpenSSL.a in Frameworks */,
+				7511332517FB1FB200A3DB81 /* libnetpgp.a in Frameworks */,
+				751132FD17FB1F0800A3DB81 /* CoreGraphics.framework in Frameworks */,
+				751132FE17FB1F0800A3DB81 /* UIKit.framework in Frameworks */,
+				7511332717FB1FC400A3DB81 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75E60B5717F4498900952522 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -106,10 +151,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		751132FF17FB1F0800A3DB81 /* test client */ = {
+			isa = PBXGroup;
+			children = (
+				7511330817FB1F0800A3DB81 /* AppDelegate.h */,
+				7511330917FB1F0800A3DB81 /* AppDelegate.m */,
+				7511330B17FB1F0800A3DB81 /* Images.xcassets */,
+				7511330017FB1F0800A3DB81 /* Supporting Files */,
+			);
+			path = "test client";
+			sourceTree = "<group>";
+		};
+		7511330017FB1F0800A3DB81 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7511330117FB1F0800A3DB81 /* test client-Info.plist */,
+				7511330217FB1F0800A3DB81 /* InfoPlist.strings */,
+				7511330517FB1F0800A3DB81 /* main.m */,
+				7511330717FB1F0800A3DB81 /* test client-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		75E60B5117F4498900952522 = {
 			isa = PBXGroup;
 			children = (
 				75E60B5F17F4498900952522 /* netpgp */,
+				751132FF17FB1F0800A3DB81 /* test client */,
 				75E60B5C17F4498900952522 /* Frameworks */,
 				75E60B5B17F4498900952522 /* Products */,
 				DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */,
@@ -120,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				75E60B5A17F4498900952522 /* libnetpgp.a */,
+				751132FA17FB1F0800A3DB81 /* test client.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,10 +196,16 @@
 		75E60B5C17F4498900952522 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7561881C17FB2011003030EB /* libz.dylib */,
+				7561881A17FB2006003030EB /* libbz2.dylib */,
+				7511332817FB1FCA00A3DB81 /* libPods-OpenSSL.a */,
+				7511332617FB1FC400A3DB81 /* libPods.a */,
+				751132F417FB1ECF00A3DB81 /* libPods.a */,
 				75E60B5D17F4498900952522 /* Foundation.framework */,
 				75E60B6B17F4498900952522 /* XCTest.framework */,
 				75E60B6E17F4498900952522 /* UIKit.framework */,
 				FE89B52DBAE9412383F2624D /* libPods.a */,
+				751132FC17FB1F0800A3DB81 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,6 +215,8 @@
 			children = (
 				75E60BE517F44A0B00952522 /* lib */,
 				75E60B6017F4498900952522 /* Supporting Files */,
+				7544904817FB07880047DF5C /* UNNetPGP.h */,
+				7544904917FB07880047DF5C /* UNNetPGP.m */,
 			);
 			path = netpgp;
 			sourceTree = "<group>";
@@ -209,12 +286,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				75E60C3E17F4586C00952522 /* netpgp.h in Headers */,
+				7544904A17FB07880047DF5C /* UNNetPGP.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		751132F917FB1F0800A3DB81 /* test client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7511331F17FB1F0800A3DB81 /* Build configuration list for PBXNativeTarget "test client" */;
+			buildPhases = (
+				751132F617FB1F0800A3DB81 /* Sources */,
+				751132F717FB1F0800A3DB81 /* Frameworks */,
+				751132F817FB1F0800A3DB81 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "test client";
+			productName = "test client";
+			productReference = 751132FA17FB1F0800A3DB81 /* test client.app */;
+			productType = "com.apple.product-type.application";
+		};
 		75E60B5917F4498900952522 /* netpgp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75E60B7D17F4498900952522 /* Build configuration list for PBXNativeTarget "netpgp" */;
@@ -257,9 +352,22 @@
 			projectRoot = "";
 			targets = (
 				75E60B5917F4498900952522 /* netpgp */,
+				751132F917FB1F0800A3DB81 /* test client */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		751132F817FB1F0800A3DB81 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7511330417FB1F0800A3DB81 /* InfoPlist.strings in Resources */,
+				7511330C17FB1F0800A3DB81 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		108171624B04444BB0CCB088 /* Check Pods Manifest.lock */ = {
@@ -295,6 +403,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		751132F617FB1F0800A3DB81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7511330A17FB1F0800A3DB81 /* AppDelegate.m in Sources */,
+				7511330617FB1F0800A3DB81 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75E60B5617F4498900952522 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,12 +435,74 @@
 				75E60C2817F44A0B00952522 /* netpgp.c in Sources */,
 				75E60C3117F44A0B00952522 /* validate.c in Sources */,
 				75E60C2D17F44A0B00952522 /* reader.c in Sources */,
+				7544904B17FB07880047DF5C /* UNNetPGP.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		7511330217FB1F0800A3DB81 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7511330317FB1F0800A3DB81 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		7511332017FB1F0800A3DB81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "test client/test client-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "test client/test client-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/marcinkrzyzanowski/Devel/netpgp-xcode/netpgp/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7511332117FB1F0800A3DB81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "test client/test client-Prefix.pch";
+				INFOPLIST_FILE = "test client/test client-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/marcinkrzyzanowski/Devel/netpgp-xcode/netpgp/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		75E60B7B17F4498900952522 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -433,6 +612,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7511331F17FB1F0800A3DB81 /* Build configuration list for PBXNativeTarget "test client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7511332017FB1F0800A3DB81 /* Debug */,
+				7511332117FB1F0800A3DB81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		75E60B5517F4498900952522 /* Build configuration list for PBXProject "netpgp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
