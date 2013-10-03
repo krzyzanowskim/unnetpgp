@@ -22,9 +22,8 @@ static dispatch_queue_t lock_queue;
 - (instancetype) init
 {
     if (self = [super init]) {
-        // by default search keys in Document directory
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        self.homeDirectory = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        // by default search keys in resources
+        self.homeDirectory = [[NSBundle mainBundle] resourcePath];
     }
     return self;
 }
@@ -274,11 +273,11 @@ static dispatch_queue_t lock_queue;
     if (self.homeDirectory)
         netpgp_setvar(netpgp, "homedir", [self.homeDirectory UTF8String]);
     
-    if (self.secretKeyRing)
-        netpgp_setvar(netpgp, "secring", [self.secretKeyRing UTF8String]);
+    if (self.secretKeyRingPath)
+        netpgp_setvar(netpgp, "secring", [self.secretKeyRingPath UTF8String]);
     
-    if (self.publicKeyRing)
-        netpgp_setvar(netpgp, "pubring", [self.publicKeyRing UTF8String]);
+    if (self.publicKeyRingPath)
+        netpgp_setvar(netpgp, "pubring", [self.publicKeyRingPath UTF8String]);
     
     if (!netpgp_init(netpgp)) {
         NSLog(@"Can't initialize netpgp stack");

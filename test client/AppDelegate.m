@@ -42,18 +42,20 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     UNNetPGP *pgp = [[UNNetPGP alloc] init];
-    pgp.userId = @"Vodaofone KYC W27";
+    pgp.publicKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"rings/pubring.gpg"];
+    pgp.secretKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"rings/secring.gpg"];
+    pgp.userId = @"Vodaofone KYC W27 - 2014 <kyc@vodafone.com>";
     NSString *plainFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything.gif"];
     NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];
     NSString *signatureFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-signature.sig"];
-    NSString *encryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"secure-fuckeverything.gif.gpg"];
+    NSString *encryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-ecoded.gif.gpg"];
     BOOL res = NO;
-//    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
-//    NSLog(@"encryptedFilePath = %@",@(res));
+    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
+    NSLog(@"encryptedFilePath = %@",@(res));
     res = [pgp signFileAtPath:plainFilePath writeSignatureToFile:signatureFilePath];
     NSLog(@"signFileAtPath = %@",@(res));
-//    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
-//    NSLog(@"decryptFileAtPath = %@",@(res));
+    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
+    NSLog(@"decryptFileAtPath = %@",@(res));
     
 //    NSData *encryptedData = [pgp encryptData:[NSData dataWithContentsOfFile:plainFilePath]];
 //    NSLog(@"encryptedData = %@",@(encryptedData.length));
