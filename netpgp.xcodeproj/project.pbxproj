@@ -71,6 +71,7 @@
 		7511332817FB1FCA00A3DB81 /* libPods-OpenSSL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OpenSSL.a"; path = "Pods/build/Debug-iphoneos/libPods-OpenSSL.a"; sourceTree = "<group>"; };
 		7544904817FB07880047DF5C /* UNNetPGP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNNetPGP.h; sourceTree = "<group>"; };
 		7544904917FB07880047DF5C /* UNNetPGP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNNetPGP.m; sourceTree = "<group>"; };
+		755ACF9A17FF1D3800AC419B /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		7561881A17FB2006003030EB /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		7561881C17FB2011003030EB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		75E60B5A17F4498900952522 /* libnetpgp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnetpgp.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +218,7 @@
 				75E60B6017F4498900952522 /* Supporting Files */,
 				7544904817FB07880047DF5C /* UNNetPGP.h */,
 				7544904917FB07880047DF5C /* UNNetPGP.m */,
+				755ACF9A17FF1D3800AC419B /* TODO.txt */,
 			);
 			path = netpgp;
 			sourceTree = "<group>";

@@ -268,7 +268,7 @@ static dispatch_queue_t lock_queue;
         if (netpgp) {
             
             char *jsonCString = NULL;
-            if (netpgp_list_keys_json(netpgp, &jsonCString, 0)) {
+            if (netpgp_list_keys_json(netpgp, &jsonCString, 0) && (jsonCString != NULL)) {
                 NSError *error = nil;
                 keysDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithBytes:jsonCString length:strlen(jsonCString)] options:0 error:&error];
             }
@@ -285,6 +285,28 @@ static dispatch_queue_t lock_queue;
     dispatch_sync(lock_queue, ^{
         _availableKeys = keys;
     });
+}
+
+- (NSString *)exportKeyNamed:(NSString *)keyName
+{
+    __block NSString *keyData;
+    
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {            
+            char keyname[keyName.length];
+            strcpy(keyname, keyName.UTF8String);
+            
+            char *keydata = netpgp_export_key(netpgp, keyname);
+            if (keydata) {
+                keyData = [NSString stringWithCString:keydata encoding:NSASCIIStringEncoding];
+                free(keydata);
+            }
+            
+            [self finishnetpgp:netpgp];
+        }
+    });
+    return keyData;
 }
 
 /** import a key into keyring */
@@ -310,6 +332,8 @@ static dispatch_queue_t lock_queue;
 
 - (netpgp_t *) buildnetpgp;
 {
+    // Love http://jverkoey.github.io/fmemopen/
+
     netpgp_t *netpgp = calloc(0x1, sizeof(netpgp_t));
     
     if (self.userId)

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UNNetPGP.h"
+#import <stdio.h>
 
 @implementation AppDelegate {
 //    UNNetPGP *pgp;
@@ -40,7 +41,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
-{
+{    
     UNNetPGP *pgp = [[UNNetPGP alloc] init];
     pgp.publicKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"rings/pubring.gpg"];
     pgp.secretKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"rings/secring.gpg"];
@@ -49,7 +50,9 @@
     NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];
     NSString *signatureFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-signature.sig"];
     NSString *encryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-ecoded.gif.gpg"];
-    NSLog(@"%@",pgp.availableKeys);
+//    NSLog(@"%@",pgp.availableKeys);
+//    NSString *key = [pgp exportKeyNamed:@"bdfa092e94a978da"];
+//    NSLog(@"%@",key);
 //    BOOL res = NO;
 //    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
 //    NSLog(@"encryptedFilePath = %@",@(res));
