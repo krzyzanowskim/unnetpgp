@@ -28,10 +28,6 @@ static dispatch_queue_t lock_queue;
     return self;
 }
 
-- (void) dealloc
-{
-}
-
 #pragma mark - Data
 
 - (NSData *) encryptData:(NSData *)inData
