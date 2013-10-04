@@ -22,6 +22,9 @@
 /** path to secure key ring file */
 @property (strong, atomic) NSString *secretKeyRingPath;
 
+/** keys in a keyring */
+@property (strong, atomic) NSArray *keys;
+
 /** armored */
 @property (assign) BOOL armored;
 

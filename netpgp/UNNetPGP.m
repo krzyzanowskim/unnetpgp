@@ -11,8 +11,9 @@
 
 static dispatch_queue_t lock_queue;
 
-@implementation UNNetPGP {
-}
+@implementation UNNetPGP
+
+@synthesize keys = _keys;
 
 + (void)initialize
 {
@@ -254,6 +255,36 @@ static dispatch_queue_t lock_queue;
     });
     
     return result;
+}
+
+#pragma mark - Keys
+
+- (NSArray *)keys
+{
+    __block NSArray *keysDict = nil;
+    
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            
+            char *jsonCString = NULL;
+            if (netpgp_list_keys_json(netpgp, &jsonCString, 0)) {
+                NSError *error = nil;
+                keysDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithBytes:jsonCString length:strlen(jsonCString)] options:0 error:&error];
+            }
+            free(jsonCString);
+            
+            [self finishnetpgp:netpgp];
+        }
+    });
+    return keysDict;
+}
+
+- (void)setKeys:(NSArray *)keys
+{
+    dispatch_sync(lock_queue, ^{
+        _keys = keys;
+    });
 }
 
 
