@@ -23,7 +23,7 @@
 @property (strong, atomic) NSString *secretKeyRingPath;
 
 /** keys in a keyring */
-@property (strong, atomic) NSArray *keys;
+@property (strong, atomic) NSArray *availableKeys;
 
 /** armored */
 @property (assign) BOOL armored;
@@ -41,5 +41,7 @@
 
 - (NSData *) signData:(NSData *)data;
 - (BOOL) verifyData:(NSData *)inData;
+
+- (BOOL) importKeyFromFileAtPath:(NSString *)inFilePath;
 
 @end

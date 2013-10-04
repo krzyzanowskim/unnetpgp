@@ -49,13 +49,14 @@
     NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];
     NSString *signatureFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-signature.sig"];
     NSString *encryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-ecoded.gif.gpg"];
-    BOOL res = NO;
-    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
-    NSLog(@"encryptedFilePath = %@",@(res));
-    res = [pgp signFileAtPath:plainFilePath writeSignatureToFile:signatureFilePath];
-    NSLog(@"signFileAtPath = %@",@(res));
-    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
-    NSLog(@"decryptFileAtPath = %@",@(res));
+    NSLog(@"%@",pgp.availableKeys);
+//    BOOL res = NO;
+//    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
+//    NSLog(@"encryptedFilePath = %@",@(res));
+//    res = [pgp signFileAtPath:plainFilePath writeSignatureToFile:signatureFilePath];
+//    NSLog(@"signFileAtPath = %@",@(res));
+//    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
+//    NSLog(@"decryptFileAtPath = %@",@(res));
     
 //    NSData *encryptedData = [pgp encryptData:[NSData dataWithContentsOfFile:plainFilePath]];
 //    NSLog(@"encryptedData = %@",@(encryptedData.length));

@@ -13,7 +13,7 @@ static dispatch_queue_t lock_queue;
 
 @implementation UNNetPGP
 
-@synthesize keys = _keys;
+@synthesize availableKeys = _availableKeys;
 
 + (void)initialize
 {
@@ -259,7 +259,7 @@ static dispatch_queue_t lock_queue;
 
 #pragma mark - Keys
 
-- (NSArray *)keys
+- (NSArray *)availableKeys
 {
     __block NSArray *keysDict = nil;
     
@@ -280,13 +280,31 @@ static dispatch_queue_t lock_queue;
     return keysDict;
 }
 
-- (void)setKeys:(NSArray *)keys
+- (void)setAvailableKeys:(NSArray *)keys
 {
     dispatch_sync(lock_queue, ^{
-        _keys = keys;
+        _availableKeys = keys;
     });
 }
 
+/** import a key into keyring */
+- (BOOL) importKeyFromFileAtPath:(NSString *)inFilePath
+{
+    __block BOOL result = NO;
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            
+            char infilepath[inFilePath.length];
+            strcpy(infilepath, inFilePath.UTF8String);
+            result = netpgp_import_key(netpgp, infilepath);
+            
+            [self finishnetpgp:netpgp];
+        }
+    });
+    
+    return result;
+}
 
 #pragma mark - private
 
