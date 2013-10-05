@@ -3,11 +3,24 @@
 //  netpgp
 //
 //  Created by Marcin Krzyzanowski on 01.10.2013.
-//  Copyright (c) 2013 HAKORE. All rights reserved.
+//  Copyright (c) 2013 Marcin Krzyżanowski
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 //
 
 #import "UNNetPGP.h"
 #import "netpgp.h"
+#import "fmemopen.h"
 
 static dispatch_queue_t lock_queue;
 
@@ -43,7 +56,7 @@ static dispatch_queue_t lock_queue;
             
             int maxlen = (int)(inData.length * 1.2f); // magic number 1.2, how much bigger it can be?
             void *outbuf = calloc(maxlen, sizeof(Byte));
-            int outsize = netpgp_encrypt_memory(netpgp, [self.userId UTF8String], inbuf, inData.length, outbuf, maxlen, self.armored ? 1 : 0);
+            int outsize = netpgp_encrypt_memory(netpgp, self.userId.UTF8String, inbuf, inData.length, outbuf, maxlen, self.armored ? 1 : 0);
             
             if (outsize > 0) {
                 result = [NSData dataWithBytesNoCopy:outbuf length:outsize freeWhenDone:YES];
@@ -93,7 +106,7 @@ static dispatch_queue_t lock_queue;
             
             int maxlen = (int)(inData.length * 1.2f); // magic number 1.2, how much bigger it can be?
             void *outbuf = calloc(maxlen, sizeof(Byte));
-            int outsize = netpgp_sign_memory(netpgp, [self.userId UTF8String], inbuf, inData.length, outbuf, maxlen, self.armored ? 1 : 0, 1 /* cleartext */);
+            int outsize = netpgp_sign_memory(netpgp, self.userId.UTF8String, inbuf, inData.length, outbuf, maxlen, self.armored ? 1 : 0, 1 /* cleartext */);
             
             if (outsize > 0) {
                 result = [NSData dataWithBytesNoCopy:outbuf length:outsize freeWhenDone:YES];
@@ -156,7 +169,7 @@ static dispatch_queue_t lock_queue;
                 strcpy(outfilepath, outFilePath.UTF8String);
             }
 
-            result = netpgp_encrypt_file(netpgp, [self.userId UTF8String], infilepath, outfilepath, self.armored ? 1 : 0);
+            result = netpgp_encrypt_file(netpgp, self.userId.UTF8String, infilepath, outfilepath, self.armored ? 1 : 0);
 
             [self finishnetpgp:netpgp];
 
@@ -229,7 +242,7 @@ static dispatch_queue_t lock_queue;
                 strcpy(outfilepath, signatureFilePath.UTF8String);
             }
             
-            result = netpgp_sign_file(netpgp, [self.userId UTF8String], infilepath, outfilepath /* sigfile name */, self.armored ? 1 : 0, 1 /* cleartext */, detached ? 1 : 0 /* detached */);
+            result = netpgp_sign_file(netpgp, self.userId.UTF8String, infilepath, outfilepath /* sigfile name */, self.armored ? 1 : 0, 1 /* cleartext */, detached ? 1 : 0 /* detached */);
             
             [self finishnetpgp:netpgp];
         }
@@ -337,16 +350,21 @@ static dispatch_queue_t lock_queue;
     netpgp_t *netpgp = calloc(0x1, sizeof(netpgp_t));
     
     if (self.userId)
-        netpgp_setvar(netpgp, "userid", [self.userId UTF8String]);
+        netpgp_setvar(netpgp, "userid", self.userId.UTF8String);
     
     if (self.homeDirectory)
-        netpgp_setvar(netpgp, "homedir", [self.homeDirectory UTF8String]);
+        netpgp_setvar(netpgp, "homedir", self.homeDirectory.UTF8String);
     
     if (self.secretKeyRingPath)
-        netpgp_setvar(netpgp, "secring", [self.secretKeyRingPath UTF8String]);
+        netpgp_setvar(netpgp, "secring", self.secretKeyRingPath.UTF8String);
     
     if (self.publicKeyRingPath)
-        netpgp_setvar(netpgp, "pubring", [self.publicKeyRingPath UTF8String]);
+        netpgp_setvar(netpgp, "pubring", self.publicKeyRingPath.UTF8String);
+    
+    if (self.password) {
+        const char* cstr = [self.password stringByAppendingString:@"\n"].UTF8String;
+        netpgp->passfp = fmemopen((void *)cstr, sizeof(char) * (self.password.length + 1), "r");
+    }
     
     if (!netpgp_init(netpgp)) {
         NSLog(@"Can't initialize netpgp stack");
