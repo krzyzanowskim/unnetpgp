@@ -41,6 +41,8 @@
 		75E60C3217F44A0B00952522 /* writer.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C1F17F44A0B00952522 /* writer.c */; };
 		75E60C3517F44BAE00952522 /* mj.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60C3317F44BAE00952522 /* mj.c */; };
 		75E60C3E17F4586C00952522 /* netpgp.h in Headers */ = {isa = PBXBuildFile; fileRef = 75E60C3A17F44E6200952522 /* netpgp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75EC4E1E180014BC00D82718 /* fmemopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 75EC4E1B180014BC00D82718 /* fmemopen.c */; };
+		75EC4E1F180014BC00D82718 /* fmemopen.h in Headers */ = {isa = PBXBuildFile; fileRef = 75EC4E1C180014BC00D82718 /* fmemopen.h */; };
 		D035A006DF60432984EB4D07 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE89B52DBAE9412383F2624D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +123,8 @@
 		75E60C3317F44BAE00952522 /* mj.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mj.c; sourceTree = "<group>"; };
 		75E60C3417F44BAE00952522 /* mj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mj.h; sourceTree = "<group>"; };
 		75E60C3A17F44E6200952522 /* netpgp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netpgp.h; sourceTree = "<group>"; };
+		75EC4E1B180014BC00D82718 /* fmemopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fmemopen.c; sourceTree = "<group>"; };
+		75EC4E1C180014BC00D82718 /* fmemopen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmemopen.h; sourceTree = "<group>"; };
 		DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FE89B52DBAE9412383F2624D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -214,6 +218,7 @@
 		75E60B5F17F4498900952522 /* netpgp */ = {
 			isa = PBXGroup;
 			children = (
+				75EC4E1A180014BC00D82718 /* fmemopen */,
 				75E60BE517F44A0B00952522 /* lib */,
 				75E60B6017F4498900952522 /* Supporting Files */,
 				7544904817FB07880047DF5C /* UNNetPGP.h */,
@@ -280,6 +285,15 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		75EC4E1A180014BC00D82718 /* fmemopen */ = {
+			isa = PBXGroup;
+			children = (
+				75EC4E1B180014BC00D82718 /* fmemopen.c */,
+				75EC4E1C180014BC00D82718 /* fmemopen.h */,
+			);
+			path = fmemopen;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -287,6 +301,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75EC4E1F180014BC00D82718 /* fmemopen.h in Headers */,
 				75E60C3E17F4586C00952522 /* netpgp.h in Headers */,
 				7544904A17FB07880047DF5C /* UNNetPGP.h in Headers */,
 			);
@@ -426,6 +441,7 @@
 				75E60C2617F44A0B00952522 /* keyring.c in Sources */,
 				75E60C2517F44A0B00952522 /* fastctype.c in Sources */,
 				75E60C2E17F44A0B00952522 /* signature.c in Sources */,
+				75EC4E1E180014BC00D82718 /* fmemopen.c in Sources */,
 				75E60C2F17F44A0B00952522 /* ssh2pgp.c in Sources */,
 				75E60C2B17F44A0B00952522 /* packet-print.c in Sources */,
 				75E60C3017F44A0B00952522 /* symmetric.c in Sources */,
