@@ -6,9 +6,10 @@ Pod::Spec.new do |s|
   s.name     = 'netpgp'
   s.version  = '0.4'
   s.license  = { :type => 'Apache License, Version 2.0', :file => 'Licence.txt' }
-  s.summary  = 'NetPGP'
+  s.summary  = 'Objective-c wrapper of NetPGP for iOS'
+  s.description = "NetPGP is a standards-compliant library and suite of utilities providing digital signature and verification functionality, as well as data encryption and decryption, using RSA and DSA/Elgamal keys."
   s.homepage = 'http://www.netpgp.com'
-  s.authors  = { 'Nominet UK' => 'http://www.nic.uk' }
+  s.authors  = { 'Marcin Krzyżanowski' => 'marcin.krzyzanowski@hakore.com', 'Nominet UK' => 'http://www.nic.uk' }
   s.source   = { :git => 'ssh://git@stash.up-next.com:7999/spc/netpgp.git', :tag => "v#{s.version}" }
   s.requires_arc = false
 
