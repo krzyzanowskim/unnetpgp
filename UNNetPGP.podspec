@@ -5,7 +5,7 @@
 Pod::Spec.new do |s|
   s.name     = 'UNNetPGP'
   s.version  = '0.4'
-  s.deployment = :ios, '6.0'
+  s.platform = :ios, '6.0'
   s.license  = { :type => 'Apache License, Version 2.0', :file => 'Licence.txt' }
   s.summary  = 'Objective-c wrapper of NetPGP for iOS'
   s.description = "NetPGP is a standards-compliant library and suite of utilities providing digital signature and verification functionality, as well as data encryption and decryption, using RSA and DSA/Elgamal keys."
