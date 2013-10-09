@@ -14,7 +14,7 @@
 		7511330617FB1F0800A3DB81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7511330517FB1F0800A3DB81 /* main.m */; };
 		7511330A17FB1F0800A3DB81 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7511330917FB1F0800A3DB81 /* AppDelegate.m */; };
 		7511330C17FB1F0800A3DB81 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7511330B17FB1F0800A3DB81 /* Images.xcassets */; };
-		7511332517FB1FB200A3DB81 /* libnetpgp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5A17F4498900952522 /* libnetpgp.a */; };
+		7511332517FB1FB200A3DB81 /* libUNNetPGP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5A17F4498900952522 /* libUNNetPGP.a */; };
 		7511332717FB1FC400A3DB81 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7511332617FB1FC400A3DB81 /* libPods.a */; };
 		7511332917FB1FCA00A3DB81 /* libPods-OpenSSL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7511332817FB1FCA00A3DB81 /* libPods-OpenSSL.a */; };
 		7544904A17FB07880047DF5C /* UNNetPGP.h in Headers */ = {isa = PBXBuildFile; fileRef = 7544904817FB07880047DF5C /* UNNetPGP.h */; };
@@ -76,7 +76,7 @@
 		755ACF9A17FF1D3800AC419B /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		7561881A17FB2006003030EB /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		7561881C17FB2011003030EB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		75E60B5A17F4498900952522 /* libnetpgp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnetpgp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E60B5A17F4498900952522 /* libUNNetPGP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUNNetPGP.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B5D17F4498900952522 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75E60B6B17F4498900952522 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		75E60B6E17F4498900952522 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -138,7 +138,7 @@
 				7561881B17FB2006003030EB /* libbz2.dylib in Frameworks */,
 				751132FB17FB1F0800A3DB81 /* Foundation.framework in Frameworks */,
 				7511332917FB1FCA00A3DB81 /* libPods-OpenSSL.a in Frameworks */,
-				7511332517FB1FB200A3DB81 /* libnetpgp.a in Frameworks */,
+				7511332517FB1FB200A3DB81 /* libUNNetPGP.a in Frameworks */,
 				751132FD17FB1F0800A3DB81 /* CoreGraphics.framework in Frameworks */,
 				751132FE17FB1F0800A3DB81 /* UIKit.framework in Frameworks */,
 				7511332717FB1FC400A3DB81 /* libPods.a in Frameworks */,
@@ -192,7 +192,7 @@
 		75E60B5B17F4498900952522 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				75E60B5A17F4498900952522 /* libnetpgp.a */,
+				75E60B5A17F4498900952522 /* libUNNetPGP.a */,
 				751132FA17FB1F0800A3DB81 /* test client.app */,
 			);
 			name = Products;
@@ -327,9 +327,9 @@
 			productReference = 751132FA17FB1F0800A3DB81 /* test client.app */;
 			productType = "com.apple.product-type.application";
 		};
-		75E60B5917F4498900952522 /* netpgp */ = {
+		75E60B5917F4498900952522 /* UNNetPGP */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 75E60B7D17F4498900952522 /* Build configuration list for PBXNativeTarget "netpgp" */;
+			buildConfigurationList = 75E60B7D17F4498900952522 /* Build configuration list for PBXNativeTarget "UNNetPGP" */;
 			buildPhases = (
 				108171624B04444BB0CCB088 /* Check Pods Manifest.lock */,
 				75E60B5617F4498900952522 /* Sources */,
@@ -342,9 +342,9 @@
 			);
 			dependencies = (
 			);
-			name = netpgp;
+			name = UNNetPGP;
 			productName = netpgp;
-			productReference = 75E60B5A17F4498900952522 /* libnetpgp.a */;
+			productReference = 75E60B5A17F4498900952522 /* libUNNetPGP.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -354,9 +354,9 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = HAKORE;
+				ORGANIZATIONNAME = "UP-NEXT";
 			};
-			buildConfigurationList = 75E60B5517F4498900952522 /* Build configuration list for PBXProject "netpgp" */;
+			buildConfigurationList = 75E60B5517F4498900952522 /* Build configuration list for PBXProject "UNNetPGP" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -368,7 +368,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				75E60B5917F4498900952522 /* netpgp */,
+				75E60B5917F4498900952522 /* UNNetPGP */,
 				751132F917FB1F0800A3DB81 /* test client */,
 			);
 		};
@@ -603,7 +603,7 @@
 					"$(TARGET_BUILD_DIR)",
 				);
 				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = UNNetPGP;
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/include;
 				SKIP_INSTALL = YES;
 			};
@@ -621,7 +621,7 @@
 					"$(TARGET_BUILD_DIR)",
 				);
 				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = UNNetPGP;
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/include;
 				SKIP_INSTALL = YES;
 			};
@@ -639,7 +639,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75E60B5517F4498900952522 /* Build configuration list for PBXProject "netpgp" */ = {
+		75E60B5517F4498900952522 /* Build configuration list for PBXProject "UNNetPGP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75E60B7B17F4498900952522 /* Debug */,
@@ -648,7 +648,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75E60B7D17F4498900952522 /* Build configuration list for PBXNativeTarget "netpgp" */ = {
+		75E60B7D17F4498900952522 /* Build configuration list for PBXNativeTarget "UNNetPGP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75E60B7E17F4498900952522 /* Debug */,
