@@ -1,0 +1,50 @@
+UNNetPGP is Objective-C wrapper for [NetPGP](http://www.netpgp.com) for iOS.
+
+**About**
+
+The PGP solution you've been looking for is here. Low level C based api with Objective-C wrapper around it is all you need to encrypt and decrypt PGP messages. Based on [NetPGP](http://www.netpgp.com), a standards-compliant library and suite of utilities providing digital signature and verification functionality, as well as data encryption and decryption, using RSA and DSA/Elgamal keys.
+
+**Installation**
+
+This package is intended to be used with [Cocoapods](http://cocoapods.org) to satisfy OpenSSL dependency.
+
+* With [Cocoapods](http://cocoapods.org)
+
+Add this to you `Podfile`:
+
+	pod 'OpenSSL', :podspec => 'https://raw.github.com/krzak/OpenSSL/master/OpenSSL.podspec'
+	pod 'UNNetPGP', :podspec => 'https://raw.github.com/upnext/unnetpgp/master/UNNetPGP.podspec'
+ 
+* Without Cocoapods
+
+Something with Source Trees should do the trick but haven't tested. Pull request welcome.
+
+
+**Usage**
+
+Initialize and setup
+
+    UNNetPGP *pgp = [[UNNetPGP alloc] init];
+    pgp.userId = @"marcin.krzyzanowski@gmail.com";
+    pgp.password = @"1234";
+
+Optionally you can specify ringfiles out of home directory
+
+    pgp.publicKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"pubring.gpg"];
+    pgp.secretKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"secring.gpg"];
+
+    BOOL res = NO;
+    
+Encrypt file
+
+    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
+    NSLog(@"encryptedFilePath = %@",@(res));
+
+Decrypt file
+
+    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
+    NSLog(@"decryptFileAtPath = %@",@(res));
+
+**Authors**
+
+Marcin Krzyżanowski <marcin.krzyzanowski@hakore.com> at [UP-NEXT](http://www.up-next.com)
