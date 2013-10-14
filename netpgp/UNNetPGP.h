@@ -56,10 +56,11 @@
 - (NSData *) decryptData:(NSData *)inData;
 
 - (NSData *) signData:(NSData *)data;
-
 - (BOOL) verifyData:(NSData *)inData;
 
 - (BOOL) importKeyFromFileAtPath:(NSString *)inFilePath;
 - (NSString *)exportKeyNamed:(NSString *)keyName;
+
+- (BOOL) generateKey:(int)numberOfBits;
 
 @end

@@ -341,6 +341,29 @@ static dispatch_queue_t lock_queue;
     return result;
 }
 
+/** 
+ Generate key and save to keyring.
+ 
+ @param numberOfBits
+ @see userId
+ */
+- (BOOL) generateKey:(int)numberOfBits
+{
+    __block BOOL result = NO;
+    dispatch_sync(lock_queue, ^{
+        netpgp_t *netpgp = [self buildnetpgp];
+        if (netpgp) {
+            char keyId[self.userId.length];
+            strcpy(keyId, self.userId.UTF8String);
+
+            result = netpgp_generate_key(netpgp, keyId, numberOfBits);
+            [self finishnetpgp:netpgp];
+        }
+    });
+    
+    return result;
+}
+
 #pragma mark - private
 
 - (netpgp_t *) buildnetpgp;
