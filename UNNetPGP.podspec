@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name     = 'UNNetPGP'
-  s.version  = '0.4'
+  s.version  = '0.5'
   s.platform = :ios, '6.0'
   s.license  = { :type => 'Apache License, Version 2.0', :file => 'Licence.txt' }
   s.summary  = 'Objective-c wrapper of NetPGP for iOS'
