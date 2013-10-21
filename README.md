@@ -47,4 +47,5 @@ Decrypt file
 
 **Authors**
 
-Marcin Krzyżanowski <marcin.krzyzanowski@hakore.com> at [UP-NEXT](http://www.up-next.com)
+[Marcin Krzyżanowski](https://twitter.com/krzyzanowskim)
+
