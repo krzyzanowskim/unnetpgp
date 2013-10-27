@@ -649,7 +649,7 @@ savepubkey(char *res, char *f, size_t size)
 		return 0;
 	}
 	len = strlen(res);
-	for (cc = 0 ; (wc = write(fd, &res[cc], len - cc)) > 0 ; cc += wc) {
+	for (cc = 0 ; (wc = (int)MIN(write(fd, &res[cc], len - cc),INT_MAX)) > 0 ; cc += wc) {
 	}
 	(void) close(fd);
 	return 1;
@@ -672,9 +672,9 @@ formatstring(char *buffer, const uint8_t *s, size_t len)
 {
 	int	cc;
 
-	cc = formatu32((uint8_t *)buffer, len);
+	cc = formatu32((uint8_t *)buffer, (int)MIN(len,INT_MAX));
 	(void) memcpy(&buffer[cc], s, len);
-	return cc + len;
+	return cc + (int)MIN(len,INT_MAX);
 }
 
 /* format a bignum, checking for "interesting" high bit values */
@@ -1803,5 +1803,5 @@ netpgp_write_sshkey(netpgp_t *netpgp, char *s, const char *userid, char *out, si
 	cc += formatbignum((char *)&out[cc], key->key.pubkey.key.rsa.n);
 	free(io);
 	free(keyring);
-	return cc;
+	return (int)MIN(cc,INT_MAX);
 }
