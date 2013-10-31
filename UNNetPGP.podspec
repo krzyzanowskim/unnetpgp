@@ -22,7 +22,6 @@ Pod::Spec.new do |s|
 
   s.dependency 'OpenSSL'
 
-  s.frameworks = 'Security'
   s.libraries = 'bz2', 'z'
   
   s.source_files = 'netpgp/lib/*.{h,c}', 'netpgp/*.{h,m}', 'netpgp/fmemopen/*.{h,c}'
