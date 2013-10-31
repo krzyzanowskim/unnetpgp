@@ -399,8 +399,11 @@ static dispatch_queue_t lock_queue;
     __block BOOL result = NO;
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
-        NSString *keyIdString = keyName ?: self.userId;
         if (netpgp) {
+            NSString *keyIdString = keyName ?: self.userId;
+            // use sha1 because sha256 crashing, don't know why yet
+            netpgp_setvar(netpgp, "hash", [@"sha1" UTF8String]);
+
             char keyId[keyIdString.length];
             strcpy(keyId, keyIdString.UTF8String);
 
