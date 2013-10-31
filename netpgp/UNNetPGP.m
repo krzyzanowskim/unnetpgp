@@ -39,7 +39,10 @@ static dispatch_queue_t lock_queue;
         // by default search keys in Documents
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentDirectoryPath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        
         self.homeDirectory = documentDirectoryPath;
+        self.publicKeyRingPath = [self.homeDirectory stringByAppendingPathComponent:@"pubring.gpg"];
+        self.secretKeyRingPath = [self.homeDirectory stringByAppendingPathComponent:@"secring.gpg"];
     }
     return self;
 }
@@ -347,16 +350,18 @@ static dispatch_queue_t lock_queue;
  Generate key and save to keyring.
  
  @param numberOfBits
+ @param keyName
  @see userId
  */
-- (BOOL) generateKey:(int)numberOfBits
+- (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName
 {
     __block BOOL result = NO;
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
+        NSString *keyIdString = keyName ?: self.userId;
         if (netpgp) {
-            char keyId[self.userId.length];
-            strcpy(keyId, self.userId.UTF8String);
+            char keyId[keyIdString.length];
+            strcpy(keyId, keyIdString.UTF8String);
 
             result = netpgp_generate_key(netpgp, keyId, numberOfBits);
             [self finishnetpgp:netpgp];
@@ -364,6 +369,17 @@ static dispatch_queue_t lock_queue;
     });
     
     return result;
+}
+
+/**
+ Generate key and save to keyring.
+ 
+ @param numberOfBits
+ @see userId
+ */
+- (BOOL) generateKey:(int)numberOfBits
+{
+    return [self generateKey:numberOfBits named:nil];
 }
 
 #pragma mark - private
@@ -380,11 +396,19 @@ static dispatch_queue_t lock_queue;
     if (self.homeDirectory)
         netpgp_setvar(netpgp, "homedir", self.homeDirectory.UTF8String);
     
-    if (self.secretKeyRingPath)
+    if (self.secretKeyRingPath) {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:self.secretKeyRingPath]) {
+            [[NSFileManager defaultManager] createFileAtPath:self.secretKeyRingPath contents:nil attributes:@{NSFilePosixPermissions: [NSNumber numberWithShort:0600]}];
+        }
         netpgp_setvar(netpgp, "secring", self.secretKeyRingPath.UTF8String);
+    }
     
-    if (self.publicKeyRingPath)
+    if (self.publicKeyRingPath) {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:self.publicKeyRingPath]) {
+            [[NSFileManager defaultManager] createFileAtPath:self.publicKeyRingPath contents:nil attributes:@{NSFilePosixPermissions: [NSNumber numberWithShort:0600]}];
+        }
         netpgp_setvar(netpgp, "pubring", self.publicKeyRingPath.UTF8String);
+    }
     
     if (self.password) {
         const char* cstr = [self.password stringByAppendingString:@"\n"].UTF8String;
