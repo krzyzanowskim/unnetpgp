@@ -36,8 +36,10 @@ static dispatch_queue_t lock_queue;
 - (instancetype) init
 {
     if (self = [super init]) {
-        // by default search keys in resources
-        self.homeDirectory = [[NSBundle mainBundle] resourcePath];
+        // by default search keys in Documents
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentDirectoryPath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        self.homeDirectory = documentDirectoryPath;
     }
     return self;
 }
