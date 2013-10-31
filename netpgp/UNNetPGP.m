@@ -27,6 +27,8 @@ static dispatch_queue_t lock_queue;
 @implementation UNNetPGP
 
 @synthesize availableKeys = _availableKeys;
+@synthesize publicKeyRingPath = _publicKeyRingPath;
+@synthesize secretKeyRingPath = _secretKeyRingPath;
 
 + (void)initialize
 {
@@ -41,10 +43,49 @@ static dispatch_queue_t lock_queue;
         NSString *documentDirectoryPath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
         
         self.homeDirectory = documentDirectoryPath;
-        self.publicKeyRingPath = [self.homeDirectory stringByAppendingPathComponent:@"pubring.gpg"];
-        self.secretKeyRingPath = [self.homeDirectory stringByAppendingPathComponent:@"secring.gpg"];
     }
     return self;
+}
+
+- (void)setPublicKeyRingPath:(NSString *)publicKeyRingPath
+{
+    dispatch_sync(lock_queue, ^{
+        self->_publicKeyRingPath = publicKeyRingPath;
+    });
+}
+
+- (NSString *)publicKeyRingPath
+{
+    @synchronized(self) {
+        NSString *ret = nil;
+        if (_publicKeyRingPath) {
+            ret = _publicKeyRingPath;
+        } else if (self.homeDirectory) {
+            ret = [self.homeDirectory stringByAppendingPathComponent:@"pubring.gpg"];
+        }
+        return ret;
+    }
+}
+
+- (void)setSecretKeyRingPath:(NSString *)secretKeyRingPath
+{
+    dispatch_sync(lock_queue, ^{
+        self->_secretKeyRingPath = secretKeyRingPath;
+    });
+
+}
+
+- (NSString *)secretKeyRingPath
+{
+    @synchronized(self) {
+        NSString *ret = nil;
+        if (_secretKeyRingPath) {
+            ret = _secretKeyRingPath;
+        } else if (self.homeDirectory) {
+            ret = [self.homeDirectory stringByAppendingPathComponent:@"secring.gpg"];
+        }
+        return ret;
+    }
 }
 
 #pragma mark - Data
@@ -367,7 +408,7 @@ static dispatch_queue_t lock_queue;
             [self finishnetpgp:netpgp];
         }
     });
-    
+
     return result;
 }
 
