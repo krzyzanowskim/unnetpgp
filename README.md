@@ -45,6 +45,11 @@ Decrypt file
     res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
     NSLog(@"decryptFileAtPath = %@",@(res));
 
+Generate new key (and save in keyring)
+
+    [pgp generateKey:1024];
+
+
 **Authors**
 
 [Marcin Krzyżanowski](https://twitter.com/krzyzanowskim)
