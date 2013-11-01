@@ -373,7 +373,7 @@ static dispatch_queue_t lock_queue;
 }
 
 /** import a key into keyring */
-- (BOOL) importKeyFromFileAtPath:(NSString *)inFilePath
+- (BOOL) importPublicKeyFromFileAtPath:(NSString *)inFilePath
 {
     if (!inFilePath)
         return NO;
@@ -385,7 +385,8 @@ static dispatch_queue_t lock_queue;
             
             char infilepath[inFilePath.length];
             strcpy(infilepath, inFilePath.UTF8String);
-            result = netpgp_import_key(netpgp, infilepath);
+            //TODO: save in keyring
+            result = netpgp_import_public_key(netpgp, infilepath);
             
             [self finishnetpgp:netpgp];
         }
@@ -393,6 +394,29 @@ static dispatch_queue_t lock_queue;
     
     return result;
 }
+
+/** import a key into keyring */
+//- (BOOL) importSecureKeyFromFileAtPath:(NSString *)inFilePath
+//{
+//    if (!inFilePath)
+//        return NO;
+//    
+//    __block BOOL result = NO;
+//    dispatch_sync(lock_queue, ^{
+//        netpgp_t *netpgp = [self buildnetpgp];
+//        if (netpgp) {
+//            
+//            char infilepath[inFilePath.length];
+//            strcpy(infilepath, inFilePath.UTF8String);
+//            //TODO: save in keyring
+//            result = netpgp_import_secure_key(netpgp, infilepath);
+//            
+//            [self finishnetpgp:netpgp];
+//        }
+//    });
+//    
+//    return result;
+//}
 
 /** 
  Generate key and save to keyring.

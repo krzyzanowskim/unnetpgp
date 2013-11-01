@@ -58,7 +58,8 @@
 - (NSData *) signData:(NSData *)data;
 - (BOOL) verifyData:(NSData *)inData;
 
-- (BOOL) importKeyFromFileAtPath:(NSString *)inFilePath;
+- (BOOL) importPublicKeyFromFileAtPath:(NSString *)inFilePath;
+//- (BOOL) importSecureKeyFromFileAtPath:(NSString *)inFilePath;
 - (NSString *)exportKeyNamed:(NSString *)keyName;
 
 - (BOOL) generateKey:(int)numberOfBits;
