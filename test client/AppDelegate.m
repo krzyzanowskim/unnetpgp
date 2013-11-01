@@ -50,7 +50,9 @@
 //    pgp.userId = @"Vodaofone KYC W27 - 2014 <kyc@vodafone.com>";
     pgp.userId = @"marcin.krzyzanowski@gmail.com";
 //    [pgp generateKey:1024 named:nil toDirectory:[[self documentsDirectory] stringByAppendingPathComponent:@"ring"]];
-    [pgp generateKey:1024];
+//    [pgp generateKey:1024];
+    [pgp importPublicKeyFromFileAtPath:[[self documentsDirectory] stringByAppendingPathComponent:@"ring/pubring.gpg"]];
+//    [pgp importSecureKeyFromFileAtPath:[[self documentsDirectory] stringByAppendingPathComponent:@"ring/secring.gpg"]];
     NSLog(@"%@",[pgp availableKeys]);
 //    NSString *plainFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything.gif"];
 //    NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];

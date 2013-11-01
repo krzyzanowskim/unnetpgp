@@ -1070,7 +1070,7 @@ netpgp_export_key(netpgp_t *netpgp, char *name)
 
 /* import a key into our keyring */
 int
-netpgp_import_key(netpgp_t *netpgp, char *f)
+netpgp_import_public_key(netpgp_t *netpgp, char *f)
 {
 	__ops_io_t	*io;
 	unsigned	 realarmor;
@@ -1083,9 +1083,97 @@ netpgp_import_key(netpgp_t *netpgp, char *f)
 		(void) fprintf(io->errs, "Cannot import key from file %s\n", f);
 		return 0;
 	}
+
+    /* import public key */
+    __ops_keyring_t *keyring = netpgp->pubring;
+    __ops_key_t		*key;
+    unsigned n = 0;
     
+    for (n = 0, key = keyring->keys; n < keyring->keyc; ++n, ++key) {
+		if (!__ops_is_key_secret(key)) {
+            char *ringfile = netpgp_getvar(netpgp, "pubring");
+            if (!appendkey(io, key, ringfile)) {
+                (void) fprintf(io->errs, "Cannot write pubkey to '%s'\n", ringfile);
+                return 0;
+            }
+		}
+		(void) fputc('\n', io->res);
+	}
+    
+    /* import secret key */
+//    keyring = netpgp->secring;
+//    for (n = 0, key = keyring->keys; n < keyring->keyc; ++n, ++key) {
+//		if (__ops_is_key_secret(key)) {
+//            const unsigned		 noarmor = 0;
+//            __ops_output_t		*create;
+//            int             	 fd;
+//            
+//            char *ringfile = netpgp_getvar(netpgp, "secring");
+//            if ((fd = __ops_setup_file_append(&create, ringfile)) < 0) {
+//                fd = __ops_setup_file_write(&create, ringfile, 0);
+//            }
+//            if (fd < 0) {
+//                (void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
+//                return 0;
+//            }
+//            if (!__ops_write_xfer_seckey(create, key, NULL, 0, noarmor)) {
+//                (void) fprintf(io->errs, "Cannot write seckey\n");
+//                return 0;
+//            }
+//            __ops_teardown_file_write(create, fd);
+//		}
+//		(void) fputc('\n', io->res);
+//	}
+
 	return __ops_keyring_list(io, netpgp->pubring, 0);
 }
+
+/* import a key into our keyring */
+//int
+//netpgp_import_secure_key(netpgp_t *netpgp, char *f)
+//{
+//	__ops_io_t	*io;
+//	unsigned	 realarmor;
+//	int		 done;
+//    
+//	io = netpgp->io;
+//	realarmor = isarmoured(io, f, NULL, IMPORT_ARMOR_HEAD);
+//	done = __ops_keyring_fileread(netpgp->secring, realarmor, f);
+//	if (!done) {
+//		(void) fprintf(io->errs, "Cannot import key from file %s\n", f);
+//		return 0;
+//	}
+//    
+//    /* import secret key */
+//    __ops_keyring_t *keyring = netpgp->secring;
+//    __ops_key_t		*key;
+//    unsigned n = 0;
+//    
+//    for (n = 0, key = keyring->keys; n < keyring->keyc; ++n, ++key) {
+//		if (__ops_is_key_secret(key)) {
+//            const unsigned		 noarmor = 1;
+//            __ops_output_t		*create;
+//            int             	 fd;
+//
+//            char *ringfile = netpgp_getvar(netpgp, "secring");
+//            if ((fd = __ops_setup_file_append(&create, ringfile)) < 0) {
+//                fd = __ops_setup_file_write(&create, ringfile, 0);
+//            }
+//            if (fd < 0) {
+//                (void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
+//                return 0;
+//            }
+//            if (!__ops_write_xfer_seckey(create, key, NULL, 0, noarmor)) {
+//                (void) fprintf(io->errs, "Cannot write seckey\n");
+//                return 0;
+//            }
+//            __ops_teardown_file_write(create, fd);
+//		}
+//	}
+//    
+//	return __ops_keyring_list(io, netpgp->pubring, 0);
+//}
+
 
 /* generate a new key */
 /* output directory have to exists */
