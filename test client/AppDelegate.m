@@ -43,25 +43,29 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {    
     UNNetPGP *pgp = [[UNNetPGP alloc] init];
-    pgp.password = @"1234";
-    pgp.publicKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"rings2/pubring.gpg"];
-    pgp.secretKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"rings2/secring.gpg"];
+//    pgp.password = @"1234";
+//    [[NSFileManager defaultManager] createDirectoryAtPath:[[self documentsDirectory] stringByAppendingPathComponent:@"ring"] withIntermediateDirectories:YES attributes:nil error:nil];
+//    pgp.publicKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"ring/pubring.gpg"];
+//    pgp.secretKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"ring/secring.gpg"];
 //    pgp.userId = @"Vodaofone KYC W27 - 2014 <kyc@vodafone.com>";
     pgp.userId = @"marcin.krzyzanowski@gmail.com";
-    NSString *plainFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything.gif"];
-    NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];
-    NSString *signatureFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-signature.sig"];
-    NSString *encryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-ecoded.gif.gpg"];
-//    NSLog(@"%@",pgp.availableKeys);
-//    NSString *key = [pgp exportKeyNamed:@"6020c976e9bc089a"];
-//    NSLog(@"%@",key);
-    BOOL res = NO;
-    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
-    NSLog(@"encryptedFilePath = %@",@(res));
-    res = [pgp signFileAtPath:plainFilePath writeSignatureToFile:signatureFilePath];
-    NSLog(@"signFileAtPath = %@",@(res));
-    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
-    NSLog(@"decryptFileAtPath = %@",@(res));
+//    [pgp generateKey:1024 named:nil toDirectory:[[self documentsDirectory] stringByAppendingPathComponent:@"ring"]];
+    [pgp generateKey:1024];
+    NSLog(@"%@",[pgp availableKeys]);
+//    NSString *plainFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything.gif"];
+//    NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];
+//    NSString *signatureFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-signature.sig"];
+//    NSString *encryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-ecoded.gif.gpg"];
+////    NSLog(@"%@",pgp.availableKeys);
+////    NSString *key = [pgp exportKeyNamed:@"6020c976e9bc089a"];
+////    NSLog(@"%@",key);
+//    BOOL res = NO;
+//    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
+//    NSLog(@"encryptedFilePath = %@",@(res));
+//    res = [pgp signFileAtPath:plainFilePath writeSignatureToFile:signatureFilePath];
+//    NSLog(@"signFileAtPath = %@",@(res));
+//    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
+//    NSLog(@"decryptFileAtPath = %@",@(res));
     
 //    NSData *encryptedData = [pgp encryptData:[NSData dataWithContentsOfFile:plainFilePath]];
 //    NSLog(@"encryptedData = %@",@(encryptedData.length));

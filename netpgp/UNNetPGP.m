@@ -375,6 +375,9 @@ static dispatch_queue_t lock_queue;
 /** import a key into keyring */
 - (BOOL) importKeyFromFileAtPath:(NSString *)inFilePath
 {
+    if (!inFilePath)
+        return NO;
+    
     __block BOOL result = NO;
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
@@ -396,18 +399,21 @@ static dispatch_queue_t lock_queue;
  
  @param numberOfBits
  @param keyName
+ @param path
+ @param defaultKeyring
  @see userId
  */
-- (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName toDirectory:(NSString *)path
+- (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName toDirectory:(NSString *)path saveToDefaultKeyring:(BOOL)defaultKeyring
 {
     __block BOOL result = NO;
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
             NSString *keyIdString = keyName ?: self.userId;
-            // use sha1 because sha256 crashing, don't know why yet
+            //FIXME: use sha1 because sha256 crashing, don't know why yet
             netpgp_setvar(netpgp, "hash", [@"sha1" UTF8String]);
-
+            netpgp_setvar(netpgp, "userid checks", "skip");
+            
             char key_id[keyIdString.length];
             strcpy(key_id, keyIdString.UTF8String);
             
@@ -415,13 +421,13 @@ static dispatch_queue_t lock_queue;
             if (path) {
                 directory_path = calloc(path.length, sizeof(char));
                 strcpy(directory_path, path.UTF8String);
-            }
-            
-            if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-                [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:@{NSFilePosixPermissions: [NSNumber numberWithShort:0700]} error:nil];
+
+                if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:@{NSFilePosixPermissions: [NSNumber numberWithShort:0700]} error:nil];
+                }
             }
 
-            result = netpgp_generate_key_rich(netpgp, key_id, numberOfBits, directory_path);
+            result = netpgp_generate_key_rich(netpgp, key_id, numberOfBits, directory_path, defaultKeyring ? 1 : 0);
             [self finishnetpgp:netpgp];
             
             if (directory_path) {
@@ -441,7 +447,21 @@ static dispatch_queue_t lock_queue;
  */
 - (BOOL) generateKey:(int)numberOfBits
 {
-    return [self generateKey:numberOfBits named:nil toDirectory:nil];
+    return [self generateKey:numberOfBits named:nil toDirectory:nil saveToDefaultKeyring:YES];
+}
+
+/**
+ Generate key and save to defined path
+ 
+ @param numberOfBits
+ @param keyName
+ @param path
+ @see userId
+ */
+
+- (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName toDirectory:(NSString *)path
+{
+    return [self generateKey:numberOfBits named:keyName toDirectory:path saveToDefaultKeyring:NO];
 }
 
 #pragma mark - private
@@ -455,8 +475,14 @@ static dispatch_queue_t lock_queue;
     if (self.userId)
         netpgp_setvar(netpgp, "userid", self.userId.UTF8String);
     
-    if (self.homeDirectory)
-        netpgp_setvar(netpgp, "homedir", self.homeDirectory.UTF8String);
+    if (self.homeDirectory) {
+        char *directory_path = calloc(self.homeDirectory.length, sizeof(char));
+        strcpy(directory_path, self.homeDirectory.UTF8String);
+        
+        netpgp_set_homedir(netpgp, directory_path, NULL, 0);
+        
+        free(directory_path);
+    }
     
     if (self.secretKeyRingPath) {
         if (![[NSFileManager defaultManager] fileExistsAtPath:self.secretKeyRingPath]) {
@@ -476,6 +502,11 @@ static dispatch_queue_t lock_queue;
         const char* cstr = [self.password stringByAppendingString:@"\n"].UTF8String;
         netpgp->passfp = fmemopen((void *)cstr, sizeof(char) * (self.password.length + 1), "r");
     }
+
+#if DEBUG
+    netpgp_incvar(netpgp, "verbose", 1);
+    netpgp_set_debug(NULL);
+#endif
     
     if (!netpgp_init(netpgp)) {
         NSLog(@"Can't initialize netpgp stack");
