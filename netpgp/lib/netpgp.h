@@ -80,7 +80,7 @@ char *netpgp_get_key(netpgp_t *, const char *, const char *);
 char *netpgp_export_key(netpgp_t *, char *);
 int netpgp_import_key(netpgp_t *, char *);
 int netpgp_generate_key(netpgp_t *, char *, int);
-int netpgp_generate_key_rich(netpgp_t *, char *, int, char *);
+int netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_directory, int save_to_default_keyring);
 
 /* file management */
 int netpgp_encrypt_file(netpgp_t *, const char *, const char *, char *, int);

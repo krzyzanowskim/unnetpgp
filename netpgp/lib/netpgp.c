@@ -1083,13 +1083,14 @@ netpgp_import_key(netpgp_t *netpgp, char *f)
 		(void) fprintf(io->errs, "Cannot import key from file %s\n", f);
 		return 0;
 	}
+    
 	return __ops_keyring_list(io, netpgp->pubring, 0);
 }
 
 /* generate a new key */
 /* output directory have to exists */
 int
-netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_directory)
+netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_directory, int save_to_default_keyring)
 {
 	__ops_output_t		*create;
 	const unsigned		 noarmor = 0;
@@ -1124,38 +1125,61 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
 	__ops_sprint_keydata(netpgp->io, NULL, key, &cp, "signature ", &key->key.seckey.pubkey, 0);
 	(void) fprintf(stdout, "%s", cp);
 	/* write public key */
-    if (output_directory == NULL) {
-        (void) snprintf(dir, sizeof(dir), "%s/%.16s", netpgp_getvar(netpgp, "homedir"), &cp[38]);
-        if (mkdir(dir, 0700) < 0) {
-            (void) fprintf(io->errs, "can't mkdir '%s'\n", dir);
+    if (output_directory) {
+        (void) snprintf(dir, sizeof(dir), "%s", output_directory);
+        (void) fprintf(io->errs, "netpgp: generated keys in directory %s\n", dir);
+        (void) snprintf(ringfile = filename, sizeof(filename), "%s/pubring.gpg", dir);
+        if (!appendkey(io, key, ringfile)) {
+            (void) fprintf(io->errs, "Cannot write pubkey to '%s'\n", ringfile);
             return 0;
         }
-    } else {
-        (void) snprintf(dir, sizeof(dir), "%s", output_directory);
     }
-	(void) fprintf(io->errs, "netpgp: generated keys in directory %s\n", dir);
-	(void) snprintf(ringfile = filename, sizeof(filename), "%s/pubring.gpg", dir);
-	if (!appendkey(io, key, ringfile)) {
-		(void) fprintf(io->errs, "Cannot write pubkey to '%s'\n", ringfile);
-		return 0;
-	}
+    
+    /* write to default keyring */
+    if (save_to_default_keyring) {
+        ringfile = netpgp_getvar(netpgp, "pubring");
+        if (!appendkey(io, key, ringfile)) {
+            (void) fprintf(io->errs, "Cannot write pubkey to '%s'\n", ringfile);
+            return 0;
+        }
+    }
+    
 	if (netpgp->pubring != NULL) {
 		__ops_keyring_free(netpgp->pubring);
 	}
 	/* write secret key */
-	(void) snprintf(ringfile = filename, sizeof(filename), "%s/secring.gpg", dir);
-	if ((fd = __ops_setup_file_append(&create, ringfile)) < 0) {
-		fd = __ops_setup_file_write(&create, ringfile, 0);
-	}
-	if (fd < 0) {
-		(void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
-		return 0;
-	}
-	if (!__ops_write_xfer_seckey(create, key, NULL, 0, noarmor)) {
-		(void) fprintf(io->errs, "Cannot write seckey\n");
-		return 0;
-	}
-	__ops_teardown_file_write(create, fd);
+    if (output_directory) {
+        (void) snprintf(ringfile = filename, sizeof(filename), "%s/secring.gpg", dir);
+        if ((fd = __ops_setup_file_append(&create, ringfile)) < 0) {
+            fd = __ops_setup_file_write(&create, ringfile, 0);
+        }
+        if (fd < 0) {
+            (void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
+            return 0;
+        }
+        if (!__ops_write_xfer_seckey(create, key, NULL, 0, noarmor)) {
+            (void) fprintf(io->errs, "Cannot write seckey\n");
+            return 0;
+        }
+        __ops_teardown_file_write(create, fd);
+    }
+    
+    /* write to default keyring */
+    if (save_to_default_keyring) {
+        ringfile = netpgp_getvar(netpgp, "secring");
+        if ((fd = __ops_setup_file_append(&create, ringfile)) < 0) {
+            fd = __ops_setup_file_write(&create, ringfile, 0);
+        }
+        if (fd < 0) {
+            (void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
+            return 0;
+        }
+        if (!__ops_write_xfer_seckey(create, key, NULL, 0, noarmor)) {
+            (void) fprintf(io->errs, "Cannot write seckey\n");
+            return 0;
+        }
+        __ops_teardown_file_write(create, fd);
+    }
 	if (netpgp->secring != NULL) {
 		__ops_keyring_free(netpgp->secring);
 	}
@@ -1168,7 +1192,7 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
 int
 netpgp_generate_key(netpgp_t *netpgp, char *id, int numbits)
 {
-    return netpgp_generate_key_rich(netpgp, id, numbits, NULL);
+    return netpgp_generate_key_rich(netpgp, id, numbits, NULL, 1);
 }
 
 /* encrypt a file */
