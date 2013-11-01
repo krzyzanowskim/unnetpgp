@@ -390,7 +390,7 @@ write_seckey_body(const __ops_seckey_t *key,
 				hash.add(&hash, key->salt, OPS_SALT_SIZE);
 			}
 			hash.add(&hash, passphrase, (unsigned)pplen);
-			hash.finish(&hash, hashed);
+			hash.finish(&hash, hashed); // this is crashing 'i' value is completly wrong after this
 
 			/*
 			 * if more in hash than is needed by session key, use

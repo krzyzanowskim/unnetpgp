@@ -291,6 +291,10 @@ static dispatch_queue_t lock_queue;
             result = netpgp_sign_file(netpgp, self.userId.UTF8String, infilepath, outfilepath /* sigfile name */, self.armored ? 1 : 0, 1 /* cleartext */, detached ? 1 : 0 /* detached */);
             
             [self finishnetpgp:netpgp];
+            
+            if (outfilepath) {
+                free(outfilepath);
+            }
         }
     });
     
@@ -394,7 +398,7 @@ static dispatch_queue_t lock_queue;
  @param keyName
  @see userId
  */
-- (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName
+- (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName toDirectory:(NSString *)path
 {
     __block BOOL result = NO;
     dispatch_sync(lock_queue, ^{
@@ -404,11 +408,25 @@ static dispatch_queue_t lock_queue;
             // use sha1 because sha256 crashing, don't know why yet
             netpgp_setvar(netpgp, "hash", [@"sha1" UTF8String]);
 
-            char keyId[keyIdString.length];
-            strcpy(keyId, keyIdString.UTF8String);
+            char key_id[keyIdString.length];
+            strcpy(key_id, keyIdString.UTF8String);
+            
+            char *directory_path = NULL;
+            if (path) {
+                directory_path = calloc(path.length, sizeof(char));
+                strcpy(directory_path, path.UTF8String);
+            }
+            
+            if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:@{NSFilePosixPermissions: [NSNumber numberWithShort:0700]} error:nil];
+            }
 
-            result = netpgp_generate_key(netpgp, keyId, numberOfBits);
+            result = netpgp_generate_key_rich(netpgp, key_id, numberOfBits, directory_path);
             [self finishnetpgp:netpgp];
+            
+            if (directory_path) {
+                free(directory_path);
+            }
         }
     });
 
@@ -423,7 +441,7 @@ static dispatch_queue_t lock_queue;
  */
 - (BOOL) generateKey:(int)numberOfBits
 {
-    return [self generateKey:numberOfBits named:nil];
+    return [self generateKey:numberOfBits named:nil toDirectory:nil];
 }
 
 #pragma mark - private

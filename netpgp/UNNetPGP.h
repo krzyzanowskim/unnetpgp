@@ -62,6 +62,6 @@
 - (NSString *)exportKeyNamed:(NSString *)keyName;
 
 - (BOOL) generateKey:(int)numberOfBits;
-- (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName;
+- (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName toDirectory:(NSString *)path;
 
 @end

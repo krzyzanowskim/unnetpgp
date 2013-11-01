@@ -1087,8 +1087,9 @@ netpgp_import_key(netpgp_t *netpgp, char *f)
 }
 
 /* generate a new key */
+/* output directory have to exists */
 int
-netpgp_generate_key(netpgp_t *netpgp, char *id, int numbits)
+netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_directory)
 {
 	__ops_output_t		*create;
 	const unsigned		 noarmor = 0;
@@ -1123,11 +1124,15 @@ netpgp_generate_key(netpgp_t *netpgp, char *id, int numbits)
 	__ops_sprint_keydata(netpgp->io, NULL, key, &cp, "signature ", &key->key.seckey.pubkey, 0);
 	(void) fprintf(stdout, "%s", cp);
 	/* write public key */
-	(void) snprintf(dir, sizeof(dir), "%s/%.16s", netpgp_getvar(netpgp, "homedir"), &cp[38]);
-	if (mkdir(dir, 0700) < 0) {
-		(void) fprintf(io->errs, "can't mkdir '%s'\n", dir);
-		return 0;
-	}
+    if (output_directory == NULL) {
+        (void) snprintf(dir, sizeof(dir), "%s/%.16s", netpgp_getvar(netpgp, "homedir"), &cp[38]);
+        if (mkdir(dir, 0700) < 0) {
+            (void) fprintf(io->errs, "can't mkdir '%s'\n", dir);
+            return 0;
+        }
+    } else {
+        (void) snprintf(dir, sizeof(dir), "%s", output_directory);
+    }
 	(void) fprintf(io->errs, "netpgp: generated keys in directory %s\n", dir);
 	(void) snprintf(ringfile = filename, sizeof(filename), "%s/pubring.gpg", dir);
 	if (!appendkey(io, key, ringfile)) {
@@ -1157,6 +1162,13 @@ netpgp_generate_key(netpgp_t *netpgp, char *id, int numbits)
 	__ops_keydata_free(key);
 	free(cp);
 	return 1;
+}
+
+/* generate a new key */
+int
+netpgp_generate_key(netpgp_t *netpgp, char *id, int numbits)
+{
+    return netpgp_generate_key_rich(netpgp, id, numbits, NULL);
 }
 
 /* encrypt a file */
