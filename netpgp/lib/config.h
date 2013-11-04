@@ -44,7 +44,7 @@
 #define HAVE_OPENSSL_BN_H 1
 
 /* Define to 1 if you have the <openssl/camellia.h> header file. */
-/* #undef HAVE_OPENSSL_CAMELLIA_H */
+#define HAVE_OPENSSL_CAMELLIA_H 1
 
 /* Define to 1 if you have the <openssl/cast.h> header file. */
 #define HAVE_OPENSSL_CAST_H 1
@@ -53,7 +53,7 @@
 #define HAVE_OPENSSL_DES_H 1
 
 /* Define to 1 if you have the <openssl/dsa.h> header file. */
-/* #undef HAVE_OPENSSL_DSA_H */
+#define HAVE_OPENSSL_DSA_H 1
 
 /* Define to 1 if you have the <openssl/err.h> header file. */
 #define HAVE_OPENSSL_ERR_H 1
@@ -62,16 +62,16 @@
 #define HAVE_OPENSSL_IDEA_H 1
 
 /* Define to 1 if you have the <openssl/md5.h> header file. */
-/* #undef HAVE_OPENSSL_MD5_H */
+#define HAVE_OPENSSL_MD5_H 1
 
 /* Define to 1 if you have the <openssl/rand.h> header file. */
 #define HAVE_OPENSSL_RAND_H 1
 
 /* Define to 1 if you have the <openssl/rsa.h> header file. */
-/* #undef HAVE_OPENSSL_RSA_H */
+#define HAVE_OPENSSL_RSA_H 1
 
 /* Define to 1 if you have the <openssl/sha.h> header file. */
-/* #undef HAVE_OPENSSL_SHA_H */
+#define HAVE_OPENSSL_SHA_H 1
 
 /* Define to 1 if the system has the type `SHA256_CTX'. */
 #define HAVE_SHA256_CTX 1
