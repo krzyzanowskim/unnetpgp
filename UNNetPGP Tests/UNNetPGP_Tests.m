@@ -10,10 +10,13 @@
 
 #import "UNNetPGP.h"
 
+#define PLAINTEXT @"Plaintext: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit justo eros."
+
 @interface UNNetPGP_Tests : XCTestCase {
 
   UNNetPGP* pgp;
-  
+  NSFileManager* fm;
+  NSString* plaintextFile;
 }
 
 @end
@@ -23,11 +26,12 @@
 - (void)setUp
 {
   [super setUp];
+  
+  fm = [NSFileManager defaultManager];
 
   pgp = [[UNNetPGP alloc] init];
   
   NSError* error = nil;
-  NSFileManager* fm = [NSFileManager defaultManager];
   NSArray* homeContents = [fm contentsOfDirectoryAtPath:pgp.homeDirectory error:&error];
   XCTAssertTrue(error == nil, @"error reading directory: %@", error.localizedDescription);
 
@@ -36,6 +40,12 @@
     [fm removeItemAtPath:itemPath error:&error];
     XCTAssertTrue(error == nil, @"couldn't remove %@:\n%@", itemPath, error.localizedDescription);
   }
+  
+  plaintextFile = [pgp.homeDirectory stringByAppendingPathComponent:@"plain.txt"];
+  
+  NSData* plainData = [PLAINTEXT dataUsingEncoding:NSASCIIStringEncoding];
+  [plainData writeToFile:plaintextFile atomically:YES];
+  XCTAssertTrue([fm fileExistsAtPath:plaintextFile], @"expect file is present");
 }
 
 - (void)tearDown
@@ -69,6 +79,34 @@
   // FAILS: There's extra junk after the end message
   XCTAssertTrue([keyString hasSuffix:@"-----END PGP PUBLIC KEY BLOCK-----"], @"should end properly insetad of\n%@", keyString);
   
+}
+
+- (void)testSignData {
+  BOOL success = [pgp generateKey:1024];
+  XCTAssertTrue(success, @"key generation should be true");
+  
+  NSData* inData = [PLAINTEXT dataUsingEncoding:NSASCIIStringEncoding];
+  NSData* signedData = [pgp signData:inData];
+  XCTAssertNotNil(signedData, @"expect signed data");
+  
+  success = [pgp verifyData:signedData];
+  XCTAssertTrue(success, @"expect verification");
+}
+
+- (void)testSignFile {
+  BOOL success = [pgp generateKey:1024];
+  XCTAssertTrue(success, @"key generation should be true");
+  
+  XCTAssertTrue([fm fileExistsAtPath:plaintextFile], @"expect the plaintext file");
+  
+  NSString* sigFile = [pgp.homeDirectory stringByAppendingPathComponent:@"signed.asc"];
+  XCTAssertFalse([fm fileExistsAtPath:sigFile], @"don't expect a signature yet");
+  success = [pgp signFileAtPath:plaintextFile writeSignatureToFile:sigFile detached:YES];
+  XCTAssertTrue(success, @"expect successful signing");
+  XCTAssertTrue([fm fileExistsAtPath:sigFile], @"expect signature file %@", sigFile);
+  
+  success = [pgp verifyFileAtPath:sigFile];
+  XCTAssertTrue(success, @"expect successful verification");
 }
 
 @end
