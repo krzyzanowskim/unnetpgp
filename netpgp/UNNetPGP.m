@@ -285,6 +285,9 @@ static dispatch_queue_t lock_queue;
 - (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath detached:(BOOL)detached
 {
     __block BOOL result = NO;
+  
+    // HACK: Don't crash
+    if (inFilePath == nil || signatureFilePath == nil) return NO;
 
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
