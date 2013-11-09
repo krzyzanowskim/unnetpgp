@@ -37,6 +37,11 @@
 {
   NSString* home = [pgp homeDirectory];
   XCTAssertTrue(home != nil, @"home directory should not be nil");
+  BOOL isDirectory = NO;
+  BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:home isDirectory:&isDirectory];
+  XCTAssertTrue(exists && isDirectory, @"home directory should exist");
 }
+
+
 
 @end
