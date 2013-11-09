@@ -444,6 +444,9 @@ static dispatch_queue_t lock_queue;
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
             NSString *keyIdString = keyName ?: self.userId;
+            if (keyIdString == nil) {
+              keyIdString = @"";
+            }
             //FIXME: use sha1 because sha256 crashing, don't know why yet
             netpgp_setvar(netpgp, "hash", [@"sha1" UTF8String]);
             netpgp_setvar(netpgp, "userid checks", "skip");

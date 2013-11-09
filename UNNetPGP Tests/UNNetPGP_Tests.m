@@ -42,6 +42,10 @@
   XCTAssertTrue(exists && isDirectory, @"home directory should exist");
 }
 
-
+- (void)testBasicGenerateKey
+{
+  BOOL generated = [pgp generateKey:1024];
+  XCTAssertTrue(generated, @"key generation should be true");
+}
 
 @end
