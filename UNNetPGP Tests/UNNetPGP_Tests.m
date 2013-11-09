@@ -23,13 +23,23 @@
 - (void)setUp
 {
   [super setUp];
-  // Put setup code here. This method is called before the invocation of each test method in the class.
+
   pgp = [[UNNetPGP alloc] init];
+  
+  NSError* error = nil;
+  NSFileManager* fm = [NSFileManager defaultManager];
+  NSArray* homeContents = [fm contentsOfDirectoryAtPath:pgp.homeDirectory error:&error];
+  XCTAssertTrue(error == nil, @"error reading directory: %@", error.localizedDescription);
+
+  for (NSString* item in homeContents) {
+    NSString* itemPath = [pgp.homeDirectory stringByAppendingPathComponent:item];
+    [fm removeItemAtPath:itemPath error:&error];
+    XCTAssertTrue(error == nil, @"couldn't remove %@:\n%@", itemPath, error.localizedDescription);
+  }
 }
 
 - (void)tearDown
 {
-  // Put teardown code here. This method is called after the invocation of each test method in the class.
   [super tearDown];
 }
 
@@ -46,6 +56,19 @@
 {
   BOOL generated = [pgp generateKey:1024];
   XCTAssertTrue(generated, @"key generation should be true");
+}
+
+- (void)testGenerateAndExportNamedKey {
+  BOOL generated = [pgp generateKey:2048 named:@"alice" toDirectory:pgp.homeDirectory];
+  XCTAssertTrue(generated, @"key generation for Alice should be true");
+  
+  NSString* keyString = [pgp exportKeyNamed:@"alice"];
+  
+  XCTAssertTrue([keyString hasPrefix:@"-----BEGIN PGP PUBLIC KEY BLOCK-----"], @"should begin properly instead of\n%@", keyString);
+  
+  // FAILS: There's extra junk after the end message
+  XCTAssertTrue([keyString hasSuffix:@"-----END PGP PUBLIC KEY BLOCK-----"], @"should end properly insetad of\n%@", keyString);
+  
 }
 
 @end
