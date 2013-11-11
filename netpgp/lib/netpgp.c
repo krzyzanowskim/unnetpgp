@@ -1063,7 +1063,13 @@ netpgp_export_key(netpgp_t *netpgp, char *name)
 	if ((key = resolve_userid(netpgp, netpgp->pubring, name)) == NULL) {
 		return NULL;
 	}
-	return __ops_export_key(io, key, NULL);
+    
+    char pass[MAX_PASSPHRASE_LENGTH];
+    if (netpgp->passfp) {
+        __ops_getpassphrase(netpgp->passfp, pass, sizeof(pass));
+    }
+
+	return __ops_export_key(io, key, netpgp->passfp ? pass : NULL);
 }
 
 #define IMPORT_ARMOR_HEAD	"-----BEGIN PGP PUBLIC KEY BLOCK-----"
@@ -1235,6 +1241,12 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
 	if (netpgp->pubring != NULL) {
 		__ops_keyring_free(netpgp->pubring);
 	}
+    
+    char pass[MAX_PASSPHRASE_LENGTH];
+    if (netpgp->passfp) {
+        __ops_getpassphrase(netpgp->passfp, pass, sizeof(pass));
+    }
+    
 	/* write secret key */
     if (output_directory) {
         (void) snprintf(ringfile = filename, sizeof(filename), "%s/secring.gpg", dir);
@@ -1245,7 +1257,7 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
             (void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
             return 0;
         }
-        if (!__ops_write_xfer_seckey(create, key, NULL, 0, noarmor)) {
+        if (!__ops_write_xfer_seckey(create, key, netpgp->passfp ? (uint8_t *)pass : NULL, strlen(pass), noarmor)) {
             (void) fprintf(io->errs, "Cannot write seckey\n");
             return 0;
         }
@@ -1262,7 +1274,7 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
             (void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
             return 0;
         }
-        if (!__ops_write_xfer_seckey(create, key, NULL, 0, noarmor)) {
+        if (!__ops_write_xfer_seckey(create, key, netpgp->passfp ? (uint8_t *)pass : NULL, strlen(pass), noarmor)) {
             (void) fprintf(io->errs, "Cannot write seckey\n");
             return 0;
         }
