@@ -1065,11 +1065,15 @@ netpgp_export_key(netpgp_t *netpgp, char *name)
 	}
     
     char pass[MAX_PASSPHRASE_LENGTH];
+    __ops_forget(pass, (unsigned)sizeof(pass)); //clear pass array
     if (netpgp->passfp) {
         __ops_getpassphrase(netpgp->passfp, pass, sizeof(pass));
     }
 
-	return __ops_export_key(io, key, netpgp->passfp ? pass : NULL);
+    char *result = __ops_export_key(io, key, (strlen(pass) > 0) ? (uint8_t *)pass : NULL);
+    __ops_forget(pass, (unsigned)sizeof(pass));
+
+	return result;
 }
 
 #define IMPORT_ARMOR_HEAD	"-----BEGIN PGP PUBLIC KEY BLOCK-----"
@@ -1243,6 +1247,7 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
 	}
     
     char pass[MAX_PASSPHRASE_LENGTH];
+    __ops_forget(pass, (unsigned)sizeof(pass)); //clear pass array
     if (netpgp->passfp) {
         __ops_getpassphrase(netpgp->passfp, pass, sizeof(pass));
     }
@@ -1257,7 +1262,7 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
             (void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
             return 0;
         }
-        if (!__ops_write_xfer_seckey(create, key, netpgp->passfp ? (uint8_t *)pass : NULL, strlen(pass), noarmor)) {
+        if (!__ops_write_xfer_seckey(create, key, (strlen(pass) > 0) ? (uint8_t *)pass : NULL, strlen(pass), noarmor)) {
             (void) fprintf(io->errs, "Cannot write seckey\n");
             return 0;
         }
@@ -1274,7 +1279,7 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
             (void) fprintf(io->errs, "can't append secring '%s'\n", ringfile);
             return 0;
         }
-        if (!__ops_write_xfer_seckey(create, key, netpgp->passfp ? (uint8_t *)pass : NULL, strlen(pass), noarmor)) {
+        if (!__ops_write_xfer_seckey(create, key, (strlen(pass) > 0) ? (uint8_t *)pass : NULL, strlen(pass), noarmor)) {
             (void) fprintf(io->errs, "Cannot write seckey\n");
             return 0;
         }
@@ -1283,6 +1288,8 @@ netpgp_generate_key_rich(netpgp_t *netpgp, char *id, int numbits, char *output_d
 	if (netpgp->secring != NULL) {
 		__ops_keyring_free(netpgp->secring);
 	}
+    
+    __ops_forget(pass, (unsigned)sizeof(pass));
 	__ops_keydata_free(key);
 	free(cp);
 	return 1;
