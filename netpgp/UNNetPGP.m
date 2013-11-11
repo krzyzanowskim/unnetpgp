@@ -309,7 +309,7 @@ static dispatch_queue_t lock_queue;
                 strcpy(outfilepath, signatureFilePath.UTF8String);
             }
             
-            result = netpgp_sign_file(netpgp, self.userId.UTF8String, infilepath, outfilepath /* sigfile name */, self.armored ? 1 : 0, 1 /* cleartext */, detached ? 1 : 0 /* detached */);
+            result = netpgp_sign_file(netpgp, self.userId.UTF8String, infilepath, outfilepath /* sigfile name */, self.armored ? 1 : 0, 0 /* !cleartext */, detached ? 1 : 0 /* detached */);
             
             [self finishnetpgp:netpgp];
             
