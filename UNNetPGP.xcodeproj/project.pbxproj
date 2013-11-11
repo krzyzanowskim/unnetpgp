@@ -79,7 +79,6 @@
 		7511330917FB1F0800A3DB81 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7544904817FB07880047DF5C /* UNNetPGP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNNetPGP.h; sourceTree = "<group>"; };
 		7544904917FB07880047DF5C /* UNNetPGP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNNetPGP.m; sourceTree = "<group>"; };
-		755ACF9A17FF1D3800AC419B /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		7561881A17FB2006003030EB /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		7561881C17FB2011003030EB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		75E60B5A17F4498900952522 /* libUNNetPGP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUNNetPGP.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,7 +203,9 @@
 				DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */,
 				4C5B572BCDCF4F9EBD55ADDD /* Pods-test client.xcconfig */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		75E60B5B17F4498900952522 /* Products */ = {
 			isa = PBXGroup;
@@ -237,7 +238,6 @@
 				75E60B6017F4498900952522 /* Supporting Files */,
 				7544904817FB07880047DF5C /* UNNetPGP.h */,
 				7544904917FB07880047DF5C /* UNNetPGP.m */,
-				755ACF9A17FF1D3800AC419B /* TODO.txt */,
 			);
 			path = netpgp;
 			sourceTree = "<group>";
@@ -296,8 +296,10 @@
 				75E60C1F17F44A0B00952522 /* writer.c */,
 				75E60C2017F44A0B00952522 /* writer.h */,
 			);
+			indentWidth = 4;
 			path = lib;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		75EC4E1A180014BC00D82718 /* fmemopen */ = {
 			isa = PBXGroup;
@@ -821,6 +823,7 @@
 				D127CB23182E9D8100BB0AF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
