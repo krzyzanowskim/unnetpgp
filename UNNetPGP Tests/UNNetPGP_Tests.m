@@ -148,22 +148,21 @@ NSString* getUUID(void){
   XCTAssertEqualObjects(plainData, decodedData, @"expect decrypted data to match original plaintext");
 }
 
-//- (void)testGenerateAndExportNamedKey {
-//  BOOL generated = [pgp generateKey:2048 named:@"alice" toDirectory:pgp.homeDirectory];
-//  XCTAssertTrue(generated, @"key generation for Alice should be true");
-//  
-//  NSString* keyString = [pgp exportKeyNamed:@"alice"];
-//  
-//  XCTAssertTrue([keyString hasPrefix:@"-----BEGIN PGP PUBLIC KEY BLOCK-----"], @"should begin properly instead of\n%@", keyString);
-//  
-//  // FAILS: There's extra junk after the end message
-//  // RFC 4880: Note that all these Armor Header Lines are to consist of a complete
-//  // line.  That is to say, there is always a line ending preceding the
-//  // starting five dashes, and following the ending five dashes.
-//  // XCTAssertTrue([keyString hasSuffix:@"-----END PGP PUBLIC KEY BLOCK-----"], @"should end properly insetad of\n%@", keyString);
-//  
-//}
-//
+- (void)testGenerateAndExportNamedKey {
+  BOOL generated = [pgp generateKey:2048 named:@"alice" toDirectory:pgp.homeDirectory];
+  XCTAssertTrue(generated, @"key generation for Alice should be true");
+  
+  NSString* keyString = [pgp exportKeyNamed:@"alice"];
+  
+  XCTAssertTrue([keyString hasPrefix:@"-----BEGIN PGP PUBLIC KEY BLOCK-----"], @"should begin properly instead of\n%@", keyString);
+  
+  // FAILS: There's extra junk after the end message
+  // RFC 4880: Note that all these Armor Header Lines are to consist of a complete
+  // line.  That is to say, there is always a line ending preceding the
+  // starting five dashes, and following the ending five dashes.
+  // XCTAssertTrue([keyString hasSuffix:@"-----END PGP PUBLIC KEY BLOCK-----"], @"should end properly insetad of\n%@", keyString);
+}
+
 //- (void)testSignData {
 //  BOOL success = [pgp generateKey:1024];
 //  XCTAssertTrue(success, @"key generation should be true");
@@ -177,7 +176,7 @@ NSString* getUUID(void){
 //  success = [pgp verifyData:signedData];
 //  XCTAssertTrue(success, @"expect verification");
 //}
-//
+
 //- (void)testSignFile {
 //  BOOL success = [pgp generateKey:1024];
 //  XCTAssertTrue(success, @"key generation should be true");
