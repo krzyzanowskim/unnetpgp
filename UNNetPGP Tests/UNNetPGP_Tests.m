@@ -65,7 +65,7 @@ NSString* getUUID(void){
   encodedFile = [tmpDir stringByAppendingPathComponent:@"plain.txt.gpg"];
   decodedFile = [tmpDir stringByAppendingPathComponent:@"plain.decoded.txt"];
   
-  NSData* plainData = [PLAINTEXT dataUsingEncoding:NSASCIIStringEncoding];
+  NSData* plainData = [PLAINTEXT dataUsingEncoding:NSUTF8StringEncoding];
   [plainData writeToFile:plaintextFile atomically:YES];
   XCTAssertTrue([fm fileExistsAtPath:plaintextFile], @"expect file is present");
     
@@ -106,9 +106,8 @@ NSString* getUUID(void){
   pgp.password = PASSWORD;
   pgp.armored  = YES;
   
-  [pgp generateKey:1024];
-  
-  BOOL success = NO;
+  BOOL success = [pgp generateKey:1024];
+  XCTAssertTrue(success, @"key generation should be true");
   
   // Encrypt
   success = [pgp encryptFileAtPath:plaintextFile toFileAtPath:encodedFile];
@@ -132,7 +131,8 @@ NSString* getUUID(void){
   pgp.password = PASSWORD;
   pgp.armored  = YES;
   
-  [pgp generateKey:1024];
+  BOOL success = [pgp generateKey:1024];
+  XCTAssertTrue(success, @"key generation should be true");
   
   NSData *plainData = [NSData dataWithContentsOfFile:plaintextFile];
   
@@ -163,19 +163,22 @@ NSString* getUUID(void){
   // XCTAssertTrue([keyString hasSuffix:@"-----END PGP PUBLIC KEY BLOCK-----"], @"should end properly insetad of\n%@", keyString);
 }
 
-//- (void)testSignData {
-//  BOOL success = [pgp generateKey:1024];
-//  XCTAssertTrue(success, @"key generation should be true");
-//  
-//  NSData* inData = [PLAINTEXT dataUsingEncoding:NSASCIIStringEncoding];
-//  NSData* signedData = [pgp signData:inData];
-//  
-//  // FAILS: signedData is nil
-//  XCTAssertNotNil(signedData, @"expect signed data");
-//  
-//  success = [pgp verifyData:signedData];
-//  XCTAssertTrue(success, @"expect verification");
-//}
+- (void)testSignData {
+  pgp.password = PASSWORD;
+  pgp.armored = YES;
+  
+  BOOL success = [pgp generateKey:1024];
+  XCTAssertTrue(success, @"key generation should be true");
+  
+  NSData* inData = [PLAINTEXT dataUsingEncoding:NSUTF8StringEncoding];
+  NSData* signedData = [pgp signData:inData];
+  
+  XCTAssertNotNil(signedData, @"expect signed data");
+  NSLog(@"%@",[[NSString alloc] initWithData:signedData encoding:NSUTF8StringEncoding]);
+  
+  success = [pgp verifyData:signedData];
+  XCTAssertTrue(success, @"expect verification");
+}
 
 //- (void)testSignFile {
 //  BOOL success = [pgp generateKey:1024];
