@@ -25,8 +25,9 @@ NSString* getUUID(void){
   UNNetPGP* pgp;
   NSFileManager* fm;
   NSString* plaintextFile;
-  NSString* encodedFile;
-  NSString* decodedFile;
+  NSString* encryptedFile;
+  NSString* decryptedFile;
+  NSString* signatureFile;
   NSString* tmpDir;
 }
 
@@ -62,8 +63,9 @@ NSString* getUUID(void){
   }
 
   plaintextFile = [tmpDir stringByAppendingPathComponent:@"plain.txt"];
-  encodedFile = [tmpDir stringByAppendingPathComponent:@"plain.txt.gpg"];
-  decodedFile = [tmpDir stringByAppendingPathComponent:@"plain.decoded.txt"];
+  encryptedFile = [tmpDir stringByAppendingPathComponent:@"plain.txt.gpg"];
+  decryptedFile = [tmpDir stringByAppendingPathComponent:@"plain.decoded.txt"];
+  signatureFile = [tmpDir stringByAppendingPathComponent:@"plain.txt.asc"];
   
   NSData* plainData = [PLAINTEXT dataUsingEncoding:NSUTF8StringEncoding];
   [plainData writeToFile:plaintextFile atomically:YES];
@@ -110,18 +112,18 @@ NSString* getUUID(void){
   XCTAssertTrue(success, @"key generation should be true");
   
   // Encrypt
-  success = [pgp encryptFileAtPath:plaintextFile toFileAtPath:encodedFile];
+  success = [pgp encryptFileAtPath:plaintextFile toFileAtPath:encryptedFile];
   XCTAssertTrue(success, @"encryption should report success");
-  XCTAssertTrue([fm fileExistsAtPath:encodedFile], @"encrypted file should exist: %@", encodedFile);
+  XCTAssertTrue([fm fileExistsAtPath:encryptedFile], @"encrypted file should exist: %@", encryptedFile);
 
   // Decrypt
-  success = [pgp decryptFileAtPath:encodedFile toFileAtPath:decodedFile];
+  success = [pgp decryptFileAtPath:encryptedFile toFileAtPath:decryptedFile];
   XCTAssertTrue(success, @"decryption should report success");
-  XCTAssertTrue([fm fileExistsAtPath:decodedFile], @"decrypted file should exist: %@", decodedFile);
+  XCTAssertTrue([fm fileExistsAtPath:decryptedFile], @"decrypted file should exist: %@", decryptedFile);
   
   // Check result
   NSError* error = nil;
-  NSString* decryptedText = [NSString stringWithContentsOfFile:decodedFile usedEncoding:nil error:&error];
+  NSString* decryptedText = [NSString stringWithContentsOfFile:decryptedFile usedEncoding:nil error:&error];
   XCTAssertNil(error, @"don't expect an error: %@", error.localizedDescription);
   XCTAssertEqualObjects(PLAINTEXT, decryptedText, @"expect decrypted text to match original plaintext");
 }
@@ -174,28 +176,29 @@ NSString* getUUID(void){
   NSData* signedData = [pgp signData:inData];
   
   XCTAssertNotNil(signedData, @"expect signed data");
-  NSLog(@"%@",[[NSString alloc] initWithData:signedData encoding:NSUTF8StringEncoding]);
   
   success = [pgp verifyData:signedData];
   XCTAssertTrue(success, @"expect verification");
 }
 
-//- (void)testSignFile {
-//  BOOL success = [pgp generateKey:1024];
-//  XCTAssertTrue(success, @"key generation should be true");
-//  
-//  XCTAssertTrue([fm fileExistsAtPath:plaintextFile], @"expect the plaintext file");
-//  
-//  NSString* sigFile = [pgp.homeDirectory stringByAppendingPathComponent:@"signed.asc"];
-//  XCTAssertFalse([fm fileExistsAtPath:sigFile], @"don't expect a signature yet");
-//  success = [pgp signFileAtPath:plaintextFile writeSignatureToFile:sigFile detached:YES];
-//  
-//  // FAILS: returns false & doesn't create signed file.
-//  XCTAssertTrue(success, @"expect successful signing");
-//  XCTAssertTrue([fm fileExistsAtPath:sigFile], @"expect signature file %@", sigFile);
-//  
-//  success = [pgp verifyFileAtPath:sigFile];
-//  XCTAssertTrue(success, @"expect successful verification");
-//}
+- (void)testSignFile {
+  pgp.password = PASSWORD;
+  pgp.armored = YES;
+  
+  BOOL success = [pgp generateKey:1024];
+  XCTAssertTrue(success, @"key generation should be true");
+  
+  XCTAssertTrue([fm fileExistsAtPath:plaintextFile], @"expect the plaintext file");
+  
+  XCTAssertFalse([fm fileExistsAtPath:signatureFile], @"don't expect a signature file yet");
+  success = [pgp signFileAtPath:plaintextFile writeToFile:signatureFile detached:YES];
+  
+  // FAILS: returns false & doesn't create signed file.
+  XCTAssertTrue(success, @"expect successful signing");
+  XCTAssertTrue([fm fileExistsAtPath:signatureFile], @"expect signature file %@", signatureFile);
+  
+  success = [pgp verifyFileAtPath:signatureFile];
+  XCTAssertTrue(success, @"expect successful verification");
+}
 
 @end
