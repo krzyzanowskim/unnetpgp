@@ -38,7 +38,8 @@ NSString* getUUID(void){
   fm = [NSFileManager defaultManager];
 
   pgp = [[UNNetPGP alloc] init];
-  
+  pgp.userId = @"alice@resturant.org";
+
   NSError* error = nil;
   NSArray* homeContents = [fm contentsOfDirectoryAtPath:pgp.homeDirectory error:&error];
   XCTAssertTrue(error == nil, @"error reading directory: %@", error.localizedDescription);
@@ -97,7 +98,6 @@ NSString* getUUID(void){
 
 - (void)testReadme
 {
-  pgp.userId = @"alice@resturant.org";
   pgp.password = @"take out the garbage";
   pgp.armored = YES;
     

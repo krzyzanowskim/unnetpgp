@@ -132,7 +132,7 @@
 		D127CB13182E9D8000BB0AF0 /* UNNetPGP Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UNNetPGP Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D127CB19182E9D8100BB0AF0 /* UNNetPGP Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UNNetPGP Tests-Info.plist"; sourceTree = "<group>"; };
 		D127CB1B182E9D8100BB0AF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D127CB1D182E9D8100BB0AF0 /* UNNetPGP_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UNNetPGP_Tests.m; sourceTree = "<group>"; };
+		D127CB1D182E9D8100BB0AF0 /* UNNetPGP_Tests.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = UNNetPGP_Tests.m; sourceTree = "<group>"; tabWidth = 2; };
 		D127CB1F182E9D8100BB0AF0 /* UNNetPGP Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UNNetPGP Tests-Prefix.pch"; sourceTree = "<group>"; };
 		DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FE89B52DBAE9412383F2624D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,9 +203,9 @@
 				DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */,
 				4C5B572BCDCF4F9EBD55ADDD /* Pods-test client.xcconfig */,
 			);
-			indentWidth = 2;
+			indentWidth = 4;
 			sourceTree = "<group>";
-			tabWidth = 2;
+			tabWidth = 4;
 		};
 		75E60B5B17F4498900952522 /* Products */ = {
 			isa = PBXGroup;
