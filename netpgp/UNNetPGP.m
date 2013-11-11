@@ -458,8 +458,6 @@ static dispatch_queue_t lock_queue;
             if (keyIdString == nil) {
               keyIdString = @"";
             }
-            //FIXME: use sha1 because sha256 crashing, don't know why yet
-            netpgp_setvar(netpgp, "hash", [@"sha1" UTF8String]);
             netpgp_setvar(netpgp, "userid checks", "skip");
             
             char key_id[keyIdString.length];
@@ -556,6 +554,9 @@ static dispatch_queue_t lock_queue;
     if (self.maximumMemoryAllocationSize) {
         netpgp_setvar(netpgp, "max mem alloc", [[NSString stringWithFormat:@"%i",self.maximumMemoryAllocationSize] UTF8String]);
     }
+    
+    //FIXME: use sha1 because sha256 crashing, don't know why yet
+    netpgp_setvar(netpgp, "hash", "sha1");
 
 #if DEBUG
     netpgp_incvar(netpgp, "verbose", 1);
