@@ -55,9 +55,19 @@
 /** Decrypt file at path and save result to out file */
 - (BOOL) decryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
 
+/** Sign file and write signature to separate file */
 - (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath;
-- (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath detached:(BOOL)detached;
 
+/** 
+ Sign file and write signature to separate file or attach signature to signed file.
+ signatureFilePath have extension ".asc" or ".sig"
+ */
+- (BOOL) signFileAtPath:(NSString *)inFilePath writeToFile:(NSString *)signatureFilePath detached:(BOOL)detached;
+
+/** 
+ Verifies the signatures in a signed file.
+ @param inFilePath have to be one of ".sig" or ".asc" file. Method expect companion signed filed.
+ */
 - (BOOL) verifyFileAtPath:(NSString *)inFilePath;
 
 - (NSData *) encryptData:(NSData *)inData;

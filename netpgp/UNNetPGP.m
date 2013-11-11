@@ -287,10 +287,10 @@ static dispatch_queue_t lock_queue;
 
 - (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath
 {
-    return [self signFileAtPath:inFilePath writeSignatureToFile:signatureFilePath detached:YES];
+    return [self signFileAtPath:inFilePath writeToFile:signatureFilePath detached:YES];
 }
 
-- (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath detached:(BOOL)detached
+- (BOOL) signFileAtPath:(NSString *)inFilePath writeToFile:(NSString *)signatureFilePath detached:(BOOL)detached
 {
     __block BOOL result = NO;
   
