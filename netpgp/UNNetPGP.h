@@ -44,6 +44,9 @@
 /** armored */
 @property (assign) BOOL armored;
 
+/** Maximum memory allocation. Default 4 MiB. Incrase for large files. */
+@property (assign) NSUInteger maximumMemoryAllocationSize;
+
 /** Initialize with user identifier */
 - (instancetype) initWithUsedId:(NSString *)userId;
 

@@ -118,9 +118,9 @@ static dispatch_queue_t lock_queue;
             void *inbuf = calloc(inData.length, sizeof(Byte));
             memcpy(inbuf, inData.bytes, inData.length);
             
-            int maxlen = (int)(inData.length * 1.2f); // magic number 1.2, how much bigger it can be?
-            void *outbuf = calloc(maxlen, sizeof(Byte));
-            int outsize = netpgp_encrypt_memory(netpgp, self.userId.UTF8String, inbuf, inData.length, outbuf, maxlen, self.armored ? 1 : 0);
+            NSInteger maxsize = (unsigned)atoi(netpgp_getvar(netpgp, "max mem alloc"));
+            void *outbuf = calloc(sizeof(Byte), maxsize);
+            int outsize = netpgp_encrypt_memory(netpgp, self.userId.UTF8String, inbuf, inData.length, outbuf, maxsize, self.armored ? 1 : 0);
             
             if (outsize > 0) {
                 result = [NSData dataWithBytesNoCopy:outbuf length:outsize freeWhenDone:YES];
@@ -549,6 +549,12 @@ static dispatch_queue_t lock_queue;
     if (self.password) {
         const char* cstr = [self.password stringByAppendingString:@"\n"].UTF8String;
         netpgp->passfp = fmemopen((void *)cstr, sizeof(char) * (self.password.length + 1), "r");
+    }
+    
+    /* 4 MiB for a memory file */
+    netpgp_setvar(netpgp, "max mem alloc", "4194304");
+    if (self.maximumMemoryAllocationSize) {
+        netpgp_setvar(netpgp, "max mem alloc", [[NSString stringWithFormat:@"%i",self.maximumMemoryAllocationSize] UTF8String]);
     }
 
 #if DEBUG
