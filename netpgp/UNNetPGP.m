@@ -170,7 +170,7 @@ static dispatch_queue_t lock_queue;
             
             NSInteger maxsize = (unsigned)atoi(netpgp_getvar(netpgp, "max mem alloc"));
             void *outbuf = calloc(sizeof(Byte), maxsize);
-            int outsize = netpgp_sign_memory(netpgp, self.userId.UTF8String, inbuf, inData.length, outbuf, maxsize, self.armored ? 1 : 0, 1 /* cleartext */);
+            int outsize = netpgp_sign_memory(netpgp, self.userId.UTF8String, inbuf, inData.length, outbuf, maxsize, self.armored ? 1 : 0, 0 /* !cleartext */);
             
             if (outsize > 0) {
                 result = [NSData dataWithBytesNoCopy:outbuf length:outsize freeWhenDone:YES];
