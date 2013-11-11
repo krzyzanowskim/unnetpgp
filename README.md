@@ -24,30 +24,43 @@ Something with Source Trees should do the trick but haven't tested. Pull request
 
 Initialize and setup
 
-    UNNetPGP *pgp = [[UNNetPGP alloc] init];
-    pgp.userId = @"marcin.krzyzanowski@gmail.com";
-    pgp.password = @"1234";
+    UNNetPGP *pgp = [[UNNetPGP alloc] initWithUserId:@"marcin.krzyzanowski@gmail.com"];
+    pgp.password = @"secret1234";
+    pgp.armored  = YES
 
 Optionally you can specify ringfiles out of home directory
 
     pgp.publicKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"pubring.gpg"];
     pgp.secretKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"secring.gpg"];
 
-    BOOL res = NO;
-    
+Lets define filenames. Caution: file extension is important for some files! (`.gpg`,`.asc`)
+
+    NSString *plaintextFile = [myDir stringByAppendingPathComponent:@"plain.txt"];
+    NSString *encryptedFile = [myDir stringByAppendingPathComponent:@"plain.txt.gpg"];
+    NSString *decryptedFile = [myDir stringByAppendingPathComponent:@"plain.decoded.txt"];
+    NSString *signatureFile = [myDir stringByAppendingPathComponent:@"plain.txt.asc"];
+
 Encrypt file
 
-    res = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
-    NSLog(@"encryptedFilePath = %@",@(res));
+    BOOL result = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
+    NSLog(@"encryptedFilePath = %@",@(result));
 
 Decrypt file
 
-    res = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
-    NSLog(@"decryptFileAtPath = %@",@(res));
+    BOOL result = [pgp decryptFileAtPath:encryptedFilePath toFileAtPath:decryptedFilePath];
+    NSLog(@"decryptFileAtPath = %@",@(result));
 
 Generate new key (and save in keyring)
 
-    [pgp generateKey:1024];
+    BOOL success = [pgp generateKey:1024];
+
+Create file signature    
+
+    BOOL success = [pgp signFileAtPath:plaintextFile writeToFile:signatureFile detached:YES];
+    
+Verify file signature. Caution: there is assumption that signed file exists in the same directory.
+
+	BOOL success = [pgp verifyFileAtPath:signatureFile];
 
 
 **Authors**
