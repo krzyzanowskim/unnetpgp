@@ -48,7 +48,7 @@
 @property (assign) NSUInteger maximumMemoryAllocationSize;
 
 /** Initialize with user identifier */
-- (instancetype) initWithUsedId:(NSString *)userId;
+- (instancetype) initWithUserId:(NSString *)userId;
 
 /** Encrypt file at path and save result to out file */
 - (BOOL) encryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;

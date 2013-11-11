@@ -57,7 +57,7 @@ static dispatch_queue_t lock_queue;
     return self;
 }
 
-- (instancetype) initWithUsedId:(NSString *)userId
+- (instancetype) initWithUserId:(NSString *)userId
 {
     if (self = [self init]) {
         self.userId = userId;
