@@ -39,10 +39,20 @@ static dispatch_queue_t lock_queue;
 {
     if (self = [super init]) {
         // by default search keys in Documents
+      
+        // NOTE: saving the keyring in this location means that it could get backed up to iCloud,
+        // leaving private keys vulernable to whoever can get access to Apple's servers.
+      
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentDirectoryPath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-        
-        self.homeDirectory = documentDirectoryPath;
+      
+#if TARGET_IPHONE_SIMULATOR
+        // Sometimes the simulator doesn't have the normal directories.
+        if (![[NSFileManager defaultManager] fileExistsAtPath:documentDirectoryPath]) {
+          [[NSFileManager defaultManager] createDirectoryAtPath:documentDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+#endif
+        _homeDirectory = documentDirectoryPath;
     }
     return self;
 }
@@ -275,6 +285,9 @@ static dispatch_queue_t lock_queue;
 - (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath detached:(BOOL)detached
 {
     __block BOOL result = NO;
+  
+    // HACK: Don't crash
+    if (inFilePath == nil || signatureFilePath == nil) return NO;
 
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
@@ -434,6 +447,9 @@ static dispatch_queue_t lock_queue;
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
             NSString *keyIdString = keyName ?: self.userId;
+            if (keyIdString == nil) {
+              keyIdString = @"";
+            }
             //FIXME: use sha1 because sha256 crashing, don't know why yet
             netpgp_setvar(netpgp, "hash", [@"sha1" UTF8String]);
             netpgp_setvar(netpgp, "userid checks", "skip");
