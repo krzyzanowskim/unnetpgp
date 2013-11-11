@@ -591,8 +591,6 @@ __ops_decrypt_buf(__ops_io_t *io,
 
 	/* tidy up */
 	__ops_teardown_memory_read(parse, inmem);
-	__ops_memory_release(inmem);
-	free(inmem);
 
 	__ops_writer_close(parse->cbinfo.output);
 	__ops_output_delete(parse->cbinfo.output);
