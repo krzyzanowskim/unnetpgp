@@ -23,7 +23,7 @@
 
 @interface UNNetPGP : NSObject
 
-/** user identifier */
+/** user identifier. Required for most actions. */
 @property (strong, atomic) NSString *userId;
 
 /** home dir for keyrings */
@@ -44,7 +44,12 @@
 /** armored */
 @property (assign) BOOL armored;
 
+/** Initialize with user identifier */
+- (instancetype) initWithUsedId:(NSString *)userId;
+
+/** Encrypt file at path and save result to out file */
 - (BOOL) encryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
+/** Decrypt file at path and save result to out file */
 - (BOOL) decryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
 
 - (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath;
@@ -62,7 +67,9 @@
 //- (BOOL) importSecureKeyFromFileAtPath:(NSString *)inFilePath;
 - (NSString *)exportKeyNamed:(NSString *)keyName;
 
+/** Generate pair of keys and store in keyring */
 - (BOOL) generateKey:(int)numberOfBits;
+/** Generate pair of keys and store in specified by path */
 - (BOOL) generateKey:(int)numberOfBits named:(NSString *)keyName toDirectory:(NSString *)path;
 
 @end

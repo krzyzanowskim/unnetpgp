@@ -57,6 +57,14 @@ static dispatch_queue_t lock_queue;
     return self;
 }
 
+- (instancetype) initWithUsedId:(NSString *)userId
+{
+    if (self = [self init]) {
+        self.userId = userId;
+    }
+    return self;
+}
+
 - (void)setPublicKeyRingPath:(NSString *)publicKeyRingPath
 {
     dispatch_sync(lock_queue, ^{
