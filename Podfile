@@ -7,3 +7,7 @@ pod 'OpenSSL', :podspec => 'https://raw.github.com/krzak/OpenSSL/master/OpenSSL.
 target 'test client' do
   pod 'UNNetPGP', :path => 'UNNetPGP.podspec'
 end
+
+target 'UNNetPGP Tests' do
+  pod 'UNNetPGP', :path => 'UNNetPGP.podspec'
+end

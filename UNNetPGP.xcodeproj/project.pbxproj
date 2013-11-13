@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02B47393804C49AE9DF819F9 /* libPods-test client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DE9EA5DFEE4FAA9C3C3DD5 /* libPods-test client.a */; };
+		074DE5BE8E6145FDB4D48364 /* libPods-UNNetPGP Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EB54C7B6F744A5A04CF145 /* libPods-UNNetPGP Tests.a */; };
 		751132FB17FB1F0800A3DB81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5D17F4498900952522 /* Foundation.framework */; };
 		751132FD17FB1F0800A3DB81 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751132FC17FB1F0800A3DB81 /* CoreGraphics.framework */; };
 		7511330617FB1F0800A3DB81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7511330517FB1F0800A3DB81 /* main.m */; };
@@ -40,9 +42,6 @@
 		D127CB15182E9D8100BB0AF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5D17F4498900952522 /* Foundation.framework */; };
 		D127CB1C182E9D8100BB0AF0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D127CB1A182E9D8100BB0AF0 /* InfoPlist.strings */; };
 		D127CB1E182E9D8100BB0AF0 /* UNNetPGP_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = D127CB1D182E9D8100BB0AF0 /* UNNetPGP_Tests.m */; };
-		D127CB25182E9FCD00BB0AF0 /* libUNNetPGP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E60B5A17F4498900952522 /* libUNNetPGP.a */; };
-		D127CB26182EA02100BB0AF0 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7561881A17FB2006003030EB /* libbz2.dylib */; };
-		D127CB27182EA02400BB0AF0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7561881C17FB2011003030EB /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +67,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01EB54C7B6F744A5A04CF145 /* libPods-UNNetPGP Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UNNetPGP Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28DE9EA5DFEE4FAA9C3C3DD5 /* libPods-test client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C5B572BCDCF4F9EBD55ADDD /* Pods-test client.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test client.xcconfig"; path = "Pods/Pods-test client.xcconfig"; sourceTree = "<group>"; };
 		751132FA17FB1F0800A3DB81 /* test client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		751132FC17FB1F0800A3DB81 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,6 +130,7 @@
 		75E60C3A17F44E6200952522 /* netpgp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netpgp.h; sourceTree = "<group>"; };
 		75EC4E1B180014BC00D82718 /* fmemopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fmemopen.c; sourceTree = "<group>"; };
 		75EC4E1C180014BC00D82718 /* fmemopen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmemopen.h; sourceTree = "<group>"; };
+		85DB375B63DF47EE94EF26FC /* Pods-UNNetPGP Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UNNetPGP Tests.xcconfig"; path = "Pods/Pods-UNNetPGP Tests.xcconfig"; sourceTree = "<group>"; };
 		D127CB13182E9D8000BB0AF0 /* UNNetPGP Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UNNetPGP Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D127CB19182E9D8100BB0AF0 /* UNNetPGP Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UNNetPGP Tests-Info.plist"; sourceTree = "<group>"; };
 		D127CB1B182E9D8100BB0AF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			files = (
 				751132FB17FB1F0800A3DB81 /* Foundation.framework in Frameworks */,
 				751132FD17FB1F0800A3DB81 /* CoreGraphics.framework in Frameworks */,
+				02B47393804C49AE9DF819F9 /* libPods-test client.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,11 +163,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D127CB26182EA02100BB0AF0 /* libbz2.dylib in Frameworks */,
-				D127CB25182E9FCD00BB0AF0 /* libUNNetPGP.a in Frameworks */,
 				D127CB14182E9D8100BB0AF0 /* XCTest.framework in Frameworks */,
 				D127CB15182E9D8100BB0AF0 /* Foundation.framework in Frameworks */,
-				D127CB27182EA02400BB0AF0 /* libz.dylib in Frameworks */,
+				074DE5BE8E6145FDB4D48364 /* libPods-UNNetPGP Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +203,7 @@
 				75E60B5B17F4498900952522 /* Products */,
 				DCF78AD3BF984E3AAC4EC1DB /* Pods.xcconfig */,
 				4C5B572BCDCF4F9EBD55ADDD /* Pods-test client.xcconfig */,
+				85DB375B63DF47EE94EF26FC /* Pods-UNNetPGP Tests.xcconfig */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -226,6 +228,8 @@
 				75E60B6B17F4498900952522 /* XCTest.framework */,
 				FE89B52DBAE9412383F2624D /* libPods.a */,
 				751132FC17FB1F0800A3DB81 /* CoreGraphics.framework */,
+				28DE9EA5DFEE4FAA9C3C3DD5 /* libPods-test client.a */,
+				01EB54C7B6F744A5A04CF145 /* libPods-UNNetPGP Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -388,9 +392,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D127CB24182E9D8100BB0AF0 /* Build configuration list for PBXNativeTarget "UNNetPGP Tests" */;
 			buildPhases = (
+				0F4750F7E71D47A191E21F00 /* Check Pods Manifest.lock */,
 				D127CB0F182E9D8000BB0AF0 /* Sources */,
 				D127CB10182E9D8000BB0AF0 /* Frameworks */,
 				D127CB11182E9D8000BB0AF0 /* Resources */,
+				D5B93D051F824A919FBD5956 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -454,6 +460,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0F4750F7E71D47A191E21F00 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		108171624B04444BB0CCB088 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -512,6 +533,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5B93D051F824A919FBD5956 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-UNNetPGP Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -750,6 +786,7 @@
 		};
 		D127CB22182E9D8100BB0AF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85DB375B63DF47EE94EF26FC /* Pods-UNNetPGP Tests.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -771,6 +808,7 @@
 		};
 		D127CB23182E9D8100BB0AF0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85DB375B63DF47EE94EF26FC /* Pods-UNNetPGP Tests.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
