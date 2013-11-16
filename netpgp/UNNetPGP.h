@@ -56,7 +56,10 @@
 - (BOOL) decryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
 
 /** Sign file and write signature to separate file */
-- (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToFile:(NSString *)signatureFilePath;
+- (BOOL) signFileAtPath:(NSString *)inFilePath writeSignatureToPath:(NSString *)signatureFilePath;
+
+/** Sign file and write signed to output file */
+- (BOOL) signFileAtPath:(NSString *)inFilePath writeSignedFileToPath:(NSString *)signedFilePath;
 
 /** 
  Sign file and write signature to separate file or attach signature to signed file.

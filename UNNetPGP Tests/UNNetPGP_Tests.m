@@ -28,6 +28,7 @@ NSString* getUUID(void){
   NSString* encryptedFile;
   NSString* decryptedFile;
   NSString* signatureFile;
+  NSString *signedFile;
   NSString* tmpDir;
 }
 
@@ -66,7 +67,8 @@ NSString* getUUID(void){
   encryptedFile = [tmpDir stringByAppendingPathComponent:@"plain.txt.gpg"];
   decryptedFile = [tmpDir stringByAppendingPathComponent:@"plain.decoded.txt"];
   signatureFile = [tmpDir stringByAppendingPathComponent:@"plain.txt.asc"];
-  
+  signedFile    = [tmpDir stringByAppendingPathComponent:@"plain_signed.txt"];
+
   NSData* plainData = [PLAINTEXT dataUsingEncoding:NSUTF8StringEncoding];
   [plainData writeToFile:plaintextFile atomically:YES];
   XCTAssertTrue([fm fileExistsAtPath:plaintextFile], @"expect file is present");
@@ -181,7 +183,7 @@ NSString* getUUID(void){
   XCTAssertTrue(success, @"expect verification");
 }
 
-- (void)testSignFile {
+- (void)testSignFileDetached {
   pgp.password = PASSWORD;
   pgp.armored = YES;
   
@@ -191,7 +193,7 @@ NSString* getUUID(void){
   XCTAssertTrue([fm fileExistsAtPath:plaintextFile], @"expect the plaintext file");
   
   XCTAssertFalse([fm fileExistsAtPath:signatureFile], @"don't expect a signature file yet");
-  success = [pgp signFileAtPath:plaintextFile writeToFile:signatureFile detached:YES];
+  success = [pgp signFileAtPath:plaintextFile writeSignatureToPath:signatureFile];
   
   // FAILS: returns false & doesn't create signed file.
   XCTAssertTrue(success, @"expect successful signing");
@@ -199,6 +201,24 @@ NSString* getUUID(void){
   
   success = [pgp verifyFileAtPath:signatureFile];
   XCTAssertTrue(success, @"expect successful verification");
+}
+
+- (void)testSignFile {
+  pgp.password = PASSWORD;
+  pgp.armored = YES;
+  
+  BOOL success = [pgp generateKey:1024];
+  XCTAssertTrue(success, @"key generation should be true");
+
+  
+  XCTAssertTrue([fm fileExistsAtPath:plaintextFile], @"expect the plaintext file");
+  
+  XCTAssertFalse([fm fileExistsAtPath:signedFile], @"don't expect a signature file yet");
+  success = [pgp signFileAtPath:plaintextFile writeSignedFileToPath:signedFile];
+  
+  XCTAssertTrue(success, @"expect successful signing");
+  XCTAssertTrue([fm fileExistsAtPath:signedFile], @"expect signature file %@", signedFile);
+
 }
 
 @end
