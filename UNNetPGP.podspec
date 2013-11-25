@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name     = 'UNNetPGP'
-  s.version  = '0.7'
+  s.version  = '0.8'
 
   s.ios.platform = :ios, '6.0'
   s.ios.deployment_target = '6.0'
