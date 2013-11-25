@@ -930,7 +930,7 @@ encode_m_buf(const uint8_t *M, size_t mLen, const __ops_pubkey_t * pubkey,
 \note Currently hard-coded to use RSA
 */
 __ops_pk_sesskey_t *
-__ops_create_pk_sesskey(const __ops_key_t *key, const char *ciphername)
+__ops_create_pk_sesskey(const __ops_key_t *key, const char *ciphername, int dont_use_subkey_to_encrypt)
 {
 	/*
          * Creates a random session key and encrypts it for the given key
@@ -951,6 +951,10 @@ __ops_create_pk_sesskey(const __ops_key_t *key, const char *ciphername)
 	if (memcmp(key->encid, "\0\0\0\0\0\0\0\0", 8) == 0) {
 		pubkey = __ops_get_pubkey(key);
 		id = key->sigid;
+    } else if (dont_use_subkey_to_encrypt) {
+        //DUPA
+		pubkey = __ops_get_pubkey(key);
+        id = key->sigid;
 	} else {
 		pubkey = &key->enckey;
 		id = key->encid;

@@ -21,6 +21,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_OPTIONS(NSUInteger, UNEncryptOption)
+{
+    UNEncryptOptionNone                 = 0,
+    UNEncryptDontUseSubkey              = 1 << 0 // Not recomended, by default subkey is used to encrypt data. Use only if required.
+};
+
 @interface UNNetPGP : NSObject
 
 /** user identifier. Required for most actions. */
@@ -51,7 +57,7 @@
 - (instancetype) initWithUserId:(NSString *)userId;
 
 /** Encrypt file at path and save result to out file */
-- (BOOL) encryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
+- (BOOL) encryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath options:(UNEncryptOption)options;
 /** Decrypt file at path and save result to out file */
 - (BOOL) decryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath;
 
@@ -73,12 +79,13 @@
  */
 - (BOOL) verifyFileAtPath:(NSString *)inFilePath;
 
-- (NSData *) encryptData:(NSData *)inData;
+- (NSData *) encryptData:(NSData *)inData options:(UNEncryptOption)options;
 - (NSData *) decryptData:(NSData *)inData;
 
 - (NSData *) signData:(NSData *)data;
 - (BOOL) verifyData:(NSData *)inData;
 
+/** Import public key from file and store in reyring */
 - (BOOL) importPublicKeyFromFileAtPath:(NSString *)inFilePath;
 //- (BOOL) importSecureKeyFromFileAtPath:(NSString *)inFilePath;
 - (NSString *)exportKeyNamed:(NSString *)keyName;

@@ -48,12 +48,20 @@
 //    pgp.publicKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"ring/pubring.gpg"];
 //    pgp.secretKeyRingPath = [[self documentsDirectory] stringByAppendingPathComponent:@"ring/secring.gpg"];
 //    pgp.userId = @"Vodaofone KYC W27 - 2014 <kyc@vodafone.com>";
-    pgp.userId = @"marcin.krzyzanowski@gmail.com";
+//    pgp.userId = @"kontakt vodafonesmartpass <kontakt@vodafonesmartpass.com>";
+    pgp.userId = @"27A26026";
 //    [pgp generateKey:1024 named:nil toDirectory:[[self documentsDirectory] stringByAppendingPathComponent:@"ring"]];
 //    [pgp generateKey:1024];
-    [pgp importPublicKeyFromFileAtPath:[[self documentsDirectory] stringByAppendingPathComponent:@"ring/pubring.gpg"]];
+//    [pgp importPublicKeyFromFileAtPath:[[self documentsDirectory] stringByAppendingPathComponent:@"ring/pubring.gpg"]];
+//    [pgp setPublicKeyRingPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"pubring.gpg"]];
 //    [pgp importSecureKeyFromFileAtPath:[[self documentsDirectory] stringByAppendingPathComponent:@"ring/secring.gpg"]];
-    NSLog(@"%@",[pgp availableKeys]);
+//    NSLog(@"%@",[pgp availableKeys]);
+    
+    // create plain file Documents/plain.txt
+    [[@"test plain file content" dataUsingEncoding:NSUTF8StringEncoding] writeToFile:[[self documentsDirectory] stringByAppendingPathComponent:@"plain.txt"] atomically:YES];
+    
+    [pgp encryptFileAtPath:[[self documentsDirectory] stringByAppendingPathComponent:@"plain.txt"] toFileAtPath:[[self documentsDirectory] stringByAppendingPathComponent:@"plain.txt.gpg"] options:0];
+    
 //    NSString *plainFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything.gif"];
 //    NSString *decryptedFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-decrypted.gif"];
 //    NSString *signatureFilePath = [[self documentsDirectory] stringByAppendingPathComponent:@"fuckeverything-signature.sig"];

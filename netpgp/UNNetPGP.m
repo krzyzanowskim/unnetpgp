@@ -108,13 +108,18 @@ static dispatch_queue_t lock_queue;
 
 #pragma mark - Data
 
-- (NSData *) encryptData:(NSData *)inData
+- (NSData *) encryptData:(NSData *)inData options:(UNEncryptOption)options
 {
     __block NSData *result = nil;
     
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
+            
+            if (options & UNEncryptDontUseSubkey) {
+                netpgp_setvar(netpgp, "dont use subkey to encrypt", "1");
+            }
+
             void *inbuf = calloc(inData.length, sizeof(Byte));
             memcpy(inbuf, inData.bytes, inData.length);
             
@@ -209,11 +214,12 @@ static dispatch_queue_t lock_queue;
  
  @param inFilePath File to encrypt
  @param outFilePath Optional. If `nil` then encrypted name is created at the same path as original file with addedd suffix `.gpg`.
+ @param options UNEncryptOption
  @return `YES` if operation success.
  
  Encrypted file is created at outFilePath, file is overwritten if already exists.
  */
-- (BOOL) encryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath
+- (BOOL) encryptFileAtPath:(NSString *)inFilePath toFileAtPath:(NSString *)outFilePath options:(UNEncryptOption)options
 {
     __block BOOL result = NO;
     
@@ -224,6 +230,11 @@ static dispatch_queue_t lock_queue;
         netpgp_t *netpgp = [self buildnetpgp];
         
         if (netpgp) {
+            
+            if (options & UNEncryptDontUseSubkey) {
+                netpgp_setvar(netpgp, "dont use subkey to encrypt", "1");
+            }
+            
             char infilepath[inFilePath.length];
             strcpy(infilepath, inFilePath.UTF8String);
 
@@ -306,6 +317,7 @@ static dispatch_queue_t lock_queue;
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
             char infilepath[inFilePath.length];
+            memset(infilepath, 0x0, sizeof(infilepath));
             strcpy(infilepath, inFilePath.UTF8String);
             
             char *outfilepath = NULL;
@@ -412,7 +424,7 @@ static dispatch_queue_t lock_queue;
             
             char infilepath[inFilePath.length];
             strcpy(infilepath, inFilePath.UTF8String);
-            //TODO: save in keyring
+            
             result = netpgp_import_public_key(netpgp, infilepath);
             
             [self finishnetpgp:netpgp];
@@ -563,6 +575,9 @@ static dispatch_queue_t lock_queue;
     
     //FIXME: use sha1 because sha256 crashing, don't know why yet
     netpgp_setvar(netpgp, "hash", "sha1");
+    
+    // Custom variable
+    //netpgp_setvar(netpgp, "dont use subkey to encrypt", "1");
 
 #if DEBUG
     netpgp_incvar(netpgp, "verbose", 1);

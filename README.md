@@ -42,7 +42,7 @@ Lets define filenames. Caution: file extension is important for some files! (`.g
 
 Encrypt file
 
-    BOOL result = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath];
+    BOOL result = [pgp encryptFileAtPath:plainFilePath toFileAtPath:encryptedFilePath options:UNEncryptOptionNone];
     NSLog(@"encryptedFilePath = %@",@(result));
 
 Decrypt file

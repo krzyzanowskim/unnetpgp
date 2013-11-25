@@ -826,7 +826,8 @@ __ops_getkeybyid(__ops_io_t *io, const __ops_keyring_t *keyring,
 	(void) memset(nullid, 0x0, sizeof(nullid));
 	for ( ; keyring && *from < keyring->keyc; *from += 1) {
 		if (__ops_get_debug_level(__FILE__)) {
-			hexdump(io->errs, "keyring keyid", keyring->keys[*from].sigid, OPS_KEY_ID_SIZE);
+			hexdump(io->errs, "keyring sig keyid", keyring->keys[*from].sigid, OPS_KEY_ID_SIZE);
+			hexdump(io->errs, "keyring enc keyid", keyring->keys[*from].encid, OPS_KEY_ID_SIZE);
 			hexdump(io->errs, "keyid", keyid, OPS_KEY_ID_SIZE);
 		}
 		if (memcmp(keyring->keys[*from].sigid, keyid, OPS_KEY_ID_SIZE) == 0 ||

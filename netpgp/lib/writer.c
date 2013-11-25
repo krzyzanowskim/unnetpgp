@@ -1026,7 +1026,7 @@ static void     encrypt_se_ip_destroyer(__ops_writer_t *);
 \brief Push Encrypted SE IP Writer onto stack
 */
 int 
-__ops_push_enc_se_ip(__ops_output_t *output, const __ops_key_t *pubkey, const char *cipher)
+__ops_push_enc_se_ip(__ops_output_t *output, const __ops_key_t *pubkey, const char *cipher, int dont_use_subkey_to_encrypt)
 {
 	__ops_pk_sesskey_t *encrypted_pk_sesskey;
 	encrypt_se_ip_t *se_ip;
@@ -1039,7 +1039,7 @@ __ops_push_enc_se_ip(__ops_output_t *output, const __ops_key_t *pubkey, const ch
 	}
 
 	/* Create and write encrypted PK session key */
-	if ((encrypted_pk_sesskey = __ops_create_pk_sesskey(pubkey, cipher)) == NULL) {
+	if ((encrypted_pk_sesskey = __ops_create_pk_sesskey(pubkey, cipher, dont_use_subkey_to_encrypt)) == NULL) {
 		(void) fprintf(stderr, "__ops_push_enc_se_ip: null pk sesskey\n");
 		return 0;
 	}
@@ -1422,7 +1422,7 @@ __ops_push_stream_enc_se_ip(__ops_output_t *output, const __ops_key_t *pubkey, c
 			"__ops_push_stream_enc_se_ip: bad alloc\n");
 		return;
 	}
-	encrypted_pk_sesskey = __ops_create_pk_sesskey(pubkey, cipher);
+	encrypted_pk_sesskey = __ops_create_pk_sesskey(pubkey, cipher, 1);
 	__ops_write_pk_sesskey(output, encrypted_pk_sesskey);
 
 	/* Setup the se_ip */

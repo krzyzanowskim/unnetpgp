@@ -114,7 +114,7 @@ NSString* getUUID(void){
   XCTAssertTrue(success, @"key generation should be true");
   
   // Encrypt
-  success = [pgp encryptFileAtPath:plaintextFile toFileAtPath:encryptedFile];
+  success = [pgp encryptFileAtPath:plaintextFile toFileAtPath:encryptedFile options:UNEncryptOptionNone];
   XCTAssertTrue(success, @"encryption should report success");
   XCTAssertTrue([fm fileExistsAtPath:encryptedFile], @"encrypted file should exist: %@", encryptedFile);
 
@@ -141,7 +141,7 @@ NSString* getUUID(void){
   NSData *plainData = [NSData dataWithContentsOfFile:plaintextFile];
   
   // Encrypt
-  NSData *encodedData = [pgp encryptData:plainData];
+  NSData *encodedData = [pgp encryptData:plainData options:UNEncryptOptionNone];
   XCTAssertNotNil(encodedData, @"encryption should success");
   
   // Decrypt

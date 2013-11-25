@@ -175,7 +175,8 @@ void __ops_writer_push_encrypt(__ops_output_t *,
 
 unsigned   __ops_encrypt_file(__ops_io_t *, const char *, const char *,
 			const __ops_key_t *,
-			const unsigned, const unsigned, const char *);
+			const unsigned, const unsigned, const char *,
+            int);
 unsigned   __ops_decrypt_file(__ops_io_t *,
 			const char *,
 			const char *,
@@ -190,7 +191,8 @@ unsigned   __ops_decrypt_file(__ops_io_t *,
 __ops_memory_t *
 __ops_encrypt_buf(__ops_io_t *, const void *, const size_t,
 			const __ops_key_t *,
-			const unsigned, const char *);
+			const unsigned, const char *,
+            int);
 __ops_memory_t *
 __ops_decrypt_buf(__ops_io_t *,
 			const void *,

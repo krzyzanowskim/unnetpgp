@@ -349,7 +349,8 @@ __ops_encrypt_file(__ops_io_t *io,
 			const __ops_key_t *key,
 			const unsigned use_armour,
 			const unsigned allow_overwrite,
-			const char *cipher)
+			const char *cipher,
+            int dont_use_subkey_to_encrypt)
 {
 	__ops_output_t	*output;
 	__ops_memory_t	*inmem;
@@ -372,7 +373,7 @@ __ops_encrypt_file(__ops_io_t *io,
 	}
 
 	/* Push the encrypted writer */
-	if (!__ops_push_enc_se_ip(output, key, cipher)) {
+	if (!__ops_push_enc_se_ip(output, key, cipher, dont_use_subkey_to_encrypt)) {
 		__ops_memory_free(inmem);
 		return 0;
 	}
@@ -394,7 +395,8 @@ __ops_encrypt_buf(__ops_io_t *io,
 			const size_t insize,
 			const __ops_key_t *pubkey,
 			const unsigned use_armour,
-			const char *cipher)
+			const char *cipher,
+            int dont_use_subkey_to_encrypt)
 {
 	__ops_output_t	*output;
 	__ops_memory_t	*outmem;
@@ -414,7 +416,7 @@ __ops_encrypt_buf(__ops_io_t *io,
 	}
 
 	/* Push the encrypted writer */
-	__ops_push_enc_se_ip(output, pubkey, cipher);
+	__ops_push_enc_se_ip(output, pubkey, cipher, dont_use_subkey_to_encrypt);
 
 	/* This does the writing */
 	__ops_write(output, input, (unsigned)insize);

@@ -1332,7 +1332,7 @@ netpgp_encrypt_file(netpgp_t *netpgp,
 		out = outname;
 	}
 	return (int)__ops_encrypt_file(io, f, out, key, (unsigned)armored,
-				overwrite, netpgp_getvar(netpgp, "cipher"));
+                                   overwrite, netpgp_getvar(netpgp, "cipher"), netpgp_getvar(netpgp, "dont use subkey to encrypt") != NULL ? 1 : 0);
 }
 
 #define ARMOR_HEAD	"-----BEGIN PGP MESSAGE-----"
@@ -1638,7 +1638,7 @@ netpgp_encrypt_memory(netpgp_t *netpgp,
 		return 0;
 	}
 	enc = __ops_encrypt_buf(io, in, insize, keypair, (unsigned)armored,
-				netpgp_getvar(netpgp, "cipher"));
+				netpgp_getvar(netpgp, "cipher"), netpgp_getvar(netpgp, "dont use subkey to encrypt") != NULL ? 1 : 0);
 	m = MIN(__ops_mem_len(enc), outsize);
 	(void) memcpy(out, __ops_mem_data(enc), m);
 	__ops_memory_free(enc);
