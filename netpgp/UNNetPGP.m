@@ -235,6 +235,13 @@ static dispatch_queue_t lock_queue;
                 netpgp_setvar(netpgp, "dont use subkey to encrypt", "1");
             }
             
+            if (self.maximumMemoryAllocationSize <= 4096) {
+                NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:inFilePath error: NULL];
+                unsigned long long fileSize = [attrs fileSize];
+                float newMax = ceilf(fileSize / (float)self.maximumMemoryAllocationSize) * (float)self.maximumMemoryAllocationSize;
+                netpgp_setvar(netpgp, "max mem alloc", [[NSString stringWithFormat:@"%d",(int32_t)newMax] UTF8String]);
+            }
+            
             char infilepath[inFilePath.length];
             strcpy(infilepath, inFilePath.UTF8String);
 
@@ -566,7 +573,7 @@ static dispatch_queue_t lock_queue;
         const char* cstr = [self.password stringByAppendingString:@"\n"].UTF8String;
         netpgp->passfp = fmemopen((void *)cstr, sizeof(char) * (self.password.length + 1), "r");
     }
-    
+
     /* 4 MiB for a memory file */
     netpgp_setvar(netpgp, "max mem alloc", "4194304");
     if (self.maximumMemoryAllocationSize) {
