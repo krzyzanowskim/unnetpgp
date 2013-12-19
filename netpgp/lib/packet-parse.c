@@ -703,10 +703,10 @@ limread_mpi(BIGNUM **pbn, __ops_region_t *region, __ops_stream_t *stream)
  */
 
 static unsigned 
-read_new_length(unsigned *length, __ops_stream_t *stream)
+read_new_length(unsigned *length, unsigned* indeterminate, __ops_stream_t *stream)
 {
 	uint8_t   c;
-
+	*indeterminate = 0;
 	if (base_read(&c, 1, stream) != 1)
 		return 0;
 	if (c < 192) {
@@ -726,10 +726,9 @@ read_new_length(unsigned *length, __ops_stream_t *stream)
 		return _read_scalar(length, 4, stream);
 	} else if (c >= 224 && c < 255) {
 		/* 4. Partial Body Length */
-		/* XXX - agc - gpg multi-recipient encryption uses this */
-		OPS_ERROR(&stream->errors, OPS_E_UNIMPLEMENTED,
-		"New format Partial Body Length fields not yet implemented");
-		return 0;
+		*indeterminate = 1;
+		*length = 1 << (c & 0x1F);
+		return 1;
 	}
 	return 0;
 }
@@ -752,28 +751,35 @@ read_new_length(unsigned *length, __ops_stream_t *stream)
  * \see __ops_ptag_t
  */
 static int 
-limited_read_new_length(unsigned *length, __ops_region_t *region,
-			__ops_stream_t *stream)
+limited_read_new_length(unsigned *length, unsigned* indeterminate, 
+			__ops_region_t *region, __ops_stream_t *stream)
 {
-	uint8_t   c = 0x0;
-
-	if (!limread(&c, 1, region, stream)) {
+	uint8_t   c;
+	*indeterminate = 0;
+	if (limread(&c, 1, region, stream) != 1)
 		return 0;
-	}
 	if (c < 192) {
+		/* 1. One-octet packet */
 		*length = c;
 		return 1;
-	}
-	if (c < 255) {
+	} else if (c >= 192 && c <= 223) {
+		/* 2. Two-octet packet */
 		unsigned        t = (c - 192) << 8;
 
-		if (!limread(&c, 1, region, stream)) {
+		if (limread(&c, 1, region, stream) != 1)
 			return 0;
-		}
 		*length = t + c + 192;
 		return 1;
+	} else if (c == 255) {
+		/* 3. Five-Octet packet */
+		return limread_scalar(length, 4, region, stream);
+	} else if (c >= 224 && c < 255) {
+		/* 4. Partial Body Length */
+		*indeterminate = 1;
+		*length = 1 << (c & 0x1F);
+		return 1;
 	}
-	return limread_scalar(length, 4, region, stream);
+	return 0;
 }
 
 /**
@@ -1499,9 +1505,10 @@ parse_one_sig_subpacket(__ops_sig_t *sig,
 	unsigned	doread = 1;
 	unsigned        t8;
 	unsigned        t7;
+	unsigned indeterminate;
 
 	__ops_init_subregion(&subregion, region);
-	if (!limited_read_new_length(&subregion.length, region, stream)) {
+	if (!limited_read_new_length(&subregion.length, &indeterminate, region, stream)) {
 		return 0;
 	}
 
@@ -2960,6 +2967,103 @@ parse_mdc(__ops_region_t *region, __ops_stream_t *stream)
 }
 
 /**
+	Data relating to indeterminate-length blocks.
+*/
+struct _ops_indeterminate_t {
+	__ops_region_t* region;
+	unsigned char* cdata;
+	unsigned readc;
+	unsigned length;
+};
+typedef struct _ops_indeterminate_t __ops_indeterminate_t;
+
+/* initialise an indeterminate parser */
+static int
+init_indeterminate(unsigned initial_length, __ops_stream_t* stream, __ops_indeterminate_t* data)
+{
+	unsigned length = initial_length;
+	unsigned indeterminate_flag = 1;
+	int r;
+	unsigned total_length = 0;
+	
+	data->readc = 0;
+	data->cdata = 0;
+	
+	while(1) {
+		if(!data->cdata) {
+			data->cdata = (unsigned char*)calloc(1, length);
+			if(!data->cdata) {
+				fprintf(stderr, "init_indeterminate: can't alloc %u bytes\n", length);
+				return 0;
+			}
+		}
+		else {
+			data->cdata = (unsigned char*)realloc(data->cdata, total_length+length);
+			if(!data->cdata) {
+				fprintf(stderr, "init_indeterminate: can't realloc %u bytes\n", total_length+length);
+				return 0;
+			}
+		}
+
+		r = base_read(data->cdata+total_length, length, stream);
+		if(!r) {
+			fprintf(stderr, "init_indeterminate: out of data\n");
+			return 0;
+		}
+		total_length += length;
+		
+		if(!indeterminate_flag)
+			break;
+		
+		r = read_new_length(&length, &indeterminate_flag, stream);
+		if(!r) {
+			fprintf(stderr, "init_indeterminate: could not read length header\n");
+			return 0;
+		}
+	}
+	data->length = data->region->length = total_length;
+	data->region->indeterminate = 0;
+	return 1;
+}
+
+void
+dealloc_indeterminate(__ops_indeterminate_t* data)
+{
+	if(data->cdata) {
+		free(data->cdata);
+		data->cdata = 0;
+	}
+}
+
+/* read from a new-style indeterminate length block */
+static int 
+indeterminate_reader(void *dest, size_t length, __ops_error_t **errors,
+	  __ops_reader_t *readinfo, __ops_cbdata_t *cbinfo)
+{
+	__ops_indeterminate_t *indeterminate = __ops_reader_get_arg(readinfo);
+	
+	memcpy(dest, indeterminate->cdata + indeterminate->readc, length);
+	indeterminate->readc += length;
+	
+	return length;
+}
+
+/* push indeterminate data reader to stack */
+void 
+__ops_reader_push_indeterminate(__ops_stream_t *stream, 
+	__ops_indeterminate_t *indeterminate)
+{
+	__ops_reader_push(stream, indeterminate_reader, NULL, indeterminate);
+}
+
+/* pop indeterminate data reader from stack */
+void
+__ops_reader_pop_indeterminate(__ops_stream_t *stream)
+{
+	__ops_reader_pop(stream);
+}
+
+/**
  * \ingroup Core_ReadPackets
  * \brief Parse one packet.
  *
@@ -2975,6 +3079,7 @@ __ops_parse_packet(__ops_stream_t *stream, uint32_t *pktlen)
 {
 	__ops_packet_t	pkt;
 	__ops_region_t	region;
+	__ops_indeterminate_t idata;
 	uint8_t		ptag;
 	unsigned	indeterminate = 0;
 	int		ret;
@@ -3005,7 +3110,7 @@ __ops_parse_packet(__ops_stream_t *stream, uint32_t *pktlen)
 	if (pkt.u.ptag.new_format) {
 		pkt.u.ptag.type = (ptag & OPS_PTAG_NF_CONTENT_TAG_MASK);
 		pkt.u.ptag.length_type = 0;
-		if (!read_new_length(&pkt.u.ptag.length, stream)) {
+		if (!read_new_length(&pkt.u.ptag.length, &indeterminate, stream)) {
 			return 0;
 		}
 	} else {
@@ -3045,6 +3150,15 @@ __ops_parse_packet(__ops_stream_t *stream, uint32_t *pktlen)
 	__ops_init_subregion(&region, NULL);
 	region.length = pkt.u.ptag.length;
 	region.indeterminate = indeterminate;
+
+	if(indeterminate && pkt.u.ptag.length > 0) {
+		idata.region = &region;
+		if(!init_indeterminate(pkt.u.ptag.length, stream, &idata)) {
+			return 0;
+		}
+		__ops_reader_push_indeterminate(stream, &idata);
+	}
+
 	if (__ops_get_debug_level(__FILE__)) {
 		(void) fprintf(stderr, "__ops_parse_packet: type %u\n",
 			       pkt.u.ptag.type);
@@ -3112,6 +3226,11 @@ __ops_parse_packet(__ops_stream_t *stream, uint32_t *pktlen)
 			    "Unknown content tag 0x%x",
 			    pkt.u.ptag.type);
 		ret = 0;
+	}
+
+	if(indeterminate && pkt.u.ptag.length > 0) {
+		__ops_reader_pop_indeterminate(stream);
+		dealloc_indeterminate(&idata);
 	}
 
 	/* Ensure that the entire packet has been consumed */
