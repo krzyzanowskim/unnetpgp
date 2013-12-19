@@ -250,7 +250,7 @@ __ops_ssh2pubkey(__ops_io_t *io, const char *f, __ops_key_t *key, __ops_hash_alg
 	}
 
 	/* convert from base64 to binary */
-	cc = bufgap_getbin(&bg, buf, (size_t)st.st_size);
+	cc = bufgap_getbin(&bg, buf, (size_t)bg.bcc);
 	if ((space = strchr(buf, ' ')) != NULL) {
 		cc = (int)(space - buf);
 	}
