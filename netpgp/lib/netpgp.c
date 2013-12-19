@@ -1577,7 +1577,7 @@ netpgp_verify_memory(netpgp_t *netpgp, const void *in, const size_t size,
 	ret = __ops_validate_mem(io, &result, signedmem,
 				(out) ? &cat : NULL,
 				armored, netpgp->pubring);
-	__ops_memory_free(signedmem);
+    /* signedmem is freed from pgp_validate_mem */
 	if (ret) {
 		resultp(io, "<stdin>", &result, netpgp->pubring);
 		if (out) {
