@@ -15,6 +15,8 @@
 		7511330A17FB1F0800A3DB81 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7511330917FB1F0800A3DB81 /* AppDelegate.m */; };
 		7544904A17FB07880047DF5C /* UNNetPGP.h in Headers */ = {isa = PBXBuildFile; fileRef = 7544904817FB07880047DF5C /* UNNetPGP.h */; };
 		7544904B17FB07880047DF5C /* UNNetPGP.m in Sources */ = {isa = PBXBuildFile; fileRef = 7544904917FB07880047DF5C /* UNNetPGP.m */; };
+		757190C11899BB6700A0D5D2 /* pubring-test.gpg in Resources */ = {isa = PBXBuildFile; fileRef = 757190BF1899BB6700A0D5D2 /* pubring-test.gpg */; };
+		757190C21899BB6700A0D5D2 /* secring-test.gpg in Resources */ = {isa = PBXBuildFile; fileRef = 757190C01899BB6700A0D5D2 /* secring-test.gpg */; };
 		75E60C2117F44A0B00952522 /* bufgap.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BF917F44A0B00952522 /* bufgap.c */; };
 		75E60C2217F44A0B00952522 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFB17F44A0B00952522 /* compress.c */; };
 		75E60C2317F44A0B00952522 /* create.c in Sources */ = {isa = PBXBuildFile; fileRef = 75E60BFD17F44A0B00952522 /* create.c */; };
@@ -82,6 +84,8 @@
 		7544904917FB07880047DF5C /* UNNetPGP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNNetPGP.m; sourceTree = "<group>"; };
 		7561881A17FB2006003030EB /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		7561881C17FB2011003030EB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		757190BF1899BB6700A0D5D2 /* pubring-test.gpg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pubring-test.gpg"; sourceTree = "<group>"; };
+		757190C01899BB6700A0D5D2 /* secring-test.gpg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "secring-test.gpg"; sourceTree = "<group>"; };
 		75E60B5A17F4498900952522 /* libUNNetPGP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUNNetPGP.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E60B5D17F4498900952522 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75E60B6B17F4498900952522 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -326,6 +330,8 @@
 		D127CB18182E9D8100BB0AF0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				757190BF1899BB6700A0D5D2 /* pubring-test.gpg */,
+				757190C01899BB6700A0D5D2 /* secring-test.gpg */,
 				D127CB19182E9D8100BB0AF0 /* UNNetPGP Tests-Info.plist */,
 				D127CB1A182E9D8100BB0AF0 /* InfoPlist.strings */,
 				D127CB1F182E9D8100BB0AF0 /* UNNetPGP Tests-Prefix.pch */,
@@ -453,6 +459,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				757190C21899BB6700A0D5D2 /* secring-test.gpg in Resources */,
+				757190C11899BB6700A0D5D2 /* pubring-test.gpg in Resources */,
 				D127CB1C182E9D8100BB0AF0 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

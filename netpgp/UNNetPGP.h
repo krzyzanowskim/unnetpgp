@@ -85,7 +85,13 @@ typedef NS_OPTIONS(NSUInteger, UNEncryptOption)
 - (NSData *) signData:(NSData *)data;
 - (BOOL) verifyData:(NSData *)inData;
 
-/** Import public key from file and store in reyring */
+/**
+ *  Import public key from given keyring file
+ *
+ *  @param inFilePath pubring.gpg file to import
+ *
+ *  @return YES for success.
+ */
 - (BOOL) importPublicKeyFromFileAtPath:(NSString *)inFilePath;
 //- (BOOL) importSecureKeyFromFileAtPath:(NSString *)inFilePath;
 - (NSString *)exportKeyNamed:(NSString *)keyName;
