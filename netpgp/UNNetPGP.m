@@ -440,8 +440,8 @@ static dispatch_queue_t lock_queue;
     
     return result;
 }
-
-/** import a key into keyring */
+//
+///** import a key into keyring */
 //- (BOOL) importSecureKeyFromFileAtPath:(NSString *)inFilePath
 //{
 //    if (!inFilePath)
