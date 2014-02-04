@@ -12,7 +12,6 @@ This package is intended to be used with [Cocoapods](http://cocoapods.org) to sa
 
 Add this to you `Podfile`:
 
-	pod 'OpenSSL', :podspec => 'https://raw.github.com/krzak/OpenSSL/master/OpenSSL.podspec'
 	pod 'UNNetPGP', :podspec => 'https://raw.github.com/upnext/unnetpgp/master/UNNetPGP.podspec'
  
 * Without Cocoapods
