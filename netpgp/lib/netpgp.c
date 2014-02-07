@@ -1137,7 +1137,7 @@ netpgp_import_public_key(netpgp_t *netpgp, char *f)
 
 
     // append to netpgp keyring (I could load again but don't have to)
-//    done = __ops_append_keyring(netpgp->pubring, keyring);
+    done = __ops_append_keyring(netpgp->pubring, keyring);
 
     if (keyring != NULL) {
         __ops_keyring_free(keyring);
