@@ -247,7 +247,7 @@ static dispatch_queue_t lock_queue;
 
             char *outfilepath = NULL;
             if (outFilePath) {
-                outfilepath = calloc(outFilePath.length, sizeof(char));
+                outfilepath = calloc(outFilePath.length+1, sizeof(char));
                 strcpy(outfilepath, outFilePath.UTF8String);
             }
 
@@ -287,7 +287,7 @@ static dispatch_queue_t lock_queue;
             
             char *outfilepath = NULL;
             if (outFilePath) {
-                outfilepath = calloc(outFilePath.length, sizeof(char));
+                outfilepath = calloc(outFilePath.length+1, sizeof(char));
                 strcpy(outfilepath, outFilePath.UTF8String);
             }
             
@@ -329,7 +329,7 @@ static dispatch_queue_t lock_queue;
             
             char *outfilepath = NULL;
             if (signatureFilePath) {
-                outfilepath = calloc(signatureFilePath.length, sizeof(char));
+                outfilepath = calloc(signatureFilePath.length+1, sizeof(char));
                 strcpy(outfilepath, signatureFilePath.UTF8String);
             }
             
@@ -490,7 +490,7 @@ static dispatch_queue_t lock_queue;
             
             char *directory_path = NULL;
             if (path) {
-                directory_path = calloc(path.length, sizeof(char));
+                directory_path = calloc(path.length+1, sizeof(char));
                 strcpy(directory_path, path.UTF8String);
 
                 if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
@@ -547,7 +547,7 @@ static dispatch_queue_t lock_queue;
         netpgp_setvar(netpgp, "userid", self.userId.UTF8String);
     
     if (self.homeDirectory) {
-        char *directory_path = calloc(self.homeDirectory.length, sizeof(char));
+        char *directory_path = calloc(self.homeDirectory.length+1, sizeof(char));
         strcpy(directory_path, self.homeDirectory.UTF8String);
         
         netpgp_set_homedir(netpgp, directory_path, NULL, 0);
