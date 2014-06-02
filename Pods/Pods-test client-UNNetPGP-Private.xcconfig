@@ -1,0 +1,5 @@
+#include "Pods-test client-UNNetPGP.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/UNNetPGP" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/OpenSSL-Universal" "${PODS_ROOT}/Headers/OpenSSL-Universal/openssl" "${PODS_ROOT}/Headers/UNNetPGP"
+OTHER_LDFLAGS = -ObjC ${PODS_TEST_CLIENT_UNNETPGP_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}

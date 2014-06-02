@@ -3,11 +3,7 @@
 *.xcuserstate
 xcuserdata/
 *.xccheckout
-UNNetPGP.xcworkspace/
-UNNetPGP.xcodeproj/project.xcworkspace/
 
 *.swp
 *~.nib
 *.lock
-
-Pods/
