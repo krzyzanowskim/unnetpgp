@@ -242,7 +242,7 @@ static dispatch_queue_t lock_queue;
                 netpgp_setvar(netpgp, "max mem alloc", [[NSString stringWithFormat:@"%d",(int32_t)newMax] UTF8String]);
             }
             
-            char infilepath[inFilePath.length];
+            char infilepath[inFilePath.length+1]; //+1 for terminating NULL character
             strcpy(infilepath, inFilePath.UTF8String);
 
             char *outfilepath = NULL;
@@ -282,7 +282,7 @@ static dispatch_queue_t lock_queue;
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
-            char infilepath[inFilePath.length];
+            char infilepath[inFilePath.length+1]; //+1 for terminating NULL character
             strcpy(infilepath, inFilePath.UTF8String);
             
             char *outfilepath = NULL;
@@ -323,7 +323,7 @@ static dispatch_queue_t lock_queue;
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
-            char infilepath[inFilePath.length];
+            char infilepath[inFilePath.length+1]; //+1 for terminating NULL character
             memset(infilepath, 0x0, sizeof(infilepath));
             strcpy(infilepath, inFilePath.UTF8String);
             
@@ -354,7 +354,7 @@ static dispatch_queue_t lock_queue;
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
-            char infilepath[inFilePath.length];
+            char infilepath[inFilePath.length+1]; //+1 for terminating NULL character
             strcpy(infilepath, inFilePath.UTF8String);
             
             result = netpgp_verify_file(netpgp, infilepath, NULL, self.armored ? 1 : 0);
@@ -403,7 +403,7 @@ static dispatch_queue_t lock_queue;
     dispatch_sync(lock_queue, ^{
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {            
-            char keyname[keyName.length];
+            char keyname[keyName.length+1]; //+1 for terminating NULL character
             strcpy(keyname, keyName.UTF8String);
             
             char *keydata = netpgp_export_key(netpgp, keyname);
@@ -429,7 +429,7 @@ static dispatch_queue_t lock_queue;
         netpgp_t *netpgp = [self buildnetpgp];
         if (netpgp) {
             
-            char infilepath[inFilePath.length];
+            char infilepath[inFilePath.length+1]; //+1 for terminating NULL character
             strcpy(infilepath, inFilePath.UTF8String);
             
             result = netpgp_import_public_key(netpgp, infilepath);
@@ -485,7 +485,7 @@ static dispatch_queue_t lock_queue;
             }
             netpgp_setvar(netpgp, "userid checks", "skip");
             
-            char key_id[keyIdString.length];
+            char key_id[keyIdString.length+1]; //+1 for terminating NULL character
             strcpy(key_id, keyIdString.UTF8String);
             
             char *directory_path = NULL;
