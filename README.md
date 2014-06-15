@@ -4,6 +4,10 @@ UNNetPGP is Objective-C wrapper for [NetPGP](http://www.netpgp.com) for iOS.
 
 The PGP solution you've been looking for is here. Low level C based api with Objective-C wrapper around it is all you need to encrypt and decrypt PGP messages. Based on [NetPGP](http://www.netpgp.com), a standards-compliant library and suite of utilities providing digital signature and verification functionality, as well as data encryption and decryption, using RSA and DSA/Elgamal keys.
 
+**Known Issues**
+
+Due to an unsolved crash when using the SHA-256 algorithm, this library [currently uses](https://github.com/upnext/unnetpgp/blob/master/netpgp/UNNetPGP.m#L584) the SHA-1 hash, [which is known to be weak.](http://www.apache.org/dev/release-signing.html#sha1) Patches to fix the crash would be greatly appreciated!
+
 **Installation**
 
 This package is intended to be used with [Cocoapods](http://cocoapods.org) to satisfy OpenSSL dependency.
