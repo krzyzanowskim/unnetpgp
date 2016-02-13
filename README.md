@@ -10,15 +10,15 @@ Due to an unsolved crash when using the SHA-256 algorithm, this library [current
 
 **Installation**
 
-This package is intended to be used with [Cocoapods](http://cocoapods.org) to satisfy OpenSSL dependency.
+This package is intended to be used with [CocoaPods](http://cocoapods.org) to satisfy OpenSSL dependency.
 
-* With [Cocoapods](http://cocoapods.org)
+* With [CocoaPods](http://cocoapods.org)
 
 Add this to you `Podfile`:
 
 	pod 'UNNetPGP', :podspec => 'https://raw.github.com/upnext/unnetpgp/master/UNNetPGP.podspec'
  
-* Without Cocoapods
+* Without CocoaPods
 
 Something with Source Trees should do the trick but haven't tested. Pull request welcome.
 
