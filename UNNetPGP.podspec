@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.description = "NetPGP is a standards-compliant library and suite of utilities providing digital signature and verification functionality, as well as data encryption and decryption, using RSA and DSA/Elgamal keys."
   s.homepage = 'http://www.netpgp.com'
   s.authors  = { 'Marcin Krzyżanowski' => 'marcin.krzyzanowski@hakore.com', 'Nominet UK' => 'http://www.nic.uk' }
-  s.source   = { :git => 'https://github.com/upnext/unnetpgp.git', :tag => "v#{s.version}" }
+  s.source   = { :git => 'https://github.com/krzyzanowskim/unnetpgp.git', :tag => "v#{s.version}" }
   s.requires_arc = true
 
   s.dependency 'OpenSSL-Universal'
