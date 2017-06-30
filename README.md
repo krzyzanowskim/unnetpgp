@@ -16,7 +16,7 @@ This package is intended to be used with [Cocoapods](http://cocoapods.org) to sa
 
 Add this to you `Podfile`:
 
-	pod 'UNNetPGP', :podspec => 'https://raw.github.com/upnext/unnetpgp/master/UNNetPGP.podspec'
+	pod 'UNNetPGP', :podspec => 'https://raw.github.com/krzyzanowskim/unnetpgp/master/UNNetPGP.podspec'
  
 * Without Cocoapods
 
