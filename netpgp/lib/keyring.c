@@ -865,7 +865,7 @@ str2keyid(const char *userid, uint8_t *keyid, size_t len)
 	size_t			 j;
 	int			 i;
 
-	for (i = 0, j = 0 ; j < len && userid[i] && userid[i + 1] ; i += 2, j++) {
+	for (i = 0, j = 0 ; j < len - 1 && userid[i] && userid[i + 1] ; i += 2, j++) {
 		if ((hi = strchr(uppers, userid[i])) == NULL) {
 			if ((hi = strchr(lowers, userid[i])) == NULL) {
 				break;
