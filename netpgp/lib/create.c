@@ -285,7 +285,7 @@ write_seckey_body(const __ops_seckey_t *key,
 	__ops_hash_t    hash;
 	unsigned	done = 0;
 	unsigned	i = 0;
-	uint8_t		hashed[OPS_SHA1_HASH_SIZE];
+	uint8_t		hashed[OPS_SHA256_HASH_SIZE];
 	uint8_t		sesskey[CAST_KEY_LENGTH];
 
 	if (!write_pubkey_body(&key->pubkey, output)) {
@@ -366,7 +366,7 @@ write_seckey_body(const __ops_seckey_t *key,
 			int             size;
 
 			needed = CAST_KEY_LENGTH - done;
-			size = MIN(needed, OPS_SHA1_HASH_SIZE);
+			size = MIN(needed, OPS_SHA256_HASH_SIZE);
 
 			__ops_hash_any(&hash, key->hash_alg);
 			if (!hash.init(&hash)) {
